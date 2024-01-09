@@ -2,7 +2,7 @@
   <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container">
-        <a class="navbar-brand" href=""><img src="../assets/img/RDA-Logo-Geo.55af0c58 (1).png" width="160" height="70" alt="logo"></a>
+        <router-link to="/"><img src="../assets/img/RDA-Logo-Geo.55af0c58 (1).png" width="160" height="70" alt="logo"></router-link>
         <button class="navbar-toggler float-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,10 +46,10 @@
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                 </svg>
-                  გიგი დოლმაზაშვილი
+                  <span>&nbsp;&nbsp;{{ user.user.name }}</span>
                 </button> 
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/">გამოსვლა</a></li>
+                    <li><a class="dropdown-item" href="#" @click="signout()">გამოსვლა</a></li>
                 </ul>
             </div>
           </form>
@@ -58,6 +58,46 @@
     </nav>
   </div>
 </template>
+
+<script>
+  import axios, { AxiosError } from "axios";
+
+  export default {
+    data() {
+      return {
+        user : JSON.parse(window.localStorage.getItem("user"))
+      }
+    },
+
+    mounted() {
+      const userData = JSON.parse(window.localStorage.getItem("user"));
+      const _this_ = this;
+
+      if(userData == null) {
+        _this_.$router.push("/");
+      }
+    },
+
+    methods : {
+      signout() {
+        const _this_ = this;
+
+        axios.post("/signout").then(function(response) {
+          if(response.data) {
+            window.localStorage.clear();
+
+            _this_.$router.push("/");
+          }
+        }).catch(function(err) {
+          if(err instanceof AxiosError) {
+            window.alert(err.response.data);
+          }
+        });
+      }
+    }
+  }
+</script>
+
 
 <style scope>
   .navbar {
@@ -71,6 +111,3 @@
     background-color: #e8e8e8 !important;
   }
 </style>
-
-<script>
-</script>

@@ -22,13 +22,13 @@
                             <label for="name" class="form-label">სახელი, გვარი</label>
                             <input type="text" id="name" class="form-control input_form"
                                 oninvalid="this.setCustomValidity('შეიყვანეთ სახელი') "
-                                onchange="this.setCustomValidity('')" required v-model="fullname">
+                                onchange="this.setCustomValidity('')" required v-model="formData.fullname">
                         </div>
                         <div class="mb-3">
                             <label for="Position" class="form-label">თანამდებობა</label>
                             <input type="text" id="Position" class="form-control input_form "
                                 oninvalid="this.setCustomValidity('შეიყვანეთ თანამდებობა') "
-                                onchange="this.setCustomValidity('')" required v-model="position">
+                                onchange="this.setCustomValidity('')" required v-model="formData.position">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -36,13 +36,13 @@
                             <label for="number" class="form-label">ტელეფონის ნომერი</label>
                             <input type="number" id="number" class="form-control input_form"
                                 oninvalid="this.setCustomValidity('შეიყვანეთ ტელეფონის ნოემრი') "
-                                onchange="this.setCustomValidity('')" required min="0" v-model="mobile">
+                                onchange="this.setCustomValidity('')" required min="0" v-model="formData.mobile">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
                             <input type="email" id="email" class="form-control input_form"
                                 oninvalid="this.setCustomValidity('შეიყვანეთ ელ. ფოსტა') "
-                                onchange="this.setCustomValidity('')" required v-model="email">
+                                onchange="this.setCustomValidity('')" required v-model="formData.email">
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <label for="drop" class="form-label ">გამოფენაზე შეძენილი საქმიანი კავშირები</label>
-                        <select id="drop" v-model="selected" class="form-select select_man opt">
+                        <select id="drop" v-model="formData.selected" class="form-select select_man opt">
                             <option class="opt" value="0">არ დაგვიმყარებია საქმიანი კავშირები</option>
                             <option class="opt" value="1">დავამყარეთ საქმიანი კავშირები</option>
                         </select>
@@ -61,7 +61,7 @@
 
                 <!-- საქმიანი კავშირი დამყარებულია -->
 
-                <div class="row mt-5" v-if="selected==1" id="dynamic">
+                <div class="row mt-5" v-if="formData.selected == 1">
                     <div class="row mb-4 justify-content-center">
                         <div class="col-md-8 col-6 border_man"></div>
                     </div>
@@ -70,10 +70,10 @@
                         <h6>ბიზნეს კონტაქტი</h6>
                     </div>
 
-                    <div v-for="(items, index) in dynamicData" :key="index" class="card p-3 mb-3">
+                    <div v-for="(items, index) in formData.dynamicData" :key="index" class="card p-3 mb-3">
                         <h4 class="card-title d-flex justify-content-between">
                             <span>#{{ index + 1 }}</span>
-                            <button v-if="dynamicData.length > 1" type="button" class="btn btn-danger" @click="removeField(index)">წაშლა</button>
+                            <button v-if="formData.dynamicData.length > 1" type="button" class="btn btn-danger" @click="removeField(index)">წაშლა</button>
                         </h4>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
@@ -107,9 +107,9 @@
                         <div class="row mb-4">
                             <div class="col-md-12 mb-2">
                                 <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა? </label>
-                                <QuillEditor theme="snow" class="input_form"
+                                <textarea style="resize:none" class="h-100 form-control"
                                     oninvalid="this.setCustomValidity('შეიყვანეთ რა ეტაპზეა საქმიანი ურთიერთობა') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.activityLevel" :ref="index + 'activityLevel'" />
+                                    onchange="this.setCustomValidity('')" required v-model="items.activityLevel"></textarea>
                             </div>
                         </div>
                         <!-- <br> -->
@@ -152,7 +152,7 @@
 
                         <!-- გაგზავინილია ნიმუში -->
 
-                        <div class="row mb-1 mt-3" v-if="items.selected1 == 2 && selected != 0">
+                        <div class="row mb-1 mt-3" v-if="items.selected1 == 2 && formData.selected != 0">
                             <div class="col-md-6">
                                 <div class="">
                                     <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
@@ -176,7 +176,7 @@
 
                 <!-- ახალი ბიზნეს კონტაქტის დამატება -->
 
-                <div v-show="selected==1">
+                <div v-show="formData.selected == 1">
                     <div class="row mt-5  mb-3  justify-content-center">
                         <div class="col-md-8 col-6 border_man"></div>
                     </div>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-5 mb-4  justify-content-center" v-if="selected==0">
+                <div class="row mt-5 mb-4  justify-content-center" v-if="formData.selected==0">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
 
@@ -206,13 +206,13 @@
                     <div class="col-md-12">
                         <label for="disabledTextInput" class="form-label">რეკომენდაცია საერთაშორისო გამოფენის
                             შესახებ</label>
-                        <QuillEditor theme="snow" class="input_form" v-model="recomendation" ref="recomendation" />
+                        <QuillEditor theme="snow" class="input_form" v-model="formData.recomendation" ref="recomendation" />
                     </div>
                 </div>
                 <div class="row mt-5 mb-5">
                     <div class="col-md-12 mt-5 mb-4">
                         <label for="disabledTextInput" class="form-label mt-3 qui">დამატებითი ინფორმაცია</label>
-                        <QuillEditor theme="snow" class="input_form" v-model="additional_info" ref="additional_info" />
+                        <QuillEditor theme="snow" class="input_form" v-model="formData.additional_info" ref="additional_info" />
                     </div>
                 </div>
 
@@ -237,28 +237,32 @@
 <script>
     import { QuillEditor } from '@vueup/vue-quill'
     import Footer from '../../components/footer.vue'
+    import axios from 'axios'
+    
     export default {
         data() {
             return {
-                selected: '0',
-                fullname: "",
-                position : "",
-                mobile : "",
-                email : "",
-                recomendation : "",
-                additional_info : "",
+                formData : {
+                    selected: '0',
+                    fullname: "",
+                    position : "",
+                    mobile : "",
+                    email : "",
+                    recomendation : "",
+                    additional_info : "",
 
-                dynamicData : [
-                    {
-                        selected1 : "0",
+                    dynamicData : [
+                        {
+                            selected1 : "0",
 
-                        activity: "",
-                        country: "",
-                        organization: "",
-                        exportLocation: "",
-                        activityLevel : "",
-                    }
-                ]
+                            activity: "",
+                            country: "",
+                            organization: "",
+                            exportLocation: "",
+                            activityLevel : "",
+                        }
+                    ]
+                }
             }
         },
         
@@ -274,11 +278,15 @@
 
         methods : {
             submitForm() {
-                console.log(this.dynamicData);
+                axios.post("/detail/add", Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function(response) {
+                    console.log(response.data);
+                }).catch(function(err) {
+                    console.log(err);
+                });
             },
 
             addFields() {
-                this.dynamicData.push({
+                this.formData.dynamicData.push({
                     selected1 : "0",
 
                     activity: "",
@@ -290,7 +298,7 @@
             },
 
             removeField(index) {
-                this.dynamicData.splice(index, 1);
+                this.formData.dynamicData.splice(index, 1);
             }
         }
     }

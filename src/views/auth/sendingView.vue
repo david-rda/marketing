@@ -6,11 +6,11 @@
                 <div class="row">
                     <div class="col-md-8 text_email1">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <label class="form-label" for="exhibition">გამოფენის დასახელება</label>
                                 <input type="text" class="form-control input_form"  id="exhibition">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
                                 <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
                             </div>

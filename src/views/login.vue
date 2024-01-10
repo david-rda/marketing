@@ -36,8 +36,16 @@
                 </div>
               </form>
               <div v-if="this.error_messages" class="p-4">
-                <div class="alert alert-danger mb-2" v-for="(item, index) in this.error_messages" :key="index">
+                <div class="alert alert-danger alert-dismissible mb-2" v-for="(item, index) in this.error_messages" :key="index">
                   <strong>{{ item[0] }}</strong>
+                  <button type="button" class="btn-close" data-dismiss="alert"></button>
+                </div>
+              </div>
+
+              <div v-if="incorrect" class="p-4">
+                <div class="alert alert-danger alert-dismissible mb-2">
+                  <strong>ელ. ფოსტა ან პაროლი არასწორია</strong>
+                  <button type="button" class="btn-close" data-dismiss="alert"></button>
                 </div>
               </div>
             </div>
@@ -56,6 +64,7 @@
       return {
         email : "",
         password : "",
+        incorrect : "",
 
         error_messages : "",
 
@@ -90,6 +99,10 @@
         }).catch(function(err) {
           if(err instanceof AxiosError) {
             _this_.error_messages = err.response.data?.errors;
+
+            if(err.response.data?.error) {
+              _this_.incorrect = true;
+            }
           }
           
           _this_.loader = false;

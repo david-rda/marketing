@@ -44,9 +44,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <label for="drop" class="form-label ">გამოფენაზე შეძენილი საქმიანი კავშირები</label>
-                        <select id="drop" v-model="selected" disabled class="form-select select_man opt">
-                            <option class="opt" value="0">არ დაგვიმყარებია საქმიანი კავშირები</option>
-                            <option class="opt" value="1">დავამყარეთ საქმიანი კავშირები</option>
+                        <select id="drop" disabled class="form-select select_man opt">
+                            <option class="opt" v-if="data.organizations">დავამყარეთ საქმიანი კავშირები</option>
+                            <option class="opt" v-else>არ დაგვიმყარებია საქმიანი კავშირები</option>
                         </select>
                     </div>
                 </div>
@@ -54,83 +54,147 @@
                 <!-- საქმიანი კავშირი დამყარებულია -->
 
                 <div class="row  mt-5" v-if="data.organizations">
-                    <div class="row  mb-4  justify-content-center">
+                    <div class="row  mb-4 justify-content-center">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                            <input disabled type="text" id="activity" class="form-control input_form ">
-                        </div>
-                        <div class="mb-3">
-                            <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
-                            <input disabled type="text" id="country" class="form-control input_form">
-                        </div>
-                    </div>     
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                            <input disabled type="text" id="organization" class="form-control input_form ">
-                        </div>
-                        <div class="mb-3 mt-2">
-                            <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი </label>
-                            <input disabled type="text" id="export" class="form-control input_form">
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-md-12">
-                            <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა? </label>
-                        <textarea disabled class="form-control" name="" id="" ></textarea>
-                        </div>
-                    </div>
-                    
-                <!-- ექსპორტი -->
-
-                    <div class="row ">
-                        <div class="col-md-12">
-                            <label for="disabledTextInput" class="form-label qui mt-3">პროდუქციის გაგზავნის შესახებ ინფორმაცია</label>
-                            <select id="disabledSelect" v-model="selected1" class="form-select select_man opt">
-                                <option class="opt" value="0">არ გაგზავნილა პროდუქცია</option>
-                                <option class="opt" value="1">გაგზავნილია პროდუქცია</option>
-                                <option class="opt" value="2">გაგზავნილია ნიმუში</option>  
-                            </select>
-                        </div>
-                    </div>
-
-                <!-- გაგზავინილია პროდუქცია -->
-
-                    <div class="row mb-1 mt-3" v-if="selected1==1&&selected!=0">
-                        <div class="col-md-6">
-                            <div class="">
-                                <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა  (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                <input disabled type="text" id="product" class="form-control input_form">
+                    <div v-for="(items, index) in data.organizations" :key="index" class="card p-3 mb-3">
+                        <h4 class="card-title d-flex justify-content-between">
+                            <span>#{{ index + 1 }}</span>
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="activity" class="form-label">საქმიანობის სფერო</label>
+                                <input disabled type="text" id="activity" class="form-control input_form"
+                                    oninvalid="this.setCustomValidity('შეიყვანეთ საქმიანობის სფერო') "
+                                    onchange="this.setCustomValidity('')" required v-model="items.activity_name">
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
+                                <input disabled type="text" id="country" class="form-control input_form"
+                                    oninvalid="this.setCustomValidity('შეიყვანეთ რომელ ქვეყანას წარმოადგენს') "
+                                    onchange="this.setCustomValidity('')" required v-model="items.country">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="">
-                                <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                <input disabled type="number" id="cost" class="form-control input_form">
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
+                                <input disabled type="text" id="organization" class="form-control input_form"
+                                    oninvalid="this.setCustomValidity('შეიყვანეთ ორგანიზაციის დასახელება') "
+                                    onchange="this.setCustomValidity('')" required v-model="items.company_name">
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი
+                                </label>
+                                <input disabled type="text" id="export" class="form-control input_form"
+                                    oninvalid="this.setCustomValidity('შეიყვანეთ ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი') "
+                                    onchange="this.setCustomValidity('')" required v-model="items.target_country_name">
                             </div>
                         </div>
-                    </div>
-
-                <!-- გაგზავინილია ნიმუში -->
-
-                    <div class="row mb-1  mt-3" v-if="selected1==2&&selected!=0">
-                        <div class="col-md-6">
-                            <div class="">
-                                <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                <input disabled type="text" id="sample" class="form-control input_form">
+                        <div class="row mb-4">
+                            <div class="col-md-12 mb-2">
+                                <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა?</label>
+                                <textarea style="resize:none" class="h-100 form-control"
+                                    oninvalid="this.setCustomValidity('შეიყვანეთ რა ეტაპზეა საქმიანი ურთიერთობა') "
+                                    onchange="this.setCustomValidity('')" required v-model="items.stage_name" disabled></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="">
-                                <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                <input disabled type="number" id="sampleCost" class="form-control input_form">
+                        <!-- <br> -->
+
+                        <!-- ექსპორტი -->
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 mt-3">
+                                <label for="disabledTextInput" class="form-label qui mt-3">პროდუქციის გაგზავნის შესახებ
+                                    ინფორმაცია</label>
+                                <select id="disabledSelect" disabled class="form-select select_man opt">
+                                    <option class="opt" value="1" v-if="items.product_volume == '' && items.template_volume == ''">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>
+                                    <option class="opt" value="1" v-if="items.product_volume != ''">გაგზავნილია პროდუქცია</option>
+                                    <option class="opt" value="2" v-else>გაგზავნილია ნიმუში</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- გაგზავინილია პროდუქცია -->
+
+                        <div class="row mb-1 mt-3" v-if="items.product_volume != ''">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 -
+                                        ცალი/კგ/ბოთლი...)</label>
+                                    <input disabled type="text" id="product" class="form-control input_form"
+                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი პროდუქციის მოცულობა ') "
+                                        onchange="this.setCustomValidity('')" required v-model="items.product_volume">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
+                                    <input disabled type="number" id="cost" class="form-control input_form"
+                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი პროდუქციის ღირებულება ლარში') "
+                                        onchange="this.setCustomValidity('')" required v-model="items.product_price">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- გაგზავინილია ნიმუში -->
+
+                        <div class="row mb-1 mt-3" v-else>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
+                                        ცალი/კგ/ბოთლი...)</label>
+                                    <input disabled type="text" id="sample" class="form-control input_form"
+                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი ნიმუშის მოცულობა') "
+                                        onchange="this.setCustomValidity('')" required v-model="items.template_volume">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
+                                    <input disabled type="number" id="sampleCost" class="form-control input_form"
+                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი ნიმუშის ღირებულება ლარში') "
+                                        onchange="this.setCustomValidity('')" required v-model="items.template_price">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- გაგზავინილია პროდუქცია -->
+
+                        <div class="row mb-1 mt-3" v-if="selected1==1&&selected!=0">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა  (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
+                                    <input disabled type="text" id="product" class="form-control input_form">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
+                                    <input disabled type="number" id="cost" class="form-control input_form">
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- გაგზავინილია ნიმუში -->
+
+                        <div class="row mb-1  mt-3" v-if="selected1==2&&selected!=0">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
+                                    <input disabled type="text" id="sample" class="form-control input_form">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
+                                    <input disabled type="number" id="sampleCost" class="form-control input_form">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                    
+                <!-- ექსპორტი -->
                 
                 <!-- ახალი ბიზნეს კონტაქტის დამატება -->
 
@@ -160,13 +224,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="disabledTextInput" class="form-label">რეკომენდაცია საერთაშორისო გამოფენის შესახებ</label>
-                        <textarea disabled class="form-control" name="" id="" ></textarea>
+                        <textarea style="resize:none" disabled class="form-control" name="" id="" v-model="data.recomendation"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12 ">
                         <label for="disabledTextInput" class="form-label mt-3 qui">დამატებითი ინფორმაცია</label>
-                        <textarea disabled class="form-control" name="" id="" ></textarea>
+                        <textarea style="resize:none" disabled class="form-control" name="" id="" v-model="data.comment"></textarea>
                     </div>
                 </div>
 

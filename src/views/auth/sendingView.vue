@@ -39,7 +39,7 @@
                             </form>
 
                             <!-- List to display added emails -->
-                            <ol class="mt-4  ">
+                            <ol class="mt-4 ">
                                 <li  v-for="(email, index) in emails" :key="index">
                                     {{ email }}
                                     <button class="btn  btn_delete" @click="deleteEmail(index)">
@@ -116,4 +116,5 @@
     width: 30px !important;
     height: 30px !important;
 }
+
 </style>

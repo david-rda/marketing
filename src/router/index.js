@@ -17,7 +17,7 @@ const routes = [
     component: dashboardView
   },
   {
-    path: '/view',
+    path: '/view/:id',
     name: 'viewView',
     component: viewView
   },

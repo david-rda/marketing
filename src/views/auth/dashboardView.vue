@@ -12,18 +12,19 @@
                     </div>
                 </div>
             </div>
-                <div class="d-md-block d-none">
-                    <Line/>
-                        <div class="row justify-content-center mt-2 mb-2 align-items-center ">
-                            <div class="col-md-3 mx-4">
-                                <div class="btn btn-warning btn-sm  d-flex justify-content-between"> <h6 class="m-0">გადმოწერა</h6>
+                <div class="d-md-block d-none" v-if="selectedValue">
+                    
+                        <div class="row justify-content-end  align-items-center ">
+                            <div class="col-md-2">
+                                <div class="btn btn-warning btn-sm  d-flex justify-content-between"> 
+                                    <h6 class="m-0"><b>გადმოწერა</b></h6>
                                     <img src="../../assets/img/icon/download-solid.svg" alt="download excel">
                                 </div>
                             </div>
                         </div>
-                    <Line/>
+
                 </div>    
-            <div class="row mt-4 ">
+            <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="overflow-auto">
                         <table class="table table-hover border">

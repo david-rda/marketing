@@ -228,6 +228,10 @@
                     </div>
                 </div>
 
+                <div class="alert alert-success alert-dismissible" v-if="success_message">
+                    <strong>დაემატა</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
             </form>
         </div>
         <Footer />
@@ -242,6 +246,8 @@
     export default {
         data() {
             return {
+                success_message : false,
+
                 formData : {
                     selected: '0',
                     fullname: "",
@@ -278,10 +284,12 @@
 
         methods : {
             submitForm() {
-                axios.post("/detail/add", Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function(response) {
-                    console.log(response.data);
-                }).catch(function(err) {
-                    console.log(err);
+                const __this__ = this;
+
+                axios.post("/detail/add", Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
+                    __this__.success_message = true;
+                }).catch(function() {
+                    __this__.success_message = true;
                 });
             },
 

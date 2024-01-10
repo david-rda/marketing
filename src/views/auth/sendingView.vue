@@ -7,7 +7,7 @@
                     <div class="col-md-8 text_email1">
                         <div class="row">
                             <div class="col-md-9">
-                                <label class="form-label" for="exhibition">გამოფენის დასახელება</label>
+                                <label class="form-label" for="exhibition">აირჩიეთ გამოფენა</label>
                                 <v-select v-model="exhibition" class="input_form_add" :options="options" placeholder="აირჩიეთ გამოფენა"></v-select>
                             </div>
                             <div class="col-md-3">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         
-                        <label for="disabledTextInput" class="form-label mt-3 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
+                        <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
                         <input type="submit" class=" btn btn-success w-100  mt-3"  value="გაგზავნა">
                     </div>

@@ -143,7 +143,7 @@ input:focus::placeholder {
   }
 .input_form {
     width: 100% !important;
-    height: 40px !important;
+    height: 40px;
     font-family: 'firago-regular' 'sans-serif';
     border-radius: 4px;
     background: #F5F5FA;
@@ -152,7 +152,7 @@ input:focus::placeholder {
 } 
 .input_form_add {
     /* width: 100% !important; */
-    height: 40px !important;
+    height: 40px;
     font-family: 'firago-regular' 'sans-serif';
     border-radius: 4px;
     background: #F5F5FA;

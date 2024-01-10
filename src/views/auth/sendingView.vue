@@ -35,7 +35,7 @@
                                 </button>
                             </div>
                             <!-- List to display added emails -->
-                            <div class="card p-1 mt-2" v-if="emails.length">
+                            <div class=" p-1 mt-2" v-if="emails.length">
                                 <ol>
                                     <li  v-for="(email, index) in emails" :key="index">
                                         {{ email }}
@@ -90,13 +90,13 @@
             Datepicker,
         },
 
-        mounted() {
-            const _this_ = this;
+        // mounted() {
+        //     const _this_ = this;
 
-            axios.get("/exhibition/list").then(function(response) {
-                _this_.options = response.data;
-            });
-        },
+        //     axios.get("/exhibition/list").then(function(response) {
+        //         _this_.options = response.data;
+        //     });
+        // },
 
         methods: {
             addEmail() {
@@ -129,6 +129,7 @@
 </script>
 
 <style scoped>
+
 .text_email1 {
     height: 350px !important;
 }

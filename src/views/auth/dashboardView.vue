@@ -15,9 +15,11 @@
                 <div class="d-md-block d-none">
                     <Line/>
                         <div class="row justify-content-center mt-2 mb-2 align-items-center ">
-                                <div class="col-md-3 mx-4">
-                                    <div class="btn btn-warning btn-sm  d-flex justify-content-between"> <h6 class="m-0">გადმოწერა</h6><img src="../../assets/img/icon/download-solid.svg" alt="download excel"></div>
+                            <div class="col-md-3 mx-4">
+                                <div class="btn btn-warning btn-sm  d-flex justify-content-between"> <h6 class="m-0">გადმოწერა</h6>
+                                    <img src="../../assets/img/icon/download-solid.svg" alt="download excel">
                                 </div>
+                            </div>
                         </div>
                     <Line/>
                 </div>    

@@ -177,7 +177,7 @@
                 <!-- ახალი ბიზნეს კონტაქტის დამატება -->
 
                 <div v-show="formData.selected == 1">
-                    <div class="row mt-5  mb-3  justify-content-center">
+                    <div class="row mt-3  mb-3  justify-content-center">
                         <div class="col-md-8 col-6 border_man"></div>
                     </div>
 

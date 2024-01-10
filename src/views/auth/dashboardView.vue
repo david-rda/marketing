@@ -24,93 +24,30 @@
             <div class="row mt-4 ">
                 <div class="col-md-12">
                     <div class="overflow-auto">
-                    <table class="table table-hover border">
-                    <thead class="text-center">
-                        <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">სახელი, გვარი</th>
-                        <th scope="col">ელ. ფოსტა</th>
-                        <th scope="col">ორგანიზაცია</th>
-                        <th scope="col">ქმედება</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr><tr>
-                            <td>1</td>
-                            <td>გიგი დოლმაზაშვილი</td>
-                            <td>gigi@gmail.com</td>
-                            <td>RDA</td>
-                            <td><div class="btn btn-success btn-sm">დათვალიერება</div></td>
-                        </tr>
-                    </tbody>
-                    </table>
+                        <table class="table table-hover border">
+                            <thead class="text-center">
+                                <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">სახელი, გვარი</th>
+                                <th scope="col">ელ. ფოსტა</th>
+                                <th scope="col">ორგანიზაცია</th>
+                                <th scope="col">ქმედება</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr v-for="(item, index) in data" :key="index">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td>
+                                        <ol>
+                                            <li v-for="data in item.organizations" :key="data.id">{{ data.company_name }}</li>
+                                        </ol>
+                                    </td>
+                                    <td><router-link :to="'/view/' + item.id" class="btn btn-success btn-sm">დათვალიერება</router-link></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -119,43 +56,45 @@
 </template>
 
 <script>
-   import navbar from '../../components/navbar.vue'
-   import vSelect from "vue-select"
-   import "vue-select/dist/vue-select.css"
-   import Line from '../../components/line.vue'
+  import navbar from '../../components/navbar.vue'
+  import vSelect from "vue-select"
+  import "vue-select/dist/vue-select.css"
+  import Line from '../../components/line.vue'
+  import axios from 'axios'
 
-   export default {
+  export default {
     components: {
-        navbar,
-        vSelect,
-        Line
+      navbar,
+      vSelect,
+      Line
     },
+    
     data() {
-    return {
-      selectedValue: null,
-      options: [
-        { value: 'option1', label: 'ჩატარებული გამოფენა 1' },
-        { value: 'option2', label: 'ჩატარებული გამოფენა 2' },
-        { value: 'option3', label: 'ჩატარებული გამოფენა 3' },
-        { value: 'option4', label: 'ჩატარებული გამოფენა 4' },
-        { value: 'option5', label: 'ჩატარებული გამოფენა 5' },
-        { value: 'option6', label: 'ჩატარებული გამოფენა 6' },
-        { value: 'option7', label: 'ჩატარებული გამოფენა 7' },
-        { value: 'option8', label: 'ჩატარებული გამოფენა 8' },
-        { value: 'option9', label: 'ჩატარებული გამოფენა 9' },
-        { value: 'option10', label: 'ჩატარებული გამოფენა 10' },
-        { value: 'option11', label: 'ჩატარებული გამოფენა 11' },
-        { value: 'option12', label: 'ჩატარებული გამოფენა 12' },
-        { value: 'option13', label: 'ჩატარებული გამოფენა 13' },
-        { value: 'option14', label: 'ჩატარებული გამოფენა 14' },
-        { value: 'option15', label: 'ჩატარებული გამოფენა 15' },
-        // Add more options as needed
-      ],
-    };
-  },
-   }
-   
+      return {
+        selectedValue: null,
+
+        data : "",
+
+        options: [
+          { value: 'option1', label: 'ჩატარებული გამოფენა 1' },
+          { value: 'option2', label: 'ჩატარებული გამოფენა 2' },
+        ],
+      }
+    },
+
+    mounted() {
+        const __this__ = this;
+
+        axios.get("/detail/list").then(function(response) {
+            __this__.data = response.data;
+        }).catch(function(err) {
+            console.log(err);
+        })
+    }
+  }
 </script>
+
+
 <style scoped>
     .container{
         font-family: firago-regular;

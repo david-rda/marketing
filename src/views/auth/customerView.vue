@@ -223,7 +223,7 @@
                 <!-- გაგზავნის ღილაკი -->
 
                 <div class="row mb-4 mt-4 justify-content-end">
-                    <div class="col-md-2  qui mb-2">
+                    <div class="col-md-2 qui mb-2">
                         <input type="submit" class=" btn btn-success w-100 float-end" value="გაგზავნა">
                     </div>
                 </div>

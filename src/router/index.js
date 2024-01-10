@@ -22,7 +22,7 @@ const routes = [
     component: viewView
   },
   {
-    path: '/customer',
+    path: '/customer/:id',
     name: 'customerView',
     component: customerView
   },

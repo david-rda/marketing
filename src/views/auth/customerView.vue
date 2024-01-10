@@ -286,7 +286,7 @@
             submitForm() {
                 const __this__ = this;
 
-                axios.post("/detail/add", Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
+                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
                     __this__.success_message = true;
                 }).catch(function() {
                     __this__.success_message = true;

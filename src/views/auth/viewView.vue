@@ -102,9 +102,9 @@
 
                         <!-- ექსპორტი -->
 
-                        <div class="row mt-5">
-                            <div class="col-md-12 mt-3">
-                                <label for="disabledTextInput" class="form-label qui mt-3">პროდუქციის გაგზავნის შესახებ
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label for="disabledTextInput" class="form-label qui">პროდუქციის გაგზავნის შესახებ
                                     ინფორმაცია</label>
                                 <select id="disabledSelect" disabled class="form-select select_man opt">
                                     <option class="opt" value="1" v-if="items.product_volume == '' && items.template_volume == ''">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>

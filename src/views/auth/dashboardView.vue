@@ -8,7 +8,7 @@
                         <v-select v-model="selectedValue" :options="options" placeholder="აირჩიეთ გამოფენა"> </v-select>
                     </div>
                     <div class="col-md-6 col-12 text-center d-md-block d-none">
-                        <h4 class="main">ჩატარებული გამოფენები</h4>
+                        <h4 class="main brand">ჩატარებული გამოფენები</h4>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
         font-family: firago-regular;
     }
     .main {
-        font-weight: 500;
+        font-weight: 600;
     }
    
 </style>

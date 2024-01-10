@@ -4,6 +4,7 @@ import dashboardView from '../views/auth/dashboardView'
 import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
 import sendingView from '@/views/auth/sendingView'
+import sentView from '@/views/auth/sentView'
 
 const routes = [
   {
@@ -30,6 +31,12 @@ const routes = [
     path: '/sending',
     name: 'sendingView',
     component: sendingView
+  },
+  {
+    path: '/sent',
+    name: 'sentView',
+    component: sentView
+    
   },
   
 ]

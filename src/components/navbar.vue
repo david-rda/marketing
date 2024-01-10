@@ -19,7 +19,7 @@
               </router-link>
             </li>
             <li class="nav-item m-auto cool-link">
-              <router-link class="nav-link" to="#">
+              <router-link class="nav-link" to="/sent">
                 <div class="nav-link active" aria-current="page" href="#">გაგზავნილი შეტყობინებები</div>
               </router-link>
             </li>

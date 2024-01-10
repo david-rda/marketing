@@ -6,6 +6,7 @@
           <div class="col-md-5 col-12 .col-lg-12 m-auto ">
             <center>    
               <img class="brand_img mb-2" src="../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="brand">
+              gigi
             </center>    
             <div class="card">
               <form method="POST" @submit.prevent="signin()">

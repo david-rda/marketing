@@ -5,8 +5,17 @@
             <form action="#" class=" form_bg">
                 <div class="row">
                     <div class="col-md-8 text_email1">
-                        <label class="form-label" for="exhibition">გამოფენის დასახელება</label>
-                        <input type="text" class="form-control input_form"  id="exhibition">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label class="form-label" for="exhibition">გამოფენის დასახელება</label>
+                                <input type="text" class="form-control input_form"  id="exhibition">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
+                                <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
+                            </div>
+                        </div>
+                        
                         <label for="disabledTextInput" class="form-label mt-3 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form"/>
                         <input type="submit" class=" btn btn-success w-100  mt-3"  value="გაგზავნა">
@@ -51,6 +60,10 @@
 <script>
     import navbar from '../../components/navbar.vue'
     import { QuillEditor } from '@vueup/vue-quill'
+    import Datepicker from 'vue3-datepicker'
+    import FlatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+   
     export default {
 
         
@@ -59,12 +72,19 @@
         selected: '0',
         selected1: '0',
         newEmail: '',
-        emails: []
+        emails: [],
+        picked: new Date(),
+        flatpickrOptions: {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i',
+        },
     }
    },
     components: {
         navbar,
+        FlatPickr,
         QuillEditor,
+        Datepicker,
     },
     mounted(){
         

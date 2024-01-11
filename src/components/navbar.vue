@@ -7,20 +7,25 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
-          <ul class="navbar-nav m-start mb-2 mb-lg-0">
+          <ul class="navbar-nav m-start mb-2 mb-lg-0">          
+            <li class="nav-item cool-link m-auto">
+                <router-link class="nav-link" to="/Dashboard">
+                <div class="nav-link active" aria-current="page">დამატება</div>
+              </router-link>
+            </li>
             <li class="nav-item cool-link m-auto">
               <router-link class="nav-link" to="/Dashboard">
-                <div class="nav-link active" aria-current="page">ჩატარებული გამოფენები</div>
+                <div class="nav-link active" aria-current="page">ჩატარებული</div>
               </router-link>
             </li>
             <li class="nav-item cool-link m-auto">
               <router-link class="nav-link" to="/sending">
-                <div class="nav-link active" aria-current="page">შეტყობინების გაგზავნა</div>
+                <div class="nav-link active" aria-current="page">გაგზავნა</div>
               </router-link>
             </li>
             <li class="nav-item m-auto cool-link">
               <router-link class="nav-link" to="/sent">
-                <div class="nav-link active" aria-current="page" href="#">გაგზავნილი შეტყობინებები</div>
+                <div class="nav-link active" aria-current="page" href="#">გაგზავნილი</div>
               </router-link>
             </li>
             <li class="nav-item cool-link m-auto">

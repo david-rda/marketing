@@ -18,7 +18,16 @@
                         
                         <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                        <input type="submit" class=" btn btn-success w-100  mt-3"  value="გაგზავნა">
+                        <input type="submit" class=" btn btn-success w-100  mt-3 mb-3"  value="გაგზავნა">
+
+                        <div v-if="show_alert" class="alert alert-success alert-dismissible">
+                            <strong>ნიმუში დაემატა</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <div v-else class="alert alert-danger alert-dismissible">
+                            <strong>ნიმუში ვერ დაემატა</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div id="emailApp" class="">
@@ -79,6 +88,8 @@
                 },
 
                 options: [],
+
+                show_alert : ""
             }
         },
 
@@ -90,13 +101,13 @@
             Datepicker,
         },
 
-        // mounted() {
-        //     const _this_ = this;
+        mounted() {
+            const _this_ = this;
 
-        //     axios.get("/exhibition/list").then(function(response) {
-        //         _this_.options = response.data;
-        //     });
-        // },
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
+        },
 
         methods: {
             addEmail() {
@@ -119,9 +130,9 @@
                     text : this.$refs.text.getText(),
                     emails : this.emails
                 }).then(function() {
-                    window.alert("ნიმუში შეინახა");
+                    _this_.show_alert = true;
                 }).catch(function() {
-                    window.alert("ნიმუში ვერ შეინახა");
+                    _this_.show_alert = false;
                 });
             }
         }

@@ -76,10 +76,7 @@
 
         data : "",
 
-        options: [
-          { value: 'option1', label: 'ჩატარებული გამოფენა 1' },
-          { value: 'option2', label: 'ჩატარებული გამოფენა 2' },
-        ],
+        options: [],
       }
     },
 
@@ -90,8 +87,12 @@
             __this__.data = response.data;
         }).catch(function(err) {
             console.log(err);
-        })
-    }
+        });
+
+        axios.get("/exhibition/list").then(function(response) {
+            __this__.options = response.data;
+        });
+    },
   }
 </script>
 

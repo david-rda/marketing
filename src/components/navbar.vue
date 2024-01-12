@@ -109,9 +109,7 @@
     background-color: #ffffff !important;
     font-family: firago-regular;
   }
-  .btn_manual {
-    background-color: #005019 !important;
-  }
+  
   .dropdown-item:hover {
     background-color: #e8e8e8 !important;
   }

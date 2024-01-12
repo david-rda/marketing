@@ -13,9 +13,9 @@
                     </b>
                 </button>
                 </p>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse mt-3" id="collapseExample">
                 <div class="card card-body">
-                    <form action="" class="d-flex justify-content-center align-items-center">
+                    <form action="" class="d-flex justify-content-evenly align-items-center">
                         <div class="mb-3 mx-3">
                             <label for="name" class="form-label">გამოფენის დასახელება</label>
                             <input type="text" id="name" class="form-control input_form">
@@ -26,7 +26,7 @@
                         </div>
                         <div class="mb-3 mx-3">
                             <label for="name" class="form-label">ჩატარების თარიღი</label>
-                            <input type="text" id="name" class="form-control input_form">
+                            <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
                         </div>
                         <div class="mb-3 mx-3 mt-4">
                             <input type="submit" value="დამატება" class="form-control input_form mt-1 btn_manual">
@@ -38,7 +38,7 @@
             </div>
             <div class="row mt-3">
                 <div class="overflow-auto">
-                        <table class="table table-hover border">
+                        <table class="table border">
                             <thead class="text-center">
                                 <tr>
                                 <th scope="col">გამოფენა</th>
@@ -51,8 +51,8 @@
                                 <tr>
                                     <td>ჩინეთის საერთაშორისო გამოფენა</td>
                                     <td>ჩინეთი</td>
-                                    <td>20/04/2024</td>
-                                    <td>12/01/2023</td>
+                                    <td>20-04-24</td>
+                                    <td>12-01-23</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -64,12 +64,23 @@
 
 <script>
     import navbar from '../../components/navbar.vue'
+    import FlatPickr from 'vue-flatpickr-component';
 
     export default {
-
+        data() {
+            return {
+                picked: new Date(),
+                flatpickrOptions: {
+                    enableTime: true,
+                    dateFormat: 'd-m-y',
+                },
+            }
+        },
         components: {
             navbar,
+            FlatPickr
         },
+        
       
     }
 </script>

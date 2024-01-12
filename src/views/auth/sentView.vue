@@ -11,8 +11,7 @@
                         <h4 class="main brand">გაგზავნილი მეილები</h4>
                     </div>
                 </div>
-            </div>
-                   
+            </div> 
             <div class="row mt-4 ">
                 <div class="col-md-12">
                     <div class="overflow-auto">

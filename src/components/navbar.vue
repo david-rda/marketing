@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
           <ul class="navbar-nav m-start mb-2 mb-lg-0">  
             <li class="nav-item cool-link m-auto">
-                <router-link class="nav-link" to="/add">
+                <router-link class="nav-link" to="/exhibitions">
                 <div class="nav-link active" aria-current="page">გამოფენები</div>
               </router-link>
             </li>        

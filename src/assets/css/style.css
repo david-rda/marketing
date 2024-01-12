@@ -189,6 +189,10 @@ input:focus::placeholder {
 fieldset {
     border-bottom: 2px solid #005019;
 }
+.btn_manual {
+    background-color: #005019 !important;
+    color: #ffffff;
+  }
 /* .row_border {
     border-top: 2px solid #005019;
 } */

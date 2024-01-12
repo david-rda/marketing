@@ -5,7 +5,7 @@ import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
 import sendingView from '@/views/auth/sendingView'
 import sentView from '@/views/auth/sentView'
-import addView from '@/views/auth/addView'
+import exhibitionsView from '@/views/auth/exhibitionsView'
 
 const routes = [
   {
@@ -41,9 +41,14 @@ const routes = [
   },
   {
     path: '/add',
-    name: 'addView',
+    name: 'addview',
     component: 'addView'
-  }
+  },
+  {
+    path: '/exhibitions',
+    name: 'exhibitionsView',
+    component: exhibitionsView
+  },
   
 ]
 

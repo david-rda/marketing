@@ -2,7 +2,7 @@
     <div>
         <navbar/>
         <div class="container row_position">
-            <form @submit.prevent="addTemplate()" class=" form_bg">
+            <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
                 <div class="row">
                     <div class="col-md-8 text_email1">
                         <div class="row">
@@ -24,7 +24,7 @@
                             <strong>ნიმუში დაემატა</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
-                        <div v-else class="alert alert-danger alert-dismissible">
+                        <div v-if="show_alert === false" class="alert alert-danger alert-dismissible">
                             <strong>ნიმუში ვერ დაემატა</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
@@ -131,6 +131,11 @@
                     emails : this.emails
                 }).then(function() {
                     _this_.show_alert = true;
+
+                    _this_.exhibition = "";
+                    _this_.datetime = "";
+                    _this_.text = "";
+                    _this_.emails = "";
                 }).catch(function() {
                     _this_.show_alert = false;
                 });

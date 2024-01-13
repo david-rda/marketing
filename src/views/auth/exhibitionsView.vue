@@ -44,6 +44,7 @@
                                     <th scope="col">გამოფენა</th>
                                     <th scope="col">ქვეყანა</th>
                                     <th scope="col">ჩატარების თარიღი</th>
+                                    <th scope="col">ქმედება</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -51,6 +52,9 @@
                                     <td>ჩინეთის საერთაშორისო გამოფენა</td>
                                     <td>ჩინეთი</td>
                                     <td>20-04-24</td>
+                                    <td>
+                                        <button type="btn" class="btn btn-danger btn-sm">წაშლა</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

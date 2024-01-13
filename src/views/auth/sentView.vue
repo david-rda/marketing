@@ -18,25 +18,45 @@
                         <table class="table table-hover border">
                             <thead class="text-center">
                                 <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">სახელი, გვარი</th>
                                 <th scope="col">ელ. ფოსტა</th>
-                                <th scope="col">ორგანიზაცია</th>
-                                <th scope="col">ქმედება</th>
+                                <th scope="col">გაგზავნის თარიღი</th>
+                                <th scope="col">მომდევნო შეტყობინება</th>
+                                <th scope="col">გაგზავნა</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr v-for="(item, index) in data" :key="index">
-                                    <td>{{ index + 1 }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.email }}</td>
+                                <tr>
+                                    <td>gigi@gmail.com</td>
+                                    <td>01-01-24</td>
+                                    <td>07-01-24</td>
                                     <td>
-                                        <ol>
-                                            <li v-for="data in item.organizations" :key="data.id">{{ data.company_name }}</li>
-                                        </ol>
-                                    </td>
-                                    <td>
-                                        <router-link :to="'/view/' + item.id" class="btn btn-success btn-sm">დათვალიერება</router-link>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-exclamation" viewBox="0 0 16 16">
+                                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
+                                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0m0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                                            </svg>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                    შეტყობინების განმეორებით გაგზავნა
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                დარწმუნებული ხართ, რომ გსურთ შეტყობინების გაგზავნა?                                            
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">გაგზავნა</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -59,7 +79,6 @@
     components: {
       navbar,
       vSelect,
-      Line
     },
     
     data() {
@@ -74,16 +93,6 @@
         ],
       }
     },
-
-    mounted() {
-        const __this__ = this;
-
-        axios.get("/detail/list").then(function(response) {
-            __this__.data = response.data;
-        }).catch(function(err) {
-            console.log(err);
-        })
-    }
   }
 </script>
 

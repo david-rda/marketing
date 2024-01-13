@@ -26,7 +26,7 @@
                             </thead>
                             <tbody class="text-center">
                                 <tr>
-                                    <td>gigi@gmail.com</td>
+                                    <td>ferma@gmail.com</td>
                                     <td>01-01-24</td>
                                     <td>07-01-24</td>
                                     <td>

@@ -41,10 +41,9 @@
                         <table class="table border">
                             <thead class="text-center">
                                 <tr>
-                                <th scope="col">გამოფენა</th>
-                                <th scope="col">ქვეყანა</th>
-                                <th scope="col">ჩატარების თარიღი</th>
-                                <th scope="col">დამატების თარიღი</th>
+                                    <th scope="col">გამოფენა</th>
+                                    <th scope="col">ქვეყანა</th>
+                                    <th scope="col">ჩატარების თარიღი</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -52,7 +51,6 @@
                                     <td>ჩინეთის საერთაშორისო გამოფენა</td>
                                     <td>ჩინეთი</td>
                                     <td>20-04-24</td>
-                                    <td>12-01-23</td>
                                 </tr>
                             </tbody>
                         </table>

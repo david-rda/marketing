@@ -18,7 +18,7 @@
                         
                         <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                        <input type="submit" class=" btn btn-success w-100  mt-3 mb-3"  value="გაგზავნა">
+                        <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
 
                         <div v-if="show_alert" class="alert alert-success alert-dismissible">
                             <strong>ნიმუში დაემატა</strong>
@@ -101,13 +101,13 @@
             Datepicker,
         },
 
-        mounted() {
-            const _this_ = this;
+        // mounted() {
+        //     const _this_ = this;
 
-            axios.get("/exhibition/list").then(function(response) {
-                _this_.options = response.data;
-            });
-        },
+        //     axios.get("/exhibition/list").then(function(response) {
+        //         _this_.options = response.data;
+        //     });
+        // },
 
         methods: {
             addEmail() {

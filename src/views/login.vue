@@ -28,7 +28,7 @@
                 </div>
                 <div class="row mt-4 justify-content-end">
                   <div class="col-md-4 col-11 mx-4 mb-3">
-                    <button type="submit" class="btn btn-success btn_login input_height w-100">
+                    <button type="submit" class="btn btn-success btn_manual  input_height w-100">
                       <b>შესვლა&nbsp;&nbsp;</b>
                       <span class="spinner spinner-border spinner-border-sm" v-if="loader"></span>
                     </button>

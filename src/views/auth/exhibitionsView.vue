@@ -88,5 +88,7 @@
 </script>
 
 <style scoped>
-
+    .container {
+        font-family: firago-regular;
+    }
 </style>

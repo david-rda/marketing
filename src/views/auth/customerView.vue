@@ -282,33 +282,33 @@
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         },
 
-        methods : {
-            submitForm() {
-                const __this__ = this;
+        // methods : {
+        //     submitForm() {
+        //         const __this__ = this;
 
-                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
-                    __this__.success_message = true;
-                }).catch(function() {
-                    __this__.success_message = true;
-                });
-            },
+        //         axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
+        //             __this__.success_message = true;
+        //         }).catch(function() {
+        //             __this__.success_message = true;
+        //         });
+        //     },
 
-            addFields() {
-                this.formData.dynamicData.push({
-                    selected1 : "0",
+        //     addFields() {
+        //         this.formData.dynamicData.push({
+        //             selected1 : "0",
 
-                    activity: "",
-                    country: "",
-                    organization: "",
-                    exportLocation: "",
-                    activityLevel : "",
-                });
-            },
+        //             activity: "",
+        //             country: "",
+        //             organization: "",
+        //             exportLocation: "",
+        //             activityLevel : "",
+        //         });
+        //     },
 
-            removeField(index) {
-                this.formData.dynamicData.splice(index, 1);
-            }
-        }
+        //     removeField(index) {
+        //         this.formData.dynamicData.splice(index, 1);
+        //     }
+        // }
     }
 </script>
 

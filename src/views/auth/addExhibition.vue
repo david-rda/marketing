@@ -49,6 +49,11 @@
         datetime: new Date(),
         country: "",
         name: "",
+
+        flatpickrOptions: {
+            enableTime: true,
+            dateFormat: 'd-m-y H:i',
+        },
       }
     },
 

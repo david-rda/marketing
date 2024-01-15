@@ -52,12 +52,6 @@
         data() {
             return {
                 exhibitions : [],
-
-                flatpickrOptions: {
-                    enableTime: true,
-                    dateFormat: 'd-m-y H:i',
-                },
-
             }
         },
 

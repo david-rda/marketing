@@ -21,53 +21,34 @@
                             <thead class="text-center">
                                 <tr>
                                     <th scope="col">ელ. ფოსტა</th>
-                                    <th scope="col">გაგზავნის თარიღი</th>
                                     <th scope="col">სტატუსი</th>
-                                    <th scope="col">გაფრთხილება</th>
-                                    <th scope="col">გაფრხილების თარიღი</th>
-                                    <th scope="col">რედაქტირების შეტყობინება</th>
-                                    <th scope="col">რედაქტირების შეტყობინების თარიღი</th>
+                                    <th scope="col">გაგზავნის თარიღი</th>
+                                    <th scope="col">ხელახლა გაგზავნა</th>
+                                    <!-- <th scope="col">გაფრთხილება</th> -->
+                                    <!-- <th scope="col" v-if="warn_status == 1">გაფრხილების თარიღი</th>
+                                    <th v-if="status == 1" scope="col">რედაქტირების შეტყობინება</th>
+                                    <th v-if="status == 1" scope="col">რედაქტირების შეტყობინების თარიღი</th> -->
                                 </tr>
                             </thead>
                             <tbody class="text-center">
                                 <tr>
                                     <td>ferma@gmail.com</td>
+                                    <td>არ არის შევსებული</td>
                                     <td>01-01-24</td>
-                                    <td>არ შევსებულა</td>
-                                    <td><!-- Button trigger modal -->
-                                        <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-exclamation" viewBox="0 0 16 16">
-                                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
-                                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0m0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
-                                            </svg>
-                                        </button> -->
-
-                                        <!-- Modal -->
-                                        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                        შეტყობინების განმეორებით გაგზავნა
-                                                    </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    დარწმუნებული ხართ, რომ გსურთ შეტყობინების გაგზავნა?                                            
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">გაგზავნა</button>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        
-                                        <p class="d-inline-flex gap-1">
-                                        <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                           გაფრთხილება
+                                    <td>
+                                        <button class="btn btn-warning" type="button" >
+                                            გაგზავნა
                                         </button>
-                                        </p>
-                                        <div class="collapse" id="collapseExample">
+                                    </td>
+                                    <!-- <td>                                      -->
+                                        <!-- <p class="d-inline-flex gap-1"> -->
+                                        <!-- <router-link to="/warning">
+                                            <button class="btn btn-warning" type="button" >
+                                            გაფრთხილება
+                                            </button>
+                                        </router-link> -->
+                                        <!-- </p> -->
+                                        <!-- <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
                                                 <form action="">
                                                     <div class="row">
@@ -81,48 +62,21 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
+                                        </div> -->
+                                    <!-- </td> -->
+                                    <!-- <td  v-if="warn_status == 1">
                                         <ol>
                                             <li>01-02-23</li>
                                             <li>01-05-23</li>
                                         </ol>
-                                    </td>
-                                    <td><!-- Button trigger modal -->
-                                        <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-exclamation" viewBox="0 0 16 16">
-                                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z"/>
-                                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1.5a.5.5 0 0 1-1 0V11a.5.5 0 0 1 1 0m0 3a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
-                                            </svg>
-                                        </button> -->
-
-                                        <!-- Modal -->
-                                        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                        შეტყობინების განმეორებით გაგზავნა
-                                                    </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    დარწმუნებული ხართ, რომ გსურთ შეტყობინების გაგზავნა?                                            
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">გაგზავნა</button>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        
-                                        <p class="d-inline-flex gap-1">
-                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    </td> -->
+                                    <!-- <td v-if="status == 1">                                         -->
+                                        <!-- <p class="d-inline-flex gap-1"> -->
+                                        <!-- <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                            რედაქტირების შეტყობინება
-                                        </button>
-                                        </p>
-                                        <div class="collapse" id="collapseExample">
+                                        </button> -->
+                                        <!-- </p> -->
+                                        <!-- <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
                                                 <form action="">
                                                     <div class="row">
@@ -136,15 +90,11 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <ol>
-                                            <li>01-02-23</li>
-                                            <li>01-05-23</li>
-                                            <li>01-08-23</li>
-                                        </ol>
-                                    </td>
+                                        </div> -->
+                                    <!-- </td> -->
+                                    <!-- <td v-if="status == 1">
+                                            01-02-23
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -184,9 +134,11 @@
           { value: 'option2', label: 'ჩატარებული გამოფენა 2' },
         ],
         flatpickrOptions: {
-                    enableTime: true,
-                    dateFormat: 'Y-m-d H:i',
-                },
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i',
+        },
+        // status: 0,
+        // warn_status : 1
       }
     },
   }
@@ -207,7 +159,7 @@
     width: 150px;
     margin: auto;
    }
-   button {
+   /* button {
     margin-top: 14px;
-   }
+   } */
 </style>

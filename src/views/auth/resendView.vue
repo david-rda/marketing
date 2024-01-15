@@ -2,12 +2,9 @@
     <div>
         <navbar/>
         <div class="container row_position">
-            <div class="row">
-                <h4 class="main brand mt-3 mb-3">პირველი შეტყობინების გაგზავნა</h4>
-            </div>
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
-                <div class="row justify-content-between">
-                    <div class="col-md-9 text_email1">
+                <div class="row">
+                    <div class="col-md-8 text_email1">
                         <div class="row">
                             <div class="col-md-9">
                                 <label class="form-label" for="exhibition">აირჩიეთ გამოფენა</label>
@@ -32,16 +29,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div id="emailApp" class="">
-                           
-                            <label class="form-label" for="emailInput">ადრესატები</label>
-
-                            <ol>
-                                <li> gigi@gmail.com</li>
-                            </ol>
+                            <!-- Form for adding emails -->
+                            <label class="form-label" for="emailInput">შეიყვანეთ ელ. ფოსტა</label>
                             
-                            <!-- <div class="input-group mb-3">
+                            <div class="input-group mb-3">
                                 <input type="email" class="form-control input_form_add" v-model="newEmail">
                                 <button type="button" class="btn btn-secondary" @click="addEmail()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -49,9 +42,9 @@
                                         <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
                                     </svg>
                                 </button>
-                            </div> -->
-                           
-                            <!-- <div class=" p-1 mt-2" v-if="emails.length">
+                            </div>
+                            <!-- List to display added emails -->
+                            <div class=" p-1 mt-2" v-if="emails.length">
                                 <ol>
                                     <li  v-for="(email, index) in emails" :key="index">
                                         {{ email }}
@@ -62,7 +55,7 @@
                                         </button>
                                     </li>
                                 </ol>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>

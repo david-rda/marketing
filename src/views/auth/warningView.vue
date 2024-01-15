@@ -2,26 +2,26 @@
     <div>
         <navbar/>
         <div class="container row_position">
-            <div class="row">
-                <h4 class="main brand mt-3 mb-3">პირველი შეტყობინების გაგზავნა</h4>
-            </div>
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
-                <div class="row justify-content-between">
-                    <div class="col-md-9 text_email1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="main brand text-center mt-3">გაფრთხილება</h4>
+                    </div>
+                    <div class="row justify-content-evenly">
+                        <div class="col-md-8 text_email1">
                         <div class="row">
                             <div class="col-md-9">
-                                <label class="form-label" for="exhibition">აირჩიეთ გამოფენა</label>
-                                <v-select v-model="exhibition" class="input_form_add" :options="options" placeholder="აირჩიეთ გამოფენა"></v-select>
+                                <label for="email" class="form-label">ელ. ფოსტა</label>
+                                <input disabled type="email" id="email" class="form-control input_form">
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
                                 <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
                             </div>
                         </div>
-                        
                         <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                        <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
+                        <input type="submit" class=" btn btn-warning w-100  mt-3 mb-3" value="გაგზავნა">
 
                         <div v-if="show_alert" class="alert alert-success alert-dismissible">
                             <strong>ნიმუში დაემატა</strong>
@@ -31,17 +31,21 @@
                             <strong>ნიმუში ვერ დაემატა</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div id="emailApp" class="">
-                           
-                            <label class="form-label" for="emailInput">ადრესატები</label>
-
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" for="exhibition">გაფრთხილების თარიღი</label>
                             <ol>
-                                <li> gigi@gmail.com</li>
+                                <li>25/01/24</li>
                             </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="col-md-4">
+                        <div id="emailApp" class="">
                             
-                            <!-- <div class="input-group mb-3">
+                            <label class="form-label" for="emailInput">შეიყვანეთ ელ. ფოსტა</label>
+                            
+                            <div class="input-group mb-3">
                                 <input type="email" class="form-control input_form_add" v-model="newEmail">
                                 <button type="button" class="btn btn-secondary" @click="addEmail()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -49,9 +53,9 @@
                                         <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
                                     </svg>
                                 </button>
-                            </div> -->
-                           
-                            <!-- <div class=" p-1 mt-2" v-if="emails.length">
+                            </div>
+                            
+                            <div class=" p-1 mt-2" v-if="emails.length">
                                 <ol>
                                     <li  v-for="(email, index) in emails" :key="index">
                                         {{ email }}
@@ -62,9 +66,9 @@
                                         </button>
                                     </li>
                                 </ol>
-                            </div> -->
+                            </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </form>
         </div>
@@ -163,6 +167,10 @@
 .delete_icon {
     width: 30px !important;
     height: 30px !important;
+}
+.btn-warning {
+    font-weight: 600;
+    font-family: firago-regular;
 }
 
 </style>

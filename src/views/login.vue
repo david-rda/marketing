@@ -80,33 +80,33 @@
       }
     },
 
-    // methods : {
-    //   signin() {
-    //     const _this_ = this;
+    methods : {
+      signin() {
+        const _this_ = this;
 
-    //     this.loader = true;
+        this.loader = true;
 
-    //     axios.post("/signin", {
-    //       email : this.email,
-    //       password : this.password
-    //     }).then(function(response) {
-    //       window.localStorage.setItem("user", JSON.stringify(response.data));
+        axios.post("/signin", {
+          email : this.email,
+          password : this.password
+        }).then(function(response) {
+          window.localStorage.setItem("user", JSON.stringify(response.data));
 
-    //       _this_.$router.push("/dashboard");
+          _this_.$router.push("/dashboard");
 
-    //       _this_.loader = false;
-    //     }).catch(function(err) {
-    //       if(err instanceof AxiosError) {
-    //         _this_.error_messages = err.response.data?.errors;
+          _this_.loader = false;
+        }).catch(function(err) {
+          if(err instanceof AxiosError) {
+            _this_.error_messages = err.response.data?.errors;
 
-    //         if(err.response.data?.error) {
-    //           _this_.incorrect = true;
-    //         }
-    //       }
+            if(err.response.data?.error) {
+              _this_.incorrect = true;
+            }
+          }
           
-    //       _this_.loader = false;
-    //     });
-    //   }
-    // }
+          _this_.loader = false;
+        });
+      }
+    }
   }
 </script>

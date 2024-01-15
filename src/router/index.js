@@ -8,6 +8,7 @@ import sentView from '@/views/auth/sentView'
 import exhibitionsView from '@/views/auth/exhibitionsView'
 import warningView from '@/views/auth/warningView'
 import resendView from '@/views/auth/resendView'
+import addExhibition from "@/views/auth/addExhibition"
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/exhibitions',
     name: 'exhibitionsView',
     component: exhibitionsView
+  },
+  {
+    path: '/exhibitions/add',
+    name: 'addExhibitions',
+    component: addExhibition
   },
   {
     path: '/warning',

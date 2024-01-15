@@ -13,7 +13,7 @@
                 </div>
             </div> 
         </div>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row mt-4 ">
                 <div class="col-md-12">
                     <div class="overflow-auto">

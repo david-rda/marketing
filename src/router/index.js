@@ -6,9 +6,10 @@ import customerView from '../views/auth/customerView'
 import sendingView from '@/views/auth/sendingView'
 import sentView from '@/views/auth/sentView'
 import exhibitionsView from '@/views/auth/exhibitionsView'
-import warningView from '@/views/auth/warningView'
 import resendView from '@/views/auth/resendView'
 import addExhibition from "@/views/auth/addExhibition"
+import scheduleExhibitionView from '@/views/auth/scheduleExhibitionView'
+import emailExhibitionView from '@/views/auth/emailExhibitionView'
 
 const routes = [
   {
@@ -58,16 +59,20 @@ const routes = [
     component: addExhibition
   },
   {
-    path: '/warning',
-    name: 'warningView',
-    component: warningView
-  },
-  {
     path: '/resend',
     name: 'resendView',
     component: resendView
   },
-  
+  {
+    path: '/exhibition/schedule',
+    name: '/scheduleExhibitionView',
+    component: scheduleExhibitionView
+  },
+  {
+    path: '/exhibition/email',
+    name: '/emailExhibitionView',
+    component: emailExhibitionView
+  },
 ]
 
 const router = createRouter({

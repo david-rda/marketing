@@ -6,13 +6,15 @@
   </div>
 </template>
 
+
+
+<script>
+
+</script>
+
 <style scope>
   .border_man {
       border: 2px solid rgb(240, 240, 240);
       border-radius: 50px;
   }
 </style>
-
-<script>
-
-</script>

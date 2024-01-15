@@ -31,7 +31,8 @@
                                 <td>{{ data.country }}</td>
                                 <td>{{ data.datetime }}</td>
                                 <td>
-                                    <router-link :to="'#/' + data.id" class="btn btn-info btn-sm">დათვალიერება</router-link>
+                                    <router-link :to="'exhubution/email' + data.id" class="btn btn-info btn-sm">ელ. ფოსტის დამატება</router-link>
+                                    <router-link :to="'/exhibition/schedule' + data.id" class="btn btn-warning btn-sm">გაგზავნის კალენდარი</router-link>
                                     <button type="btn" class="btn btn-danger btn-sm ms-1" :data-id="data.id" v-on:click="deleteExhibition($event)">წაშლა</button>
                                 </td>
                             </tr>

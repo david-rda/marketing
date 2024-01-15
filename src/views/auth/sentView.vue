@@ -83,7 +83,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>01-01-24</td>
+                                    <td>
+                                        <ol>
+                                            <li>01-02-23</li>
+                                            <li>01-05-23</li>
+                                        </ol>
+                                    </td>
                                     <td><!-- Button trigger modal -->
                                         <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-exclamation" viewBox="0 0 16 16">

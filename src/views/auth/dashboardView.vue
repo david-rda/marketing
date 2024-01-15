@@ -80,19 +80,19 @@
       }
     },
 
-    // mounted() {
-    //     const __this__ = this;
+    mounted() {
+        const __this__ = this;
 
-    //     axios.get("/detail/list").then(function(response) {
-    //         __this__.data = response.data;
-    //     }).catch(function(err) {
-    //         console.log(err);
-    //     });
+        // axios.get("/detail/list").then(function(response) {
+        //     __this__.data = response.data;
+        // }).catch(function(err) {
+        //     console.log(err);
+        // });
 
-    //     axios.get("/exhibition/list").then(function(response) {
-    //         __this__.options = response.data;
-    //     });
-    // },
+        // axios.get("/exhibition/list").then(function(response) {
+        //     __this__.options = response.data;
+        // });
+    },
   }
 </script>
 

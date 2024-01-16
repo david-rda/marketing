@@ -35,7 +35,7 @@
                     <div class="col-md-2">
                         <div id="emailApp" class="">
                            
-                            <label class="form-label" for="emailInput">ადრესატები</label>
+                            <label class="form-label" for="emailInput">ადრესატები:</label>
 
                             <ol>
                                 <li> gigi@gmail.com</li>

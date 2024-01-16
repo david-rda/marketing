@@ -51,7 +51,7 @@
         name: "",
 
         flatpickrOptions: {
-            enableTime: true,
+            enableTime: false,
             dateFormat: 'Y-m-d',
         },
       }

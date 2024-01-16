@@ -111,9 +111,9 @@
         mounted() {
             const _this_ = this;
 
-            // axios.get("/exhibition/list").then(function(response) {
-            //     _this_.options = response.data;
-            // });
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
         },
 
         methods: {

@@ -64,12 +64,12 @@ const routes = [
     component: resendView
   },
   {
-    path: '/exhibition/schedule',
+    path: '/exhibition/schedule/:id/:label',
     name: '/scheduleExhibitionView',
     component: scheduleExhibitionView
   },
   {
-    path: '/exhibition/email',
+    path: '/exhibition/email/:id/:label',
     name: '/emailExhibitionView',
     component: emailExhibitionView
   },

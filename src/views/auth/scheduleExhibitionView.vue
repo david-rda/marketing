@@ -4,7 +4,8 @@
         <div class="container" style="margin-top: 90px;">
             
             <div class="row">
-                <h4 class="main brand mt-3 mb-3">გთხოვთ დაგეგმოთ კალენდარი</h4>
+                <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
+                <h4 class="main   mb-5">გთხოვთ დაგეგმოთ კალენდარი</h4>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-9">
@@ -128,9 +129,9 @@
         mounted() {
             const _this_ = this;
 
-            // axios.get("/exhibition/list").then(function(response) {
-            //     _this_.options = response.data;
-            // });
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
         },
 
         methods: {

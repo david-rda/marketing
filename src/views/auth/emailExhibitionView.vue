@@ -3,15 +3,14 @@
         <navbar/>
         <div class="container row_position">
             <div class="row">
-                <h4 class="main brand mt-3 mb-3">გთხოვთ მიაბათ ელ. ფოსტის მისამართები</h4>
+                <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
+                <h6 class="main mt-2 mb-3">გთხოვთ მიაბათ ელ. ფოსტის მისამართები</h6>
             </div>
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
                 <div class="row justify-content-center">
                     <div class="col-md-4">
                         <div id="emailApp" class="">
-                           
-                            <label class="form-label mt-3" for="emailInput">დაამატეთ ელ. ფოსტა</label>
-                            
+                            <label class="form-label mt-3" for="emailInput">დაამატეთ ელ. ფოსტა</label>  
                             <div class="input-group mb-3">
                                 <input type="email" class="form-control input_form_add" v-model="newEmail">
                                 <button type="button" class="btn btn-success" @click="addEmail()">
@@ -75,9 +74,9 @@
         mounted() {
             const _this_ = this;
 
-            // axios.get("/exhibition/list").then(function(response) {
-            //     _this_.options = response.data;
-            // });
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
         },
 
         methods: {

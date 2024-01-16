@@ -112,7 +112,6 @@
   import { QuillEditor } from '@vueup/vue-quill'
   import FlatPickr from 'vue-flatpickr-component';
   import "vue-select/dist/vue-select.css"
-  import Line from '../../components/line.vue'
   import axios from 'axios'
 
   export default {

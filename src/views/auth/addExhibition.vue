@@ -52,7 +52,7 @@
 
         flatpickrOptions: {
             enableTime: true,
-            dateFormat: 'd-m-y H:i',
+            dateFormat: 'Y-m-d',
         },
       }
     },

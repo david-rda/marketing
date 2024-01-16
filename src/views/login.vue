@@ -76,7 +76,7 @@
       const _this_ = this;
 
       if(userData != null) {
-        _this_.$router.push("/dashboard");
+        _this_.$router.push("/exhibitions");
       }
     },
 

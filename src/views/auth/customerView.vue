@@ -353,4 +353,9 @@
     .fade {
         font-family: firago-regular;
     }
+    @media only screen and (max-width: 768px) {
+    .card {
+        margin-top: 25px;
+    }
+    }
 </style>

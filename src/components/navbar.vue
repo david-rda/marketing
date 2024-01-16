@@ -7,17 +7,17 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
-          <ul class="navbar-nav m-start mb-2 mb-lg-0">         
+          <ul class="navbar-nav m-start mb-2 mb-lg-0">  
+            <li class="nav-item cool-link m-auto">
+                <router-link class="nav-link" to="/exhibitions">
+                <div class="nav-link active" aria-current="page">გამოფენები</div>
+              </router-link>
+            </li>        
             <li class="nav-item cool-link m-auto">
               <router-link class="nav-link" to="/Dashboard">
                 <div class="nav-link active" aria-current="page">ჩატარებული</div>
               </router-link>
             </li>
-            <li class="nav-item cool-link m-auto">
-                <router-link class="nav-link" to="/exhibitions">
-                <div class="nav-link active" aria-current="page">გამოფენები</div>
-              </router-link>
-            </li> 
             <li class="nav-item cool-link m-auto">
               <router-link class="nav-link" to="/sending">
                 <div class="nav-link active" aria-current="page">გაგზავნა</div>
@@ -45,12 +45,8 @@
           </ul>
           <form class="d-flex" role="button">
             <div class="dropdown m-auto">
-                <button class="btn btn-success dropdown-toggle  btn_manual" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <!-- <img style="width: 25px" src="" alt=""> -->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
                   <span v-if="user">&nbsp;&nbsp;{{ user.user.name }}</span>
                 </button> 
                 <ul class="dropdown-menu">

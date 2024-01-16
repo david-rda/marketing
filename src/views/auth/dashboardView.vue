@@ -7,7 +7,7 @@
                     <div class="col-md-6 col-12 ">
                         <v-select v-model="selectedValue" :options="options" placeholder="აირჩიეთ გამოფენა"> </v-select>
                     </div>
-                    <div class="col-md-6 col-12 text-center d-md-block d-none">
+                    <div class="col-md-6 col-12 text-end d-md-block d-none">
                         <h4 class="main brand">ჩატარებული გამოფენები</h4>
                     </div>
                 </div>

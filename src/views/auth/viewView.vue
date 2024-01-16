@@ -276,13 +276,13 @@
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-      const _this_ = this;
+    //   const _this_ = this;
 
-      axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
-        _this_.data = response.data;
-      }).catch(function(err) {
-        console.log(err);
-      });
+    //   axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
+    //     _this_.data = response.data;
+    //   }).catch(function(err) {
+    //     console.log(err);
+    //   });
     }
   }
 </script>

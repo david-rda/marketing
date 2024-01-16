@@ -83,11 +83,11 @@
         },
 
         mounted() {
-            axios.get("/exhibition/list").then(response => {
-                this.exhibitions = response.data;
-            }).catch(err => {
-                console.log(err);
-            });
+            // axios.get("/exhibition/list").then(response => {
+            //     this.exhibitions = response.data;
+            // }).catch(err => {
+            //     console.log(err);
+            // });
         }
     }
 </script>

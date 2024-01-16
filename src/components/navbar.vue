@@ -75,12 +75,12 @@
     },
 
     mounted() {
-      const userData = JSON.parse(window.localStorage.getItem("user"));
-      const _this_ = this;
+      // const userData = JSON.parse(window.localStorage.getItem("user"));
+      // const _this_ = this;
 
-      if(userData == null) {
-        _this_.$router.push("/");
-      }
+      // if(userData == null) {
+      //   _this_.$router.push("/");
+      // }
     },
 
     methods : {

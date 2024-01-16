@@ -70,6 +70,18 @@
             FlatPickr
         },
 
+        methods : {
+            deleteExhibition(event) {
+                const id = Number(event.target.getAttribute("data-id"));
+
+                axios.delete("/exhibition/delete/" + id).then(res => {
+                    this.exhibitions = res.data.data;
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        },
+
         mounted() {
             axios.get("/exhibition/list").then(response => {
                 this.exhibitions = response.data;

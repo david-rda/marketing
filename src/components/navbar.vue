@@ -18,11 +18,11 @@
                 <div class="nav-link active" aria-current="page">ჩატარებული</div>
               </router-link>
             </li>
-            <li class="nav-item cool-link m-auto">
+            <!-- <li class="nav-item cool-link m-auto">
               <router-link class="nav-link" to="/sending">
                 <div class="nav-link active" aria-current="page">გაგზავნა</div>
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-item m-auto cool-link">
               <router-link class="nav-link" to="/sent">
                 <div class="nav-link active" aria-current="page" href="#">გაგზავნილი</div>

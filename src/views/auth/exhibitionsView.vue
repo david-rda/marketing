@@ -43,8 +43,9 @@
                                             </svg>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li class="p-1"><router-link :to="'/exhibition/email/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტა</router-link></li>
-                                            <li class="p-1"><router-link :to="'/exhibition/schedule/' + data.id + '/' + data.label" class="btn btn_m btn-sm">კალენდარი</router-link></li>
+                                            <li class="p-1"><router-link :to="'/exhibition/email/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტის დამატება</router-link></li>
+                                            <li class="p-1"><router-link :to="'/exhibition/sending/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტის გაგზავნა</router-link></li>
+                                            <li class="p-1"><router-link :to="'/exhibition/schedule/' + data.id + '/' + data.label" class="btn btn_m btn-sm">შეტყობინებების კალენდარი</router-link></li>
                                             <li class="p-1"><button type="btn" class="btn btn-danger btn-sm ms-2" :data-id="data.id" v-on:click="deleteExhibition($event)">წაშლა</button></li>
                                         </ul>
                                     </div>

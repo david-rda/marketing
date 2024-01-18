@@ -5,7 +5,7 @@
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
                 <div class="row justify-content-between">
                     <div class="col-md-9 text_email1">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-md-9">
                                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
                             </div>
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         
-                        <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
+                        <label for="disabledTextInput" class="form-label mt-1 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
                         <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
 
@@ -115,11 +115,11 @@
         },
 
         mounted() {
-            // const _this_ = this;
+            const _this_ = this;
 
-            // axios.get("/exhibition/list").then(function(response) {
-            //     _this_.options = response.data;
-            // });
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
         },
 
         watch : {

@@ -45,7 +45,7 @@
           </ul>
           <form class="d-flex" role="button">
             <div class="dropdown m-auto">
-                <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn_user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <!-- <img style="width: 25px" src="" alt=""> -->
                   <span v-if="user">&nbsp;&nbsp;{{ user.user.name }}</span>
                 </button> 
@@ -71,12 +71,12 @@
     },
 
     mounted() {
-      // const userData = JSON.parse(window.localStorage.getItem("user"));
-      // const _this_ = this;
+      const userData = JSON.parse(window.localStorage.getItem("user"));
+      const _this_ = this;
 
-      // if(userData == null) {
-      //   _this_.$router.push("/");
-      // }
+      if(userData == null) {
+        _this_.$router.push("/");
+      }
     },
 
     methods : {
@@ -108,5 +108,8 @@
   
   .dropdown-item:hover {
     background-color: #e8e8e8 !important;
+  }
+  .btn_user {
+    border: none;
   }
 </style>

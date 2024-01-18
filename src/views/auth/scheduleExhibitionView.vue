@@ -5,9 +5,9 @@
             
             <div class="row">
                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
-                <h4 class="main   mb-5">გთხოვთ დაგეგმოთ კალენდარი</h4>
+                <label for="disabledTextInput" class="form-label mt-1 qui">გთხოვთ დაგეგმოთ შეტყობინებების კალენდარი</label>
             </div>
-            <div class="row justify-content-center">
+            <div class="row">
                 <div class="col-md-9">
                     <form @submit.prevent="addTemplate()" class=" form_bg p-3" ref="sendForm">
                     <div class="row justify-content-center">
@@ -24,16 +24,6 @@
                             
                             <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
                             <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                            <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="შენახვა">
-
-                            <div v-if="show_alert" class="alert alert-success alert-dismissible">
-                                <strong>ნიმუში დაემატა</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                            <div v-if="show_alert === false" class="alert alert-danger alert-dismissible">
-                                <strong>ნიმუში ვერ დაემატა</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
                         </div>
                         <!-- <div class="col-md-2">
                             <div id="emailApp" class="">
@@ -70,18 +60,27 @@
                         </div> -->
                     </div>
                 </form>
-                <div class="row justify-content-center mt-3">
-                        <div class="col-md-2  col-12 d-flex justify-content-center">
-                            <button @click="addFields" type="button" class="btn btn-plus" data-bs-toggle="tooltip"
-                                data-bs-custom-class="custom-tooltip" data-bs-placement="top"
-                                data-bs-title="ახალი ბიზნეს კონტაქტის დამატება">
-                                <img class="plus" src="../../assets/img/icon/plus-circle.svg" alt="plus">
-                            </button>
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-md-2  col-12 d-flex justify-content-center">
+                                <button @click="addFields" type="button" class="btn btn-plus" data-bs-toggle="tooltip"
+                                    data-bs-custom-class="custom-tooltip" data-bs-placement="top"
+                                    data-bs-title="ახალი ბიზნეს კონტაქტის დამატება">
+                                    <img class="plus" src="../../assets/img/icon/plus-circle.svg" alt="plus">
+                                </button>
+                            </div>
                         </div>
+                        <input type="submit" class=" btn btn-success w-100 btn_manual mt-5 mb-4"  value="შენახვა">
+
+                            <div v-if="show_alert" class="alert alert-success alert-dismissible">
+                                <strong>ნიმუში დაემატა</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                            <div v-if="show_alert === false" class="alert alert-danger alert-dismissible">
+                                <strong>ნიმუში ვერ დაემატა</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
                     </div>
-                </div>
             </div>
-            
         </div>
        
     </div>
@@ -127,11 +126,11 @@
         },
 
         mounted() {
-            // const _this_ = this;
+            const _this_ = this;
 
-            // axios.get("/exhibition/list").then(function(response) {
-            //     _this_.options = response.data;
-            // });
+            axios.get("/exhibition/list").then(function(response) {
+                _this_.options = response.data;
+            });
         },
 
         methods: {
@@ -182,9 +181,9 @@
         opacity: 0.6;
     }
 form {
-    border: 1px solid rgb(214, 214, 214) !important;
+    border: 1px solid rgb(231, 231, 231) !important;
     /* overflow: hidden; */
-    height: 520px;
+    height: 460px;
     border-radius: 4px;
     width: 100%;
 }

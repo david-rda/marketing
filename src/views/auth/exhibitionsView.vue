@@ -21,7 +21,7 @@
             </div>
             <div class="row mt-3">
                 <div class="">
-                    <table class="table border">
+                    <table class="table border table-hover">
                         <thead class="text-center">
                             <tr>
                                 <th scope="col">გამოფენა</th>
@@ -38,13 +38,13 @@
                                 <td>
                                     <div class="dropdown m-auto">
                                         <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" >
                                             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                                             </svg>
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li class="p-1"><router-link :to="'/exhibition/email/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტის დამატება</router-link></li>
-                                            <li class="p-1"><router-link :to="'/exhibition/sending/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტის გაგზავნა</router-link></li>
+                                            <li class="p-1"><router-link :to="'/exhibition/sending/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">შეტყობინების გაგზავნა</router-link></li>
                                             <li class="p-1"><router-link :to="'/exhibition/schedule/' + data.id + '/' + data.label" class="btn btn_m btn-sm">შეტყობინებების კალენდარი</router-link></li>
                                             <li class="p-1"><button type="btn" class="btn btn-danger btn-sm ms-2" :data-id="data.id" v-on:click="deleteExhibition($event)">წაშლა</button></li>
                                         </ul>

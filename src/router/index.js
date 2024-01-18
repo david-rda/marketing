@@ -75,7 +75,7 @@ const routes = [
     component: emailExhibitionView
   },
   {
-    path: '/exhibitions/sending/',
+    path: '/exhibition/sending/:id/:label',
     name: '/sendingExhibitionsView',
     component: sendingExhibitionView
   },

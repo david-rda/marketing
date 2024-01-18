@@ -43,6 +43,13 @@
                 <div class="form-group mb-3">
                     <input type="submit" value="შენახვა" class="btn btn-success btn_manual">
                 </div>
+
+                <div v-if="errors" class="col-3">
+                    <div v-for="(item, index) in errors" :key="index" class="alert alert-danger alert-dismissible">
+                        <strong>{{ item[0] }}</strong>
+                        <button class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -52,7 +59,7 @@
     import navbar from '../../components/navbar.vue'
     import "vue-select/dist/vue-select.css"
     import 'flatpickr/dist/flatpickr.css';
-    import axios from 'axios'
+    import axios, { AxiosError } from 'axios'
 
     export default {
         data() {
@@ -69,7 +76,7 @@
 
                 options: [],
 
-                show_alert : ""
+                errors : "",
             }
         },
 
@@ -105,7 +112,9 @@
                 }).then(res => {
                     console.log(res.data);
                 }).catch(err => {
-                    console.log(err);
+                    if(err instanceof AxiosError) {
+                        this.errors = err?.response?.data?.errors;
+                    }
                 });
             }
         }

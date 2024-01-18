@@ -1,13 +1,19 @@
 <template>
     <div>
         <navbar/>
-        <div class="container row_position">
+        <div class="container" style="margin-top: 90px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 class="main head mt-4">შეტყობინების გაგზავნა</h4>
+                </div>
+            </div>
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
                 <div class="row justify-content-between">
                     <div class="col-md-9 text_email1">
-                        <div class="row align-items-center">
+                        <div class="row">
                             <div class="col-md-9">
                                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
+                                <h6 class="main mt-1 mb-3">აკრიფეთ გასაგზავნი ტექსტი</h6>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
@@ -15,7 +21,7 @@
                             </div>
                         </div>
                         
-                        <label for="disabledTextInput" class="form-label mt-1 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
+                      
                         <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
                         <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
 
@@ -161,7 +167,9 @@
 </script>
 
 <style scoped>
-
+.container {
+    font-family: firago-regular;
+}
 .text_email1 {
     height: 350px !important;
 }

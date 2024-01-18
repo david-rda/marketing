@@ -2,10 +2,14 @@
     <div>
         <navbar/>
         <div class="container" style="margin-top: 90px;">
-            
+            <div class="row ">
+                <div class="col-md-4">
+                    <h4 class="main head mt-4">შეტყობინების კალენდარი</h4>
+                </div>
+            </div>
             <div class="row">
                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
-                <label for="disabledTextInput" class="form-label mt-1 qui">გთხოვთ დაგეგმოთ შეტყობინებების კალენდარი</label>
+                <h6 class="main mt-1 mb-3 ">დაგმეთ მომდევნო შეტყობინებები</h6>
             </div>
             <div class="row">
                 <div class="col-md-9">

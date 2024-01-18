@@ -1,10 +1,15 @@
 <template>
     <div>
         <navbar/>
-        <div class="container row_position">
+        <div class="container" style="margin-top: 90px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 class="main head mt-4">ელ. ფოსტის დამატება</h4>
+                </div>
+            </div>
             <div class="row">
                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
-                <h6 class="main mt-1 ">გთხოვთ მიაბათ ელ. ფოსტის მისამართები</h6>
+                <h6 class="main mt-1 ">მიაბით ელ. ფოსტის მისამართები</h6>
             </div>
             <form @submit.prevent="addEmails()" class=" form_bg" ref="sendForm">
                 <div class="row">

@@ -8,6 +8,7 @@
                     </div>
                     <div class="col-md-10 col-12"> 
                         <h1 class="mt-5 mb-4 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
+                        <p>{{ exhibition }}</p>
                     </div>
                 </div>
                 <div class="row mt-4 mb-4 justify-content-center">
@@ -265,6 +266,7 @@
       return {
         selected: '0',
         selected1: '0',
+        exhibition : "",
 
         data : []
       }
@@ -287,6 +289,12 @@
 
       axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
         _this_.data = response.data;
+      }).catch(function(err) {
+        console.log(err);
+      });
+
+      axios.get("/exhibition/show/" + this.$route.params.exhibition_id).then(function(response) {
+        _this_.exhibition = response.data.label;
       }).catch(function(err) {
         console.log(err);
       });

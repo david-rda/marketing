@@ -34,7 +34,7 @@
                             <tr v-for="data in exhibitions" :key="data.id">
                                 <td>{{ data.label }}</td>
                                 <td>{{ data.country }}</td>
-                                <td>{{ data.datetime }}</td>
+                                <td>{{ new Date(data.datetime).toISOString().split('T')[0] }}</td>
                                 <td>
                                     <div class="dropdown m-auto">
                                         <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">

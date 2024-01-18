@@ -3,7 +3,6 @@ import login from '../views/login.vue'
 import dashboardView from '../views/auth/dashboardView'
 import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
-// import sendingView from '@/views/auth/sendingView'
 import sentView from '@/views/auth/sentView'
 import exhibitionsView from '@/views/auth/exhibitionsView'
 // import resendView from '@/views/auth/resendView'
@@ -33,11 +32,6 @@ const routes = [
     name: 'customerView',
     component: customerView
   },
-  // {
-  //   path: '/sending',
-  //   name: 'sendingView',
-  //   component: sendingView
-  // },
   {
     path: '/sent',
     name: 'sentView',

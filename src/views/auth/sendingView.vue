@@ -126,12 +126,6 @@
             });
         },
 
-        watch : {
-            exhibition : function(newValue, prevValue) {
-                this.newObject = newValue.emails;
-            }
-        },
-
         methods: {
             deleteEmail(event) {
                 const email_id = Number(event.target.getAttribute("data-email-id"));

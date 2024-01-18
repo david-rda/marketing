@@ -46,13 +46,31 @@
                                             <li class="p-1"><router-link :to="'/exhibition/email/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">ელ. ფოსტის დამატება</router-link></li>
                                             <li class="p-1"><router-link :to="'/exhibition/sending/' + data.id + '/' + data.label"  class="btn btn_m btn-sm">შეტყობინების გაგზავნა</router-link></li>
                                             <li class="p-1"><router-link :to="'/exhibition/schedule/' + data.id + '/' + data.label" class="btn btn_m btn-sm">შეტყობინებების კალენდარი</router-link></li>
-                                            <li class="p-1"><button type="btn" class="btn btn-danger btn-sm ms-2" :data-id="data.id" v-on:click="deleteExhibition($event)">წაშლა</button></li>
+                                            <li class="p-1"><button type="btn" class="btn btn-danger btn-sm ms-2" :data-id="data.id" data-bs-toggle="modal" data-bs-target="#confirmationModal" @click="setId($id)">წაშლა</button></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="modal fade" id="confirmationModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">გთხოვთ დაადასტუროთ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ნამდვილად გსურთ მოცემული გამოფენის წაშლა?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">უარყოფა</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="deleteExhibition">წაშლა</button>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,6 +86,8 @@
         data() {
             return {
                 exhibitions : [],
+
+                exhibition_id : ""
             }
         },
 
@@ -77,10 +97,15 @@
         },
 
         methods : {
-            deleteExhibition(event) {
+            setId() {
                 const id = Number(event.target.getAttribute("data-id"));
+                this.exhibition_id = id;
+            },
 
-                axios.delete("/exhibition/delete/" + id).then(res => {
+            deleteExhibition(event) {
+                // const id = Number(event.target.getAttribute("data-id"));
+
+                axios.delete("/exhibition/delete/" + this.exhibition_id).then(res => {
                     this.exhibitions = res.data.data;
                 }).catch(err => {
                     console.log(err);

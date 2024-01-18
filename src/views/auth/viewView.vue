@@ -7,7 +7,7 @@
                         <img src="../../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="icon" width="250">
                     </div>
                     <div class="col-md-10 col-12"> 
-                        <h1 class="mt-5 mb-4 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული სააპლიკაციო ფორმა</h1>
+                        <h1 class="mt-5 mb-4 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
                     </div>
                 </div>
                 <div class="row mt-4 mb-4 justify-content-center">
@@ -276,13 +276,13 @@
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-      const _this_ = this;
+    //   const _this_ = this;
 
-      axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
-        _this_.data = response.data;
-      }).catch(function(err) {
-        console.log(err);
-      });
+    //   axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
+    //     _this_.data = response.data;
+    //   }).catch(function(err) {
+    //     console.log(err);
+    //   });
     }
   }
 </script>

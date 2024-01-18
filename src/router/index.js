@@ -3,13 +3,14 @@ import login from '../views/login.vue'
 import dashboardView from '../views/auth/dashboardView'
 import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
-import sendingView from '@/views/auth/sendingView'
+// import sendingView from '@/views/auth/sendingView'
 import sentView from '@/views/auth/sentView'
 import exhibitionsView from '@/views/auth/exhibitionsView'
-import resendView from '@/views/auth/resendView'
+// import resendView from '@/views/auth/resendView'
 import addExhibition from "@/views/auth/addExhibition"
 import scheduleExhibitionView from '@/views/auth/scheduleExhibitionView'
 import emailExhibitionView from '@/views/auth/emailExhibitionView'
+import sendingExhibitionView from '@/views/auth/sendingExhibitionView'
 
 const routes = [
   {
@@ -32,11 +33,11 @@ const routes = [
     name: 'customerView',
     component: customerView
   },
-  {
-    path: '/sending',
-    name: 'sendingView',
-    component: sendingView
-  },
+  // {
+  //   path: '/sending',
+  //   name: 'sendingView',
+  //   component: sendingView
+  // },
   {
     path: '/sent',
     name: 'sentView',
@@ -58,11 +59,11 @@ const routes = [
     name: 'addExhibitions',
     component: addExhibition
   },
-  {
-    path: '/resend',
-    name: 'resendView',
-    component: resendView
-  },
+  // {
+  //   path: '/resend',
+  //   name: 'resendView',
+  //   component: resendView
+  // },
   {
     path: '/exhibition/schedule/:id/:label',
     name: '/scheduleExhibitionView',
@@ -72,6 +73,11 @@ const routes = [
     path: '/exhibition/email/:id/:label',
     name: '/emailExhibitionView',
     component: emailExhibitionView
+  },
+  {
+    path: '/exhibitions/sending/',
+    name: '/sendingExhibitionsView',
+    component: sendingExhibitionView
   },
 ]
 

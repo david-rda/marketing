@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <label class="form-label" for="exhibition">აირჩიეთ გამოფენა</label>
-                                <v-select v-model="exhibition" class="input_form_add" :options="options" placeholder="აირჩიეთ გამოფენა"></v-select>
+                                <v-select v-model="exhibition" class="input_form_add" :options="options" placeholder="აირჩიეთ გამოფენა" @change="fnc()"></v-select>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
@@ -32,13 +32,21 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div id="emailApp" class="">
+                    <div class="col-md-3" v-if="newObject != ''">
+                        <div id="emailApp" class="card p-2">
                            
                             <label class="form-label" for="emailInput">ადრესატები:</label>
 
-                            <ol>
-                                <li> gigi@gmail.com</li>
+                            <ol class="list-group mt-2">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 14px" v-for="(item, index) in newObject" :key="index">
+                                    <span>{{ item.email }}</span>
+                                    <button type="button" class="btn btn-danger" :data-email-id="item.id" :data-exhibition-id="item.exhibition_id" @click="deleteEmail($event)">
+                                        <svg style="pointer-events: none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </button>
+                                </li>
                             </ol>
                             
                             <!-- <div class="input-group mb-3">
@@ -96,7 +104,9 @@
 
                 options: [],
 
-                show_alert : ""
+                show_alert : "",
+
+                newObject : ""
             }
         },
 
@@ -116,16 +126,19 @@
             });
         },
 
-        methods: {
-            addEmail() {
-                if (this.newEmail) {
-                    this.emails.push(this.newEmail);
-                    this.newEmail = '';
-                }
-            },
+        watch : {
+            exhibition : function(newValue, prevValue) {
+                this.newObject = newValue.emails;
+            }
+        },
 
-            deleteEmail(index) {
-                this.emails.splice(index, 1);
+        methods: {
+            deleteEmail(event) {
+                const email_id = Number(event.target.getAttribute("data-email-id"));
+                const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
+
+                console.log(email_id);
+                console.log(exhibition_id);
             },
 
             addTemplate() {

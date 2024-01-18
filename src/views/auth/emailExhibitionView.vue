@@ -6,8 +6,8 @@
                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
                 <h6 class="main mt-2 mb-3">გთხოვთ მიაბათ ელ. ფოსტის მისამართები</h6>
             </div>
-            <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
-                <div class="row justify-content-center">
+            <form @submit.prevent="addEmails()" class=" form_bg" ref="sendForm">
+                <div class="row">
                     <div class="col-md-4">
                         <div id="emailApp" class="">
                             <label class="form-label mt-3" for="emailInput">დაამატეთ ელ. ფოსტა</label>  
@@ -35,7 +35,9 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="form-group mb-3">
+                    <input type="submit" value="დამატება" class="btn btn-success">
+                </div>
             </form>
         </div>
     </div>
@@ -72,11 +74,11 @@
         },
 
         mounted() {
-            const _this_ = this;
+            // const _this_ = this;
 
-            axios.get("/exhibition/list").then(function(response) {
-                _this_.options = response.data;
-            });
+            // axios.get("/exhibition/list").then(function(response) {
+            //     _this_.options = response.data;
+            // });
         },
 
         methods: {
@@ -91,23 +93,14 @@
                 this.emails.splice(index, 1);
             },
 
-            addTemplate() {
-                const _this_ = this;
-
-                axios.post("/template/add", {
-                    exhibition : this.exhibition,
-                    datetime : this.picked,
-                    text : this.$refs.text.getText(),
-                    emails : this.emails
-                }).then(function() {
-                    _this_.show_alert = true;
-
-                    _this_.exhibition = "";
-                    _this_.datetime = "";
-                    _this_.text = "";
-                    _this_.emails = "";
-                }).catch(function() {
-                    _this_.show_alert = false;
+            addEmails() {
+                axios.post("/email/add/to", {
+                    emails : this.emails,
+                    exhibition_id : this.$route.params.id
+                }).then(res => {
+                    console.log(res.data);
+                }).catch(err => {
+                    console.log(err);
                 });
             }
         }

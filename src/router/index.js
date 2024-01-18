@@ -36,7 +36,6 @@ const routes = [
     path: '/sent',
     name: 'sentView',
     component: sentView
-    
   },
   {
     path: '/add',

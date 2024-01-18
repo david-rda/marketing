@@ -73,7 +73,7 @@
                     <div v-for="(items, index) in formData.dynamicData" :key="index" class="card p-3 mb-3">
                         <h4 class="card-title d-flex justify-content-between">
                             <span>#{{ index + 1 }}</span>
-                            <button v-if="formData.dynamicData.length > 1" type="button" class="btn btn-danger" @click="removeField(index)">წაშლა</button>
+                            <button v-if="formData.dynamicData.length > 1" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal" @click="setId(index)">წაშლა</button>
                         </h4>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
@@ -196,6 +196,24 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="confirmationModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">გთხოვთ დაადასტუროთ</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ნამდვილად გსურთ მოცემული კონტაქტის წაშლა?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">უარყოფა</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="removeField">წაშლა</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row mt-5 mb-4  justify-content-center" v-if="formData.selected==0">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
@@ -247,6 +265,7 @@
         data() {
             return {
                 success_message : false,
+                field_id : "",
 
                 formData : {
                     selected: '0',
@@ -256,6 +275,7 @@
                     email : "",
                     recomendation : "",
                     additional_info : "",
+
 
                     dynamicData : [
                         {
@@ -283,6 +303,11 @@
         },
 
         methods : {
+            setId(id) {
+                // const id = Number(event.target.getAttribute("data-id"));
+                this.field_id = id;
+            },
+
             submitForm() {
                 const __this__ = this;
 
@@ -305,8 +330,8 @@
                 });
             },
 
-            removeField(index) {
-                this.formData.dynamicData.splice(index, 1);
+            removeField() {
+                this.formData.dynamicData.splice(this.field_id, 1);
             }
         }
     }

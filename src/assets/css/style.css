@@ -186,12 +186,12 @@ fieldset {
     background-color: #005019 !important;
     color: #ffffff;
   }
-  .head {
-    color: #acacac;
-    font-weight: 600;
-    font-family:'Regular';
-    font-size: 28px;
-  }
+.head {
+color: #acacac !important;
+font-weight: 600;
+font-family:'Regular';
+font-size: 28px;
+}
 /* .row_border {
     border-top: 2px solid #005019;
 } */

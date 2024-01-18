@@ -7,8 +7,9 @@
                         <img src="../../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="icon" width="250">
                     </div>
                     <div class="col-md-10 col-12"> 
-                        <h1 class="mt-5 mb-4 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
-                        <p>{{ exhibition }}</p>
+                        <h1 class="mt-5 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
+                        <h4 class="main head float-end">{{ exhibition }}</h4>
+                        
                     </div>
                 </div>
                 <div class="row mt-4 mb-4 justify-content-center">

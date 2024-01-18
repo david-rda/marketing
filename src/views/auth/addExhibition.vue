@@ -8,11 +8,11 @@
                     <form @submit.prevent="addExhibition">
                         <div class="mb-3 mx-3">
                             <label for="name" class="form-label">გამოფენის დასახელება</label>
-                            <input type="text" id="name" class="form-control input_form" v-model="name">
+                            <input type="text" id="name" class="form-control input_form" v-model="name" autocomplete="off">
                         </div>
                         <div class="mb-3 mx-3">
                             <label for="country" class="form-label">ქვეყანა</label>
-                            <input type="text" id="country" class="form-control input_form" v-model="country">
+                            <input type="text" id="country" class="form-control input_form" v-model="country" autocomplete="off">
                         </div>
                         <div class="mb-3 mx-3">
                             <label for="datetime-picker" class="form-label">ჩატარების თარიღი</label>
@@ -20,6 +20,20 @@
                         </div>
                         <div class="mb-3 mx-3 mt-4">
                             <input type="submit" value="დამატება" class="form-control input_form mt-1 btn_manual">
+                        </div>
+                        
+                        <div class="mx-3" v-if="errors != ''">
+                            <div v-for="(item, index) in errors" :key="index" class="alert alert-dismissible alert-danger">
+                                <strong>{{ item[0] }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        </div>
+
+                        <div class="mx-3" v-if="errors == null">
+                            <div class="alert alert-dismissible alert-success">
+                                <strong>გამოფენა დაემატა</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -34,7 +48,7 @@
   import { QuillEditor } from '@vueup/vue-quill'
   import FlatPickr from 'vue-flatpickr-component';
   import "vue-select/dist/vue-select.css"
-  import axios from 'axios';
+  import axios, { AxiosError } from 'axios';
 
   export default {
     components: {
@@ -49,6 +63,8 @@
         datetime: new Date(),
         country: "",
         name: "",
+
+        errors : "",
 
         flatpickrOptions: {
             enableTime: false,
@@ -70,8 +86,12 @@
 
                 this.exhibitions = response.data.data;
 
+                this.errors = null;
+
             }).catch(err => {
-                console.log(err);
+                if(err instanceof AxiosError) {
+                    this.errors = err?.response?.data?.errors;
+                }
             });
         },
     }

@@ -24,81 +24,21 @@
                                     <th scope="col">სტატუსი</th>
                                     <th scope="col">გაგზავნის თარიღი</th>
                                     <th scope="col">ხელახლა გაგზავნა</th>
-                                    <!-- <th scope="col">გაფრთხილება</th> -->
-                                    <!-- <th scope="col" v-if="warn_status == 1">გაფრხილების თარიღი</th>
-                                    <th v-if="status == 1" scope="col">რედაქტირების შეტყობინება</th>
-                                    <th v-if="status == 1" scope="col">რედაქტირების შეტყობინების თარიღი</th> -->
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td>ferma@gmail.com</td>
-                                    <td>არ არის შევსებული</td>
-                                    <td>01-01-24</td>
+                                <tr v-for="(item, index) in emails" :key="index">
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.status }}</td>
+                                    <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>
                                     <td>
                                         <button class="btn btn-warning" type="button" >
                                             გაგზავნა
                                         </button>
                                     </td>
-                                    <!-- <td>                                      -->
-                                        <!-- <p class="d-inline-flex gap-1"> -->
-                                        <!-- <router-link to="/warning">
-                                            <button class="btn btn-warning" type="button" >
-                                            გაფრთხილება
-                                            </button>
-                                        </router-link> -->
-                                        <!-- </p> -->
-                                        <!-- <div class="collapse" id="collapseExample">
-                                            <div class="card card-body">
-                                                <form action="">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
-                                                            <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
-                                                            <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
-                                                            <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                                                            <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 "  value="გაგზავნა">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div> -->
-                                    <!-- </td> -->
-                                    <!-- <td  v-if="warn_status == 1">
-                                        <ol>
-                                            <li>01-02-23</li>
-                                            <li>01-05-23</li>
-                                        </ol>
-                                    </td> -->
-                                    <!-- <td v-if="status == 1">                                         -->
-                                        <!-- <p class="d-inline-flex gap-1"> -->
-                                        <!-- <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                           რედაქტირების შეტყობინება
-                                        </button> -->
-                                        <!-- </p> -->
-                                        <!-- <div class="collapse" id="collapseExample">
-                                            <div class="card card-body">
-                                                <form action="">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <label class="form-label" for="exhibition">გაგზავნის თარიღი</label>
-                                                            <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="picked" :config="flatpickrOptions"></flat-pickr>
-                                                            <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
-                                                            <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
-                                                            <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 "  value="გაგზავნა">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div> -->
-                                    <!-- </td> -->
-                                    <!-- <td v-if="status == 1">
-                                            01-02-23
-                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
-                        
                     </div>
                 </div>
             </div>
@@ -128,6 +68,10 @@
         axios.get("/exhibition/list").then(function(response) {
             _this_.options = response.data;
         });
+
+        axios.get("/email/sent/list").then(response => {
+            _this_.emails = response.data;
+        });
     },
     
     data() {
@@ -135,17 +79,14 @@
         selectedValue: null,
 
         data : "",
+        emails : [],
 
-        options: [
-          { value: 'option1', label: 'ჩატარებული გამოფენა 1' },
-          { value: 'option2', label: 'ჩატარებული გამოფენა 2' },
-        ],
+        options: [],
+
         flatpickrOptions: {
             enableTime: true,
             dateFormat: 'Y-m-d H:i',
         },
-        // status: 0,
-        // warn_status : 1
       }
     },
   }

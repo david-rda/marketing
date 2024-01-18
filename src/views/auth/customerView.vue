@@ -207,8 +207,8 @@
                                 ნამდვილად გსურთ მოცემული კონტაქტის წაშლა?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">უარყოფა</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="removeField">წაშლა</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">არა</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="removeField">კი</button>
                             </div>
                         </div>
                     </div>

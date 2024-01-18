@@ -92,7 +92,7 @@
         }).then(function(response) {
           window.localStorage.setItem("user", JSON.stringify(response.data));
 
-          _this_.$router.push("/dashboard");
+          _this_.$router.push("/exhibitions");
 
           _this_.loader = false;
         }).catch(function(err) {

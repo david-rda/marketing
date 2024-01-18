@@ -23,7 +23,7 @@ const routes = [
     component: conductedView
   },
   {
-    path: '/view/:id',
+    path: '/view/:id/:exhibition_id',
     name: 'viewView',
     component: viewView
   },

@@ -246,7 +246,7 @@
                         <div class="btn btn-warning btn-sm  d-flex justify-content-between align-items-center d-md-block d-none"> <h6 class="m-0"></h6><img class="download_btn" src="../../assets/img/icon/download-solid.svg" alt="download excel"></div>
                     </div>
                     <div class="col-md-3  qui mb-2">
-                        <input type="submit" class=" btn btn-success w-100 "  value="უკან დაბრუნება">
+                        <button @click="back()" class=" btn btn-success w-100">უკან დაბრუნება</button>
                     </div>
                 </div>
 
@@ -272,6 +272,13 @@
     components: {
       Footer,
     },
+
+    methods : {
+        back() {
+            this.$router.back()
+        }
+    },
+
     mounted() {
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

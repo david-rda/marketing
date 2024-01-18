@@ -45,7 +45,7 @@
                                             <li v-for="data in item.organizations" :key="data.id">{{ data.company_name }}</li>
                                         </ol>
                                     </td>
-                                    <td><router-link :to="'/view/' + item.id" class="btn btn-success btn-sm">დათვალიერება</router-link></td>
+                                    <td><router-link :to="'/view/' + item.id + '/' + item.exhibition_id" class="btn btn-success btn-sm">დათვალიერება</router-link></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -247,7 +247,7 @@
                 </div>
 
                 <div class="alert alert-success alert-dismissible" v-if="success_message">
-                    <strong>დაემატა</strong>
+                    <strong>ინფორმაცია წარმატებით გაიგზავნა</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             </form>

@@ -14,7 +14,7 @@
               </router-link>
             </li>        
             <li class="nav-item cool-link m-auto">
-              <router-link class="nav-link" to="/Dashboard">
+              <router-link class="nav-link" to="/conducted">
                 <div class="nav-link active" aria-current="page">ჩატარებული</div>
               </router-link>
             </li>

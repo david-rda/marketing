@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import login from '../views/login.vue'
-import dashboardView from '../views/auth/dashboardView'
+import conductedView from '../views/auth/conductedView'
 import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
 import sentView from '@/views/auth/sentView'
@@ -18,9 +18,9 @@ const routes = [
     component: login
   },
   {
-    path: '/dashboard',
-    name: 'dashboardView',
-    component: dashboardView
+    path: '/conducted',
+    name: 'conductedView',
+    component: conductedView
   },
   {
     path: '/view/:id',

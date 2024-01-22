@@ -40,7 +40,7 @@
                             <label class="form-label" for="emailInput">ადრესატები</label>
 
                             <ol class="list-group mt-2">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 14px" v-for="(item, index) in options.emails" :key="index">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 14px" v-for="(item, index) in emails" :key="index">
                                     <span>{{ item.email }}</span>
                                     <button type="button" class="btn btn-danger" :data-email-id="item.id" :data-exhibition-id="item.exhibition_id" @click="deleteEmail($event)">
                                         <svg style="pointer-events: none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -117,8 +117,13 @@
                 const email_id = Number(event.target.getAttribute("data-email-id"));
                 const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
 
-                console.log(email_id);
-                console.log(exhibition_id);
+                const _this_ = this;
+
+                axios.delete("/email/delete/" + email_id + "/" + exhibition_id).then(function(response) {
+                    _this_.emails = response.data.data;
+                }).catch(err => {
+                    console.log(err);
+                });
             },
 
             addTemplate() {

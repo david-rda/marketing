@@ -29,10 +29,10 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
                                     <td>{{ item.email }}</td>
-                                    <td>{{ item.status }}</td>
+                                    <td>{{ (item.status) ? 'გაიგზავნა' : 'ვერ გაიგზავნა' }}</td>
                                     <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>
                                     <td>
-                                        <button class="btn btn-warning" type="button" >
+                                        <button v-if="!item.status" class="btn btn-warning" type="button" >
                                             გაგზავნა
                                         </button>
                                     </td>

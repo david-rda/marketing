@@ -220,19 +220,19 @@
 
                 <!-- რეკომენდაცია/დამატებითი ინფორმაცია -->
 
-                    <div class="row mt-5  mb-4  justify-content-center">
-                        <div class="col-md-8 col-6 border_man"></div>
-                    </div>
+                <div class="row mt-5 mb-4 justify-content-center">
+                    <div class="col-md-8 col-6 border_man"></div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="disabledTextInput" class="form-label">რეკომენდაცია საერთაშორისო გამოფენის შესახებ</label>
-                        <textarea style="resize:none" disabled class="form-control" name="" id="" v-model="data.recomendation"></textarea>
+                        <textarea style="resize:none" disabled class="form-control" v-model="data.recomendation"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12 ">
                         <label for="disabledTextInput" class="form-label mt-3 qui">დამატებითი ინფორმაცია</label>
-                        <textarea style="resize:none" disabled class="form-control" name="" id="" v-model="data.comment"></textarea>
+                        <textarea style="resize:none" disabled class="form-control" v-model="data.comment"></textarea>
                     </div>
                 </div>
 
@@ -245,7 +245,7 @@
 
                 <div class="row mb-5 mt-5 justify-content-between">
                     <div class="col-md-3  qui mb-2">
-                        <div class="btn btn-warning btn-sm  d-flex justify-content-between align-items-center d-md-block d-none"> <h6 class="m-0"></h6><img class="download_btn" src="../../assets/img/icon/download-solid.svg" alt="download excel"></div>
+                        <div class="btn btn-warning btn-sm  d-flex justify-content-between align-items-center d-md-block d-none" v-on:click="doanloadExcel()"><img class="download_btn" src="../../assets/img/icon/download-solid.svg" alt="download excel"></div>
                     </div>
                     <div class="col-md-3  qui mb-2">
                         <button @click="back()" class=" btn btn-success w-100">უკან დაბრუნება</button>
@@ -279,6 +279,10 @@
     methods : {
         back() {
             this.$router.back()
+        },
+
+        doanloadExcel() {
+            
         }
     },
 

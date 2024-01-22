@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="container">
+        <div class="container" style="margin-top: 90px;">
+            <navbar/>
             <form @submit.prevent="" action="#" class=" mt-4 form_bg">
                 <div class="row justify-content-md-between align-items-center">
                     <div class="col-md-2 col-12 text-center text-sm-start">
@@ -260,6 +261,7 @@
 
 <script>
   import Footer from '../../components/footer.vue'
+  import navbar from '../../components/navbar.vue'
   import axios from 'axios'
 
   export default {
@@ -273,7 +275,8 @@
       }
     },
     components: {
-      Footer,
+        navbar,
+        Footer,
     },
 
     methods : {

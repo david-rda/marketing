@@ -278,11 +278,11 @@
 
     methods : {
         back() {
-            this.$router.back()
+            this.$router.back();
         },
 
         doanloadExcel() {
-            
+            window.open("http://localhost/exhibition_api/public/api/detail/download/excel/" + this.$route.params.id + "/" + this.$route.params.exhibition_id);
         }
     },
 

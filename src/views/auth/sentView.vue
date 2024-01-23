@@ -20,6 +20,7 @@
                         <table class="table table-hover border ">
                             <thead class="text-center">
                                 <tr>
+                                    <th scope="col">გამოფენა</th>
                                     <th scope="col">ელ. ფოსტა</th>
                                     <th scope="col">სტატუსი</th>
                                     <th scope="col">გაგზავნის თარიღი</th>
@@ -28,6 +29,7 @@
                             </thead>
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
+                                    <td>გამოფენა</td>
                                     <td>{{ item.email }}</td>
                                     <td>{{ (item.status) ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>

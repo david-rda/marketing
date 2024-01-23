@@ -26,11 +26,11 @@
                         <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
 
                         <div v-if="show_alert" class="alert alert-success alert-dismissible">
-                            <strong>ნიმუში დაემატა</strong>
+                            <strong>შეტყობინება გაიგზავნა</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                         <div v-if="show_alert === false" class="alert alert-danger alert-dismissible">
-                            <strong>ნიმუში ვერ დაემატა</strong>
+                            <strong>შეტყობინება ვერ გაიგზავნა</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     </div>

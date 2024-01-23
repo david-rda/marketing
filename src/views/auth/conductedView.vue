@@ -29,6 +29,7 @@
                             <thead class="text-center">
                                 <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">გამოფენა</th>
                                 <th scope="col">სახელი, გვარი</th>
                                 <th scope="col">ელ. ფოსტა</th>
                                 <th scope="col">ორგანიზაცია</th>
@@ -38,6 +39,7 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in data" :key="index">
                                     <td>{{ index + 1 }}</td>
+                                    <td>გამოფენის დასახელება</td>
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.email }}</td>
                                     <td>

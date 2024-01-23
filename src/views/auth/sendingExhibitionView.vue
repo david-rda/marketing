@@ -140,7 +140,6 @@
                     _this_.exhibition = "";
                     _this_.datetime = "";
                     _this_.text = "";
-                    _this_.emails = "";
                 }).catch(function() {
                     _this_.show_alert = false;
                 });

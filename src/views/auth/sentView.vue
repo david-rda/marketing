@@ -29,7 +29,7 @@
                             </thead>
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
-                                    <td>გამოფენა</td>
+                                    <td>{{ item.exhibition_name }}</td>
                                     <td>{{ item.email }}</td>
                                     <td>{{ (item.status) ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>

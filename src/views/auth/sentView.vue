@@ -30,7 +30,7 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
                                     <td>{{ item.exhibition_name }}</td>
-                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) >= 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ item.email }}</td>
+                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ item.email }}</td>
                                     <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ item.sent_date }}</td>
                                     <td>

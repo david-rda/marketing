@@ -30,13 +30,11 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
                                     <td>{{ item.exhibition_name }}</td>
-                                    <td>{{ item.email }}</td>
+                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) >= 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ item.email }}</td>
                                     <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
-                                    <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>
+                                    <td>{{ item.sent_date }}</td>
                                     <td>
-                                        <button v-if="!item.status" class="btn btn-warning" type="button" >
-                                            გაგზავნა
-                                        </button>
+                                        <button v-if="!(item.filled_status === '1')" class="btn btn-warning" type="button">გაგზავნა</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -74,6 +72,9 @@
         axios.get("/email/sent/list").then(response => {
             _this_.emails = response.data;
         });
+
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     },
 
     watch : {
@@ -96,6 +97,8 @@
         emails : [],
 
         options: [],
+
+        current_date : new Date(),
 
         flatpickrOptions: {
             enableTime: true,

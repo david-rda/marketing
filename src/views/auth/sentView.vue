@@ -73,6 +73,18 @@
             _this_.emails = response.data;
         });
     },
+
+    watch : {
+        selectedValue(newValue, oldValue) {
+            const __this__ = this;
+
+            axios.get("/email/sent/list/" + newValue.id).then(function(response) {
+                __this__.emails = response.data;
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+    },
     
     data() {
       return {

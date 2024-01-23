@@ -39,7 +39,7 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in data" :key="index">
                                     <td>{{ index + 1 }}</td>
-                                    <td>გამოფენის დასახელება</td>
+                                    <td>{{ item.exhibition_name }}</td>
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.email }}</td>
                                     <td>

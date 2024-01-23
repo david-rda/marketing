@@ -15,7 +15,7 @@
                 <div class="d-md-block d-none" v-if="selectedValue">
                     <div class="row justify-content-end  align-items-center ">
                         <div class="col-md-2">
-                            <div class="btn btn-warning btn-sm  d-flex justify-content-between"> 
+                            <div class="btn btn-warning btn-sm d-flex justify-content-between" @click="downloadExcel()"> 
                                 <h6 class="m-0"><b>გადმოწერა</b></h6>
                                 <img src="../../assets/img/icon/download-solid.svg" alt="download excel">
                             </div>
@@ -77,7 +77,22 @@
         data : "",
 
         options: [],
+
+        new_value : ""
       }
+    },
+
+    watch : {
+        selectedValue(newValue, oldValue) {
+            const __this__ = this;
+
+            axios.get("/detail/list/" + newValue.id).then(function(response) {
+                __this__.data = response.data;
+                __this__.new_value = newValue.id;
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
     },
 
     mounted() {
@@ -93,6 +108,12 @@
             __this__.options = response.data;
         });
     },
+
+    methods : {
+        downloadExcel() {
+            window.open("http://localhost/exhibition_api/public/api/exhibition/download/excel/" + this.new_value);
+        }
+    }
   }
 </script>
 

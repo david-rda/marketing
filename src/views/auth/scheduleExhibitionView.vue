@@ -13,7 +13,7 @@
                 <h6 class="main mt-1 mb-3 ">დაგეგმეთ მომდევნო შეტყობინებები</h6>
             </div>
             <div class="row">
-                <div class="col-md-9 col-12">
+                <div class="col-md-7 col-12">
                     <form @submit.prevent="addTemplate()">
                         <div class="justify-content-center card mb-3 p-3 shadow-sm" v-for="(item, index) in templates" :key="index">
                            <div class="col-md-12">
@@ -47,6 +47,21 @@
                         <strong>ნიმუში ვერ დაემატა</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
+                </div>
+                <!-- მეილების ადგილი -->
+                <div class="col-md-3">
+                    
+                </div>
+                <!-- გაგზავნის ისტორია -->
+                <div class="col-md-2">
+                    <h6 class="main">გაგზავნის ისტორია</h6>
+                    <ol>
+                        <li>24-01-2024 12:30</li>
+                        <li>24-01-2024 12:30</li>
+                        <li>24-01-2024 12:30</li>
+                        <li>24-01-2024 12:30</li>
+                        <li>24-01-2024 12:30</li>
+                    </ol>
                 </div>
             </div>
         </div>

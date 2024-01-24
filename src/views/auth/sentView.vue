@@ -34,7 +34,7 @@
                                     <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ item.sent_date }}</td>
                                     <td>
-                                        <button v-if="!(item.filled_status === '1')" class="btn btn-warning" type="button">გაგზავნა</button>
+                                        <button v-if="!(item.filled_status === '1')" class="btn btn-warning btn-sm" type="button">გაგზავნა</button>
                                     </td>
                                 </tr>
                             </tbody>

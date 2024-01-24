@@ -2,7 +2,7 @@
     <div>
         <navbar/>
         <div class="container" style="margin-top: 120px;">
-            <div class="row">
+            <div class="row justify-content-between">
                 <div class="col-md-4 col-12">
                     <h4 class="main head mt-4">ელ. ფოსტის დამატება</h4>
                     <div class="row">
@@ -13,7 +13,6 @@
                     <form @submit.prevent="addEmails()" class=" form_bg" ref="sendForm">
                         <div class="row">
                             <div id="emailApp" class="">
-                                <label class="form-label mt-2" for="emailInput">დაამატეთ ელ. ფოსტა</label>  
                                 <div class="input-group mb-3">
                                     <input type="email" class="form-control input_form_add" v-model="newEmail">
                                     <button type="button" class="btn btn-success" @click="addEmail()">

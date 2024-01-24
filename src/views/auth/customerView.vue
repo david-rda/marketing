@@ -70,38 +70,28 @@
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                                <input type="text" id="activity" class="form-control input_form"
-                                    oninvalid="this.setCustomValidity('შეიყვანეთ საქმიანობის სფერო') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.activity">
+                                <input type="text" id="activity" class="form-control input_form" v-model="items.activity">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
-                                <input type="text" id="country" class="form-control input_form"
-                                    oninvalid="this.setCustomValidity('შეიყვანეთ რომელ ქვეყანას წარმოადგენს') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.country">
+                                <input type="text" id="country" class="form-control input_form" v-model="items.country">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                                <input type="text" id="organization" class="form-control input_form"
-                                    oninvalid="this.setCustomValidity('შეიყვანეთ ორგანიზაციის დასახელება') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.organization">
+                                <input type="text" id="organization" class="form-control input_form" v-model="items.organization">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი
                                 </label>
-                                <input type="text" id="export" class="form-control input_form"
-                                    oninvalid="this.setCustomValidity('შეიყვანეთ ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.exportLocation">
+                                <input type="text" id="export" class="form-control input_form" v-model="items.exportLocation">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12 mb-2">
                                 <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა? </label>
-                                <textarea style="resize:none" class="h-100 form-control"
-                                    oninvalid="this.setCustomValidity('შეიყვანეთ რა ეტაპზეა საქმიანი ურთიერთობა') "
-                                    onchange="this.setCustomValidity('')" required v-model="items.activityLevel"></textarea>
+                                <textarea style="resize:none" class="h-100 form-control" v-model="items.activityLevel"></textarea>
                             </div>
                         </div>
                         <!-- <br> -->
@@ -124,21 +114,13 @@
 
                         <div class="row mb-1 mt-3" v-if="items.selected1 == 1 && selected != 0">
                             <div class="col-md-6">
-                                <div class="">
-                                    <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 -
-                                        ცალი/კგ/ბოთლი...)</label>
-                                    <input type="text" id="product" class="form-control input_form"
-                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი პროდუქციის მოცულობა ') "
-                                        onchange="this.setCustomValidity('')" required v-model="items.sent_product_volume">
-                                </div>
+                                <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 -
+                                    ცალი/კგ/ბოთლი...)</label>
+                                <input type="text" id="product" class="form-control input_form" v-model="items.sent_product_volume">
                             </div>
                             <div class="col-md-6">
-                                <div class="">
-                                    <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                    <input type="number" id="cost" class="form-control input_form"
-                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი პროდუქციის ღირებულება ლარში') "
-                                        onchange="this.setCustomValidity('')" required v-model="items.sent_product_price">
-                                </div>
+                                <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
+                                <input type="number" id="cost" class="form-control input_form" v-model="items.sent_product_price">
                             </div>
                         </div>
 
@@ -146,21 +128,13 @@
 
                         <div class="row mb-1 mt-3" v-if="items.selected1 == 2 && formData.selected != 0">
                             <div class="col-md-6">
-                                <div class="">
-                                    <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
-                                        ცალი/კგ/ბოთლი...)</label>
-                                    <input type="text" id="sample" class="form-control input_form"
-                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი ნიმუშის მოცულობა') "
-                                        onchange="this.setCustomValidity('')" required v-model="items.sent_example_volume">
-                                </div>
+                                <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
+                                    ცალი/კგ/ბოთლი...)</label>
+                                <input type="text" id="sample" class="form-control input_form" v-model="items.sent_example_volume">
                             </div>
                             <div class="col-md-6">
-                                <div class="">
-                                    <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                    <input type="number" id="sampleCost" class="form-control input_form"
-                                        oninvalid="this.setCustomValidity('შეიყვანეთ გაგზავნილი ნიმუშის ღირებულება ლარში') "
-                                        onchange="this.setCustomValidity('')" required v-model="items.sent_example_price">
-                                </div>
+                                <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
+                                <input type="number" id="sampleCost" class="form-control input_form" v-model="items.sent_example_price">
                             </div>
                         </div>
                     </div>

@@ -20,29 +20,21 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="name" class="form-label">სახელი, გვარი</label>
-                            <input type="text" id="name" class="form-control input_form"
-                                oninvalid="this.setCustomValidity('შეიყვანეთ სახელი') "
-                                onchange="this.setCustomValidity('')" required v-model="formData.fullname">
+                            <input type="text" id="name" class="form-control input_form" v-model="formData.fullname">
                         </div>
                         <div class="mb-3">
                             <label for="Position" class="form-label">თანამდებობა</label>
-                            <input type="text" id="Position" class="form-control input_form "
-                                oninvalid="this.setCustomValidity('შეიყვანეთ თანამდებობა') "
-                                onchange="this.setCustomValidity('')" required v-model="formData.position">
+                            <input type="text" id="Position" class="form-control input_form" v-model="formData.position">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="number" class="form-label">ტელეფონის ნომერი</label>
-                            <input type="number" id="number" class="form-control input_form"
-                                oninvalid="this.setCustomValidity('შეიყვანეთ ტელეფონის ნოემრი') "
-                                onchange="this.setCustomValidity('')" required min="0" v-model="formData.mobile">
+                            <input type="number" id="number" class="form-control input_form" min="0" v-model="formData.mobile">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
-                            <input type="email" id="email" class="form-control input_form"
-                                oninvalid="this.setCustomValidity('შეიყვანეთ ელ. ფოსტა') "
-                                onchange="this.setCustomValidity('')" required v-model="formData.email">
+                            <input type="text" id="email" class="form-control input_form" v-model="formData.email">
                         </div>
                     </div>
                 </div>
@@ -246,6 +238,12 @@
                     </div>
                 </div>
 
+                <div v-if="errors">
+                    <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
+                        <strong>{{ item[0] }}</strong>
+                    </div>
+                </div>
+
                 <div class="alert alert-success alert-dismissible" v-if="success_message">
                     <strong>ინფორმაცია წარმატებით გაიგზავნა</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -259,13 +257,15 @@
 <script>
     import { QuillEditor } from '@vueup/vue-quill'
     import Footer from '../../components/footer.vue'
-    import axios from 'axios'
+    import axios, { AxiosError } from 'axios'
     
     export default {
         data() {
             return {
                 success_message : false,
                 field_id : "",
+
+                errors : [],
 
                 formData : {
                     selected: '0',
@@ -313,8 +313,12 @@
 
                 axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
                     __this__.success_message = true;
-                }).catch(function() {
-                    __this__.success_message = true;
+                }).catch(function(err) {
+                    if(err instanceof AxiosError) {
+                        __this__.errors = err?.response?.data?.errors;
+                    }
+
+                    __this__.success_message = false;
                 });
             },
 

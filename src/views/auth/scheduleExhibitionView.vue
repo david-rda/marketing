@@ -15,37 +15,32 @@
             <div class="row">
                 <div class="col-md-7 col-12">
                     <form @submit.prevent="addTemplate()">
-                        <div class="justify-content-center card mb-3 p-3 shadow-sm" v-for="(item, index) in templates" :key="index">
+                        <div class="justify-content-center card mb-3 p-3 shadow-sm">
                            <div class="col-md-12">
                                 <div class="row justify-content-between align-items-center">
-                                    <h3 class="text-success col-md-1">#{{ index + 1 }}</h3>
                                     <div class="col-md-3">
-                                        <label class="form-label" :for="'datetime-picker-'">გაგზავნის თარიღი</label>
-                                        <flat-pickr id="datetime-picker" class="form-control input_form_add" v-model="item.datetime" :config="flatpickrOptions"></flat-pickr>
+                                        <label class="form-label" for="datetime-picker">გაგზავნის თარიღი</label>
+                                        <flat-pickr id="datetime-picker" class="form-control input_form_add" v-model="datetime" :config="flatpickrOptions"></flat-pickr>
                                     </div>
                                 </div>
                                 <label for="disabledTextInput" class="form-label mt-4 qui">გთხოვთ აკრიფოთ გასაგზავნი ტექსტი</label>
-                                <QuillEditor theme="snow" style="height: 200px" v-model:content="item.text" contentType="html" />
-                            </div>
-                        </div>
-                        <div class="row justify-content-center mt-3">
-                            <div class="col-md-2 col-12 d-flex justify-content-center">
-                                <button @click="addNewTemplate" type="button" class="btn btn-plus">
-                                    <img class="plus" src="../../assets/img/icon/plus-circle.svg" alt="plus">
-                                </button>
+                                <QuillEditor theme="snow" style="height: 200px" v-model:content="text" contentType="html" />
                             </div>
                         </div>
 
                         <input type="submit" class="btn btn-success w-100 mt-5 mb-4"  value="შენახვა">
                     </form>
 
-                    <div v-if="show_alert" class="alert alert-success alert-dismissible">
-                        <strong>ნიმუში დაემატა</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <div v-if="errors">
+                        <div v-for="(item, index) in errors" :key="index" class="alert alert-danger alert-dismissible">
+                            <strong>{{ item[0] }}</strong>
+                            <button class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
                     </div>
-                    <div v-if="show_alert === false" class="alert alert-danger alert-dismissible">
-                        <strong>ნიმუში ვერ დაემატა</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+                    <div v-if="edited" class="alert alert-success alert-dismissible">
+                        <strong>ნიმუში დარედაქტირდა</strong>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 </div>
                 <!-- მეილების ადგილი -->
@@ -84,13 +79,11 @@
                     dateFormat: 'Y-m-d H:i',
                 },
 
-                show_alert : "",
-                templates: [
-                    {
-                        datetime: new Date(),
-                        text: ''
-                    }
-                ],
+                datetime: "",
+                text: '',
+
+                errors : [],
+                edited : false
             }
         },
 
@@ -104,21 +97,29 @@
         mounted() {
             const _this_ = this;
 
-            axios.get("/template/list/" + this.$route.params.id).then(function(response) {
-                _this_.templates = [];
-                response.data.forEach((item, index) => {
-                    _this_.templates.push({
-                        datetime : item.datetime,
-                        text : item.text
-                    });
-                })
+            axios.get("/template/get/" + this.$route.params.id).then(function(response) {
+                _this_.datetime = response.data.datetime;
+                _this_.text = response.data.text;
+            }).catch(err => {
+                console.log(err);
             });
 
         },
 
         methods: {
             addTemplate() {
-                console.log(this.templates);
+                axios.put("/template/edit/" + this.$route.params.id, {
+                    datetime : this.datetime,
+                    text : this.text,
+                }).then(response => {
+                    this.edited = true;
+                }).catch(err => {
+                    if(err instanceof AxiosError) {
+                        this.errors = err?.response?.data?.errors;
+                    }
+
+                    this.edited = false;
+                });
             },
 
             addNewTemplate() {

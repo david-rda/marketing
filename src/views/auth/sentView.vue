@@ -30,11 +30,11 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
                                     <td>{{ item.exhibition_name }}</td>
-                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ item.email }}</td>
-                                    <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ item.sent_date }}</td>
                                     <td>
-                                        <button v-if="!(item.filled_status === '1')" class="btn btn-warning btn-sm" type="button">გაგზავნა</button>
+                                        <button v-if="!(item.filled_status === '1')" :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -106,6 +106,19 @@
         },
       }
     },
+
+    methods : {
+        sendEmail(event) {
+            const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
+            const id = Number(event.target.getAttribute("data-id"));
+
+            axios.post("/email/send/to/" + id + "/" + exhibition_id).then(response => {
+                console.log(response.data);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    }
   }
 </script>
 

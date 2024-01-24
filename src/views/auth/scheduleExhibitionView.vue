@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-7 col-12">
                     <form @submit.prevent="addTemplate()">
-                        <div class="justify-content-center card mb-3 p-3 shadow-sm">
+                        <div class="justify-content-center card mb-3 p-3">
                            <div class="col-md-12">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-md-3">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn btn-success w-100 mt-5 mb-4"  value="შენახვა">
+                        <input type="submit" class="btn btn-success w-100 mb-4"  value="შენახვა">
                     </form>
 
                     <div v-if="errors">
@@ -44,11 +44,11 @@
                     </div>
                 </div>
                 <!-- მეილების ადგილი -->
-                <div class="col-md-3">
+                <!-- <div class="col-md-3"> -->
                     
-                </div>
+                <!-- </div> -->
                 <!-- გაგზავნის ისტორია -->
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <h6 class="main">გაგზავნის ისტორია</h6>
                     <ol>
                         <li>24-01-2024 12:30</li>
@@ -57,7 +57,7 @@
                         <li>24-01-2024 12:30</li>
                         <li>24-01-2024 12:30</li>
                     </ol>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
             </div>
             <form @submit.prevent="addTemplate()" class=" form_bg" ref="sendForm">
                 <div class="row justify-content-between">
-                    <div class="col-md-9 text_email1">
+                    <div class="col-md-8 text_email1">
                         <div class="row">
                             <div class="col-md-9">
                                 <h4 class="main brand mt-3">{{ this.$route.params.label }}</h4>
@@ -34,7 +34,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     </div>
-                    <div class="col-md-3" v-if="options != ''">
+                    <div class="col-md-4" v-if="options != ''">
                         <div id="emailApp" class="card p-2">
                            
                             <label class="form-label" for="emailInput">ადრესატები</label>

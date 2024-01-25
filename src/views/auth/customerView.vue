@@ -212,7 +212,7 @@
                     </div>
                 </div>
 
-                <div v-if="errors">
+                <div v-if="errors && success_message == false">
                     <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
                         <strong>{{ item[0] }}</strong>
                     </div>

@@ -109,7 +109,11 @@
         mounted() {
             const _this_ = this;
 
-            axios.get("/exhibition/show/" + this.$route.params.id).then(function(response) {
+            axios.get("/exhibition/show/" + this.$route.params.id, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 _this_.added_emails = response.data.emails;
             });
         },
@@ -121,7 +125,11 @@
 
                 const _this_ = this;
 
-                axios.delete("/email/delete/" + email_id + "/" + exhibition_id).then(function(response) {
+                axios.get("/email/delete/" + email_id + "/" + exhibition_id, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
+                }).then(function(response) {
                     _this_.added_emails = response.data.data;
                 }).catch(err => {
                     console.log(err);
@@ -143,6 +151,10 @@
                 axios.post("/email/add/to", {
                     emails : this.emails,
                     exhibition_id : this.$route.params.id
+                }, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
                 }).then(res => {
                     console.log(res.data);
                     this.email_added = true;

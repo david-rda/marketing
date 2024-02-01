@@ -285,7 +285,11 @@
             submitForm() {
                 const __this__ = this;
 
-                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
+                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() }), {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
+                }).then(function() {
                     __this__.success_message = true;
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {

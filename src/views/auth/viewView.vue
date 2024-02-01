@@ -285,7 +285,7 @@
         },
 
         doanloadExcel() {
-            window.open("http://localhost/exhibition_api/public/api/detail/download/excel/" + this.$route.params.id + "/" + this.$route.params.exhibition_id);
+            window.open("https://survey.rda.gov.ge/api/detail/download/excel/" + this.$route.params.id + "/" + this.$route.params.exhibition_id);
         }
     },
 
@@ -295,13 +295,21 @@
 
       const _this_ = this;
 
-      axios.get("/detail/get/" + this.$route.params.id).then(function(response) {
+      axios.get("/detail/get/" + this.$route.params.id, {
+            headers : {
+                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+            }
+        }).then(function(response) {
         _this_.data = response.data;
       }).catch(function(err) {
         console.log(err);
       });
 
-      axios.get("/exhibition/show/" + this.$route.params.exhibition_id).then(function(response) {
+      axios.get("/exhibition/show/" + this.$route.params.exhibition_id, {
+            headers : {
+                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+            }
+        }).then(function(response) {
         _this_.exhibition = response.data.label;
       }).catch(function(err) {
         console.log(err);

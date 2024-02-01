@@ -104,7 +104,11 @@
         mounted() {
             const _this_ = this;
 
-            axios.get("/exhibition/list").then(function(response) {
+            axios.get("/exhibition/list", {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 _this_.options = response.data;
             });
         },
@@ -129,6 +133,10 @@
                     datetime : this.picked,
                     text : this.$refs.text.getText(),
                     emails : this.emails
+                }, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
                 }).then(function() {
                     _this_.show_alert = true;
 

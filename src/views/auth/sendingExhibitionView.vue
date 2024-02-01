@@ -22,7 +22,7 @@
                         </div>
                         
                       
-                        <QuillEditor theme="snow" class="input_form" v-model="text" ref="text" />
+                        <QuillEditor theme="snow" class="input_form" v-model:content="text" ref="text" contentType="html" />
                         <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
 
                         <div v-if="show_alert" class="alert alert-success alert-dismissible">
@@ -100,7 +100,11 @@
         mounted() {
             const _this_ = this;
 
-            axios.get("/exhibition/show/" + this.$route.params.id).then(function(response) {
+            axios.get("/exhibition/show/" + this.$route.params.id, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 _this_.options = response.data;
                 _this_.emails = response.data.emails;
             });
@@ -119,7 +123,11 @@
 
                 const _this_ = this;
 
-                axios.delete("/email/delete/" + email_id + "/" + exhibition_id).then(function(response) {
+                axios.get("/email/delete/" + email_id + "/" + exhibition_id, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
+                }).then(function(response) {
                     _this_.emails = response.data.data;
                 }).catch(err => {
                     console.log(err);
@@ -134,6 +142,10 @@
                     datetime : this.picked,
                     text : this.$refs.text.getText(),
                     emails : this.emails
+                }, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
                 }).then(function() {
                     _this_.show_alert = true;
 

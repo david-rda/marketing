@@ -88,7 +88,11 @@
         selectedValue(newValue, oldValue) {
             const __this__ = this;
 
-            axios.get("/detail/list/" + newValue.id).then(function(response) {
+            axios.get("/detail/list/" + newValue.id, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 __this__.data = response.data;
                 __this__.new_value = newValue.id;
             }).catch(function(err) {
@@ -100,20 +104,28 @@
     mounted() {
         const __this__ = this;
 
-        axios.get("/detail/list").then(function(response) {
+        axios.get("/detail/list", {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
             __this__.data = response.data;
         }).catch(function(err) {
             console.log(err);
         });
 
-        axios.get("/exhibition/list").then(function(response) {
+        axios.get("/exhibition/list", {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
             __this__.options = response.data;
         });
     },
 
     methods : {
         downloadExcel() {
-            window.open("http://localhost/exhibition_api/public/api/exhibition/download/excel/" + this.new_value);
+            window.open("https://survey.rda.gov.ge/api/exhibition/download/excel/" + this.new_value);
         }
     }
   }

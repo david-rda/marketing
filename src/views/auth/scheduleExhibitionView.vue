@@ -97,7 +97,11 @@
         mounted() {
             const _this_ = this;
 
-            axios.get("/template/get/" + this.$route.params.id).then(function(response) {
+            axios.get("/template/get/" + this.$route.params.id, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 _this_.datetime = response.data.datetime;
                 _this_.text = response.data.text;
             }).catch(err => {
@@ -108,9 +112,13 @@
 
         methods: {
             addTemplate() {
-                axios.put("/template/edit/" + this.$route.params.id, {
+                axios.post("/template/edit/" + this.$route.params.id, {
                     datetime : this.datetime,
                     text : this.text,
+                }, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
                 }).then(response => {
                     this.edited = true;
                 }).catch(err => {

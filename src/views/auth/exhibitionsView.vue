@@ -105,7 +105,11 @@
             deleteExhibition(event) {
                 // const id = Number(event.target.getAttribute("data-id"));
 
-                axios.delete("/exhibition/delete/" + this.exhibition_id).then(res => {
+                axios.get("/exhibition/delete/" + this.exhibition_id, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
+                }).then(res => {
                     this.exhibitions = res.data.data;
                 }).catch(err => {
                     console.log(err);
@@ -114,7 +118,11 @@
         },
 
         mounted() {
-            axios.get("/exhibition/list").then(response => {
+            axios.get("/exhibition/list", {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(response => {
                 this.exhibitions = response.data;
             }).catch(err => {
                 console.log(err);

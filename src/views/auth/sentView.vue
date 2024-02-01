@@ -34,7 +34,8 @@
                                     <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>{{ item.sent_date }}</td>
                                     <td>
-                                        <button v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
+                                        <!-- v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" -->
+                                        <button :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -65,11 +66,19 @@
     mounted() {
         const _this_ = this;
 
-        axios.get("/exhibition/list").then(function(response) {
+        axios.get("/exhibition/list", {
+            headers : {
+                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+            }
+        }).then(function(response) {
             _this_.options = response.data;
         });
 
-        axios.get("/email/sent/list").then(response => {
+        axios.get("/email/sent/list", {
+            headers : {
+                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+            }
+        }).then(response => {
             _this_.emails = response.data;
         });
 
@@ -81,7 +90,11 @@
         selectedValue(newValue, oldValue) {
             const __this__ = this;
 
-            axios.get("/email/sent/list/" + newValue.id).then(function(response) {
+            axios.get("/email/sent/list/" + newValue.id, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(function(response) {
                 __this__.emails = response.data;
             }).catch(function(err) {
                 console.log(err);

@@ -79,6 +79,10 @@
                 title : this.name,
                 datetime : this.datetime,
                 country : this.country,
+            }, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
             }).then(response => {
                 this.name = "";
                 this.datetime = new Date();

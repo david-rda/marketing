@@ -5,7 +5,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import axios from 'axios';
 
 
-axios.defaults.baseURL = "http://172.16.31.18/exhibition_api/public/api";
+axios.defaults.baseURL = "https://survey.rda.gov.ge/api";
 // axios.defaults.baseURL = "http://localhost:8000/api";
 
 const app = createApp(App);

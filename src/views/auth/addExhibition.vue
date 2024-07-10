@@ -3,8 +3,12 @@
         <navbar />
 
         <div class="container" style="margin-top: 120px">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-12">
+            <div class="row justify-content-between">
+                <div class="col-md-2 col-12">
+                    <button type="button" class="btn btn-secondary" @click="goBack">&larr;</button>
+                </div>
+
+                <div class="col-md-10 col-12">
                     <form @submit.prevent="addExhibition">
                         <div class="mb-3 mx-3">
                             <label for="name" class="form-label">გამოფენის დასახელება</label>
@@ -23,16 +27,8 @@
                         </div>
                         
                         <div class="mx-3" v-if="errors != ''">
-                            <div v-for="(item, index) in errors" :key="index" class="alert alert-dismissible alert-danger">
+                            <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
                                 <strong>{{ item[0] }}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        </div>
-
-                        <div class="mx-3" v-if="errors == null">
-                            <div class="alert alert-dismissible alert-success">
-                                <strong>გამოფენა დაემატა</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         </div>
                     </form>
@@ -74,6 +70,10 @@
     },
 
     methods : {
+        goBack() {
+            this.$router.back()
+        },
+
         addExhibition() {
             axios.post("/exhibition/add", {
                 title : this.name,
@@ -88,9 +88,20 @@
                 this.datetime = new Date();
                 this.country = "";
 
-                this.exhibitions = response.data.data;
-
                 this.errors = null;
+
+                this.$swal({
+                    title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
+                    icon : "success",
+                    timerProgressBar: true,
+                    timer : 2000,
+                    toast : true,
+                    position : "top-end"
+                });
+
+                setTimeout(() => {
+                    this.$router.back()
+                }, 2000);
 
             }).catch(err => {
                 if(err instanceof AxiosError) {

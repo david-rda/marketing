@@ -18,19 +18,25 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">სახელი, გვარი</label>
-                            <input type="text" id="name" class="form-control input_form" v-model="formData.fullname">
+                        <div class="d-flex gap-3 additional">
+                            <div class="mb-3 w-50 additional1">
+                                <label for="company" class="form-label">კომპანიის დასახელება</label>
+                                <input type="text" id="company" class="form-control input_form" v-model="formData.company">
+                            </div>
+                            <div class="mb-3 w-50 additional1">
+                                <label for="name" class="form-label">სახელი, გვარი</label>
+                                <input type="text" id="name" class="form-control input_form" v-model="formData.fullname">
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="Position" class="form-label">თანამდებობა</label>
-                            <input type="text" id="Position" class="form-control input_form" v-model="formData.position">
+                            <label for="number" class="form-label">ტელეფონის ნომერი</label>
+                            <input type="number" min="0" id="number" class="form-control input_form" maxlength="9" v-model="formData.mobile" onkeypress="if(this.value.length==9) return false;">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="number" class="form-label">ტელეფონის ნომერი</label>
-                            <input type="number" id="number" class="form-control input_form" min="0" v-model="formData.mobile">
+                            <label for="Position" class="form-label">თანამდებობა</label>
+                            <input type="text" id="Position" class="form-control input_form" v-model="formData.position">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
@@ -69,8 +75,8 @@
                         </h4>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
-                                <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                                <input type="text" id="activity" class="form-control input_form" v-model="items.activity">
+                                <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
+                                <input type="text" id="organization" class="form-control input_form" v-model="items.organization">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
@@ -79,8 +85,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
-                                <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                                <input type="text" id="organization" class="form-control input_form" v-model="items.organization">
+                                <label for="activity" class="form-label">საქმიანობის სფერო</label>
+                                <input type="text" id="activity" class="form-control input_form" v-model="items.activity">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი
@@ -94,7 +100,7 @@
                                 <textarea style="resize:none" class="h-100 form-control" v-model="items.activityLevel"></textarea>
                             </div>
                         </div>
-                        <!-- <br> -->
+                        <br>
 
                         <!-- ექსპორტი -->
 
@@ -120,7 +126,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                <input type="number" id="cost" class="form-control input_form" v-model="items.sent_product_price">
+                                <input type="number" min="0" id="cost" class="form-control input_form" v-model="items.sent_product_price">
                             </div>
                         </div>
 
@@ -134,7 +140,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                <input type="number" id="sampleCost" class="form-control input_form" v-model="items.sent_example_price">
+                                <input type="number" min="0" id="sampleCost" class="form-control input_form" v-model="items.sent_example_price">
                             </div>
                         </div>
                     </div>
@@ -190,13 +196,13 @@
                     <div class="col-md-12">
                         <label for="disabledTextInput" class="form-label">რეკომენდაცია საერთაშორისო გამოფენის
                             შესახებ</label>
-                        <QuillEditor theme="snow" class="input_form" v-model="formData.recomendation" ref="recomendation" />
+                        <QuillEditor theme="snow" class="input_form" style="height: 100px" v-model="formData.recomendation" ref="recomendation" />
                     </div>
                 </div>
                 <div class="row mt-5 mb-5">
                     <div class="col-md-12 mt-5 mb-4">
                         <label for="disabledTextInput" class="form-label mt-3 qui">დამატებითი ინფორმაცია</label>
-                        <QuillEditor theme="snow" class="input_form" v-model="formData.additional_info" ref="additional_info" />
+                        <QuillEditor theme="snow" class="input_form" style="height: 100px" v-model="formData.additional_info" ref="additional_info" />
                     </div>
                 </div>
 
@@ -212,15 +218,8 @@
                     </div>
                 </div>
 
-                <div v-if="errors && success_message == false">
-                    <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
-                        <strong>{{ item[0] }}</strong>
-                    </div>
-                </div>
-
-                <div class="alert alert-success alert-dismissible" v-if="success_message">
-                    <strong>ინფორმაცია წარმატებით გაიგზავნა</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
+                    <strong>{{ item[0] }}</strong>
                 </div>
             </form>
         </div>
@@ -244,6 +243,7 @@
                 formData : {
                     selected: '0',
                     fullname: "",
+                    company : "",
                     position : "",
                     mobile : "",
                     email : "",
@@ -278,19 +278,21 @@
 
         methods : {
             setId(id) {
-                // const id = Number(event.target.getAttribute("data-id"));
                 this.field_id = id;
             },
 
             submitForm() {
                 const __this__ = this;
 
-                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() }), {
-                    headers : {
-                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
-                    }
-                }).then(function() {
-                    __this__.success_message = true;
+                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { status: 1, recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
+                    __this__.$swal({
+                        title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
+                        icon : "success",
+                        timerProgressBar: true,
+                        timer : 2000,
+                        toast : true,
+                        position : "top-end"
+                    });
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {
                         __this__.errors = err?.response?.data?.errors;
@@ -361,8 +363,16 @@
         font-family: firago-regular;
     }
     @media only screen and (max-width: 768px) {
-    .card {
-        margin-top: 25px;
-    }
+        .card {
+            margin-top: 25px;
+        }
+
+        .additional {
+            display: block !important;
+        }
+
+        .additional1 {
+            width: 100% !important;
+        }
     }
 </style>

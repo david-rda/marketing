@@ -3,13 +3,17 @@ import login from '../views/login.vue'
 import conductedView from '../views/auth/conductedView'
 import viewView from '../views/auth/viewView'
 import customerView from '../views/auth/customerView'
+import customerViewParent from '../views/auth/customerViewParent'
 import sentView from '@/views/auth/sentView'
 import exhibitionsView from '@/views/auth/exhibitionsView'
-// import resendView from '@/views/auth/resendView'
 import addExhibition from "@/views/auth/addExhibition"
 import scheduleExhibitionView from '@/views/auth/scheduleExhibitionView'
 import emailExhibitionView from '@/views/auth/emailExhibitionView'
 import sendingExhibitionView from '@/views/auth/sendingExhibitionView'
+import addTemplate from '@/views/auth/addTemplate'
+import editTemplate from '@/views/auth/editTemplate'
+import massiveSend from '@/views/auth/massiveSend'
+import customerEdit from '@/views/auth/customerEdit'
 
 const routes = [
   {
@@ -33,6 +37,16 @@ const routes = [
     component: customerView
   },
   {
+    path: '/customer/:id/:parent_id',
+    name: 'customerViewParent',
+    component: customerViewParent
+  },
+  {
+    path: '/customer/edit/:id/',
+    name: 'customerEdit',
+    component: customerEdit
+  },
+  {
     path: '/sent',
     name: 'sentView',
     component: sentView
@@ -52,11 +66,6 @@ const routes = [
     name: 'addExhibitions',
     component: addExhibition
   },
-  // {
-  //   path: '/resend',
-  //   name: 'resendView',
-  //   component: resendView
-  // },
   {
     path: '/exhibition/schedule/:id/:label',
     name: '/scheduleExhibitionView',
@@ -71,6 +80,21 @@ const routes = [
     path: '/exhibition/sending/:id/:label',
     name: '/sendingExhibitionsView',
     component: sendingExhibitionView
+  },
+  {
+    path: '/template/add/:id/:label',
+    name: '/addTemplate',
+    component: addTemplate
+  },
+  {
+    path: '/template/edit/:id/:label',
+    name: '/editTemplate',
+    component: editTemplate
+  },
+  {
+    path: '/massive/send',
+    name: '/massiveSend',
+    component: massiveSend
   },
 ]
 

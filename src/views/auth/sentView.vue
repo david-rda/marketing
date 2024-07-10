@@ -3,12 +3,12 @@
         <navbar/>
         <div class="container">
             <div class="row row_position justify-content-around">
-                <div class="row p-0 align-items-center mb-5">
+                <div class="row p-0 align-items-center mb-5 flex-row-reverse">
                     <div class="col-md-6 col-12 ">
                         <v-select v-model="selectedValue" :options="options" placeholder="აირჩიეთ გამოფენა"> </v-select>
                     </div>
-                    <div class="col-md-6 col-12 text-end d-md-block d-none">
-                        <h4 class="main brand">გაგზავნილი მეილები</h4>
+                    <div class="col-md-6 col-12 text-start d-md-block d-none">
+                        <h4 class="main brand"><span class="btn btn-success" @click="goBack">&larr;</span>&nbsp;&nbsp;გაგზავნილი მეილები</h4>
                     </div>
                 </div>
             </div> 
@@ -35,7 +35,9 @@
                                     <td>{{ item.sent_date }}</td>
                                     <td>
                                         <!-- v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" -->
-                                        <button :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
+                                        <button :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" ref="sendButton" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
+
+                                        <button v-if="item.filled_status === '1'" class="btn btn-info btn-sm ms-1" :data-exhibition-id="item.exhibition_id" :data-id="item.id" type="button" v-on:click="sendForEdit($event, item.email)">ჩასასწორებლად გაგზავნა</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -125,11 +127,50 @@
             const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
             const id = Number(event.target.getAttribute("data-id"));
 
-            axios.post("/email/send/to/" + id + "/" + exhibition_id).then(response => {
-                console.log(response.data);
+            axios.post("/email/send/to/" + id + "/" + exhibition_id, {}, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(response => {
+                this.$swal({
+                    title : "ელ. ფოსტა გაიგზავნა",
+                    icon : "success",
+                    timerProgressBar: true,
+                    timer : 2000,
+                    toast : true,
+                    position : "top-end"
+                });
+
+                event.target.setAttribute("style", "display: none !important");
             }).catch(err => {
                 console.log(err);
             });
+        },
+
+        sendForEdit(event, email) {
+            const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
+            const id = Number(event.target.getAttribute("data-id"));
+
+            axios.get("/email/send/to/edit/" + id + "/" + exhibition_id + "/" + email, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(response => {
+                this.$swal({
+                    title : "ელ. ფოსტა გაიგზავნა",
+                    icon : "success",
+                    timerProgressBar: true,
+                    timer : 2000,
+                    toast : true,
+                    position : "top-end"
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        },
+
+        goBack() {
+            this.$router.back();
         }
     }
   }

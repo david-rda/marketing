@@ -16,6 +16,7 @@
                 <div class="row mt-4 mb-4 justify-content-center">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
+                <button type="button" class="btn btn-success mb-5" @click="sendStatus">სიახლე არ გვაქვს</button>
 
                 <!-- საკონტაქტო ინფორმაცია -->
 
@@ -23,25 +24,25 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="name" class="form-label">კომპანიის დასახელება</label>
-                            <input type="text" id="name" class="form-control input_form" v-model="data.company">
+                            <input type="text" id="name" ref="company" class="form-control input_form" v-model="data.company">
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">სახელი, გვარი</label>
-                            <input type="text" id="name" class="form-control input_form" v-model="data.fullname">
+                            <input type="text" id="name" ref="fullname" class="form-control input_form" v-model="data.fullname">
                         </div>
                         <div class="mb-3">
                             <label for="Position" class="form-label">თანამდებობა</label>
-                            <input type="text" id="Position" class="form-control input_form" v-model="data.position">
+                            <input type="text" id="Position" ref="position" class="form-control input_form" v-model="data.position">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="number" class="form-label">საკონტაქტო ტელეფონის ნომერი</label>
-                            <input type="number" id="number" class="form-control input_form" v-model="data.mobile">
+                            <input type="number" id="number" ref="email" class="form-control input_form" v-model="data.mobile">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
-                            <input type="email" id="email" class="form-control input_form" v-model="data.email">
+                            <input type="email" id="email" ref="mobile" class="form-control input_form" v-model="data.email">
                         </div>
                     </div>
                 </div>
@@ -286,9 +287,60 @@
             }).catch(function(err) {
                 console.log(err);
             });
+
+            setTimeout(() => {
+                this.addFields()
+            }, 2000);
         },
 
         methods : {
+            sendStatus() {
+
+                if(this.$refs.company.value == "") {
+                    this.$refs.company.style.border = "1px solid #f1aeb5";
+                    return;
+                }else {
+                    this.$refs.company.style.border = "1px solid #000";
+                }
+                
+                if(this.$refs.fullname.value == "") {
+                    this.$refs.fullname.style.border = "1px solid #f1aeb5";
+                    return;
+                }else {
+                    this.$refs.fullname.style.border = "1px solid #000";
+                }
+                
+                if(this.$refs.position.value == "") {
+                    this.$refs.position.style.border = "1px solid #f1aeb5";
+                    return;
+                }else {
+                    this.$refs.position.style.border = "1px solid #000";
+                }
+                
+                if(this.$refs.email.value== "") {
+                    this.$refs.email.style.border = "1px solid #f1aeb5";
+                    return;
+                }else {
+                    this.$refs.email.style.border = "1px solid #000";
+                }
+                
+                if(this.$refs.mobile.value == "") {
+                    this.$refs.mobile.style.border = "1px solid #f1aeb5";
+                    return;
+                }else {
+                    this.$refs.mobile.style.border = "1px solid #000";
+                }
+
+                axios.get("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email).then((res) => {
+                    this.$swal({
+                        title : "სტატუსი მიენიჭა",
+                        icon : "success",
+                    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+            },
+
             setId(id) {
                 this.field_id = id;
             },
@@ -339,7 +391,6 @@
     }
 
     .btn-success {
-        background-color: #005019 !important;
         /* height: 50px; */
         font-size: 20px;
         font-family: 'Regular';

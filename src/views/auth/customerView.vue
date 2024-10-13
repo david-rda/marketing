@@ -21,26 +21,26 @@
                         <div class="d-flex gap-3 additional">
                             <div class="mb-3 w-50 additional1">
                                 <label for="company" class="form-label">კომპანიის დასახელება</label>
-                                <input type="text" id="company" class="form-control input_form" v-model="formData.company">
+                                <input type="text" id="company" ref="company" class="form-control input_form" v-model="formData.company">
                             </div>
                             <div class="mb-3 w-50 additional1">
                                 <label for="name" class="form-label">სახელი, გვარი</label>
-                                <input type="text" id="name" class="form-control input_form" v-model="formData.fullname">
+                                <input type="text" id="name" ref="fullname" class="form-control input_form" v-model="formData.fullname">
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="number" class="form-label">ტელეფონის ნომერი</label>
-                            <input type="number" min="0" id="number" class="form-control input_form" maxlength="9" v-model="formData.mobile" onkeypress="if(this.value.length==9) return false;">
+                            <label for="number" class="form-label">საკონტაქტო ტელეფონის ნომერი</label>
+                            <input type="number" min="0" ref="mobile" id="number" class="form-control input_form" maxlength="9" v-model="formData.mobile" onkeypress="if(this.value.length==9) return false;">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="Position" class="form-label">თანამდებობა</label>
-                            <input type="text" id="Position" class="form-control input_form" v-model="formData.position">
+                            <input type="text" id="Position" ref="position" class="form-control input_form" v-model="formData.position">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
-                            <input type="text" id="email" class="form-control input_form" v-model="formData.email">
+                            <input type="text" id="email" ref="email" class="form-control input_form" v-model="formData.email">
                         </div>
                     </div>
                 </div>
@@ -76,28 +76,28 @@
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                                <input type="text" id="organization" class="form-control input_form" v-model="items.organization">
+                                <input type="text" id="organization" class="form-control input_form" :class="(items.organization.error == true) ? 'form-control input_form border border-danger' : 'form-control input_form'" v-model="items.organization.value">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
-                                <input type="text" id="country" class="form-control input_form" v-model="items.country">
+                                <input type="text" id="country" :class="(items.country.error == true) ? 'form-control input_form border border-danger' : 'form-control input_form'" v-model="items.country.value">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                                <input type="text" id="activity" class="form-control input_form" v-model="items.activity">
+                                <input type="text" id="activity" :class="(items.activity.error == true) ? 'form-control input_form border border-danger' : 'form-control input_form'" v-model="items.activity.value">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი
                                 </label>
-                                <input type="text" id="export" class="form-control input_form" v-model="items.exportLocation">
+                                <input type="text" id="export" :class="(items.exportLocation.error == true) ? 'form-control input_form border border-danger' : 'form-control input_form'" v-model="items.exportLocation.value">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12 mb-2">
                                 <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა? </label>
-                                <textarea style="resize:none" class="h-100 form-control" v-model="items.activityLevel"></textarea>
+                                <textarea style="resize:none" :class="(items.activityLevel.error == true) ? 'form-control input_form border border-danger h-100' : 'form-control input_form h-100'" v-model="items.activityLevel.value"></textarea>
                             </div>
                         </div>
                         <br>
@@ -255,11 +255,26 @@
                         {
                             selected1 : "0",
 
-                            activity: "",
-                            country: "",
-                            organization: "",
-                            exportLocation: "",
-                            activityLevel : "",
+                            activity:  {
+                                error : false,
+                                value : ""
+                            },
+                            country:  {
+                                error : false,
+                                value : ""
+                            },
+                            organization:  {
+                                error : false,
+                                value : ""
+                            },
+                            exportLocation:  {
+                                error : false,
+                                value : ""
+                            },
+                            activityLevel:  {
+                                error : false,
+                                value : ""
+                            },
                         }
                     ]
                 }
@@ -274,6 +289,12 @@
         mounted() {
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+            axios.get("/email/view/" + this.$route.params.id + "/" + this.$route.query.email).then(function(response) {
+                console.log(response.data);
+            }).catch(function(err) {
+                console.log(err);
+            });
         },
 
         methods : {
@@ -283,6 +304,44 @@
 
             submitForm() {
                 const __this__ = this;
+
+                this.formData.dynamicData.forEach((item) => {
+                    item.country.error = !item.country.value;
+                    item.activity.error = !item.activity.value;
+                    item.organization.error = !item.organization.value;
+                    item.exportLocation.error = !item.exportLocation.value;
+                    item.activityLevel.error = !item.activityLevel.value;
+                });
+
+                if(this.formData.company == "") {
+                    this.$refs.company.style.border = "1px solid #f1aeb5";
+                }else {
+                    this.$refs.company.style.border = "1px solid #000"
+                }
+                
+                if(this.formData.fullname == "") {
+                    this.$refs.fullname.style.border = "1px solid #f1aeb5";
+                }else {
+                    this.$refs.fullname.style.border = "1px solid #000"
+                }
+                
+                if(this.formData.position == "") {
+                    this.$refs.position.style.border = "1px solid #f1aeb5";
+                }else {
+                    this.$refs.position.style.border = "1px solid #000"
+                }
+                
+                if(this.formData.email == "") {
+                    this.$refs.email.style.border = "1px solid #f1aeb5";
+                }else {
+                    this.$refs.email.style.border = "1px solid #000"
+                }
+                
+                if(this.formData.mobile == "") {
+                    this.$refs.mobile.style.border = "1px solid #f1aeb5";
+                }else {
+                    this.$refs.mobile.style.border = "1px solid #000"
+                }
 
                 axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { status: 1, recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {
                     __this__.$swal({
@@ -306,11 +365,26 @@
                 this.formData.dynamicData.push({
                     selected1 : "0",
 
-                    activity: "",
-                    country: "",
-                    organization: "",
-                    exportLocation: "",
-                    activityLevel : "",
+                    activity : {
+                        error : false,
+                        value : ""
+                    },
+                    country : {
+                        error : false,
+                        value : ""
+                    },
+                    organization: {
+                        error : false,
+                        value : ""
+                    },
+                    exportLocation: {
+                        error : false,
+                        value : ""
+                    },
+                    activityLevel: {
+                        error : false,
+                        value : ""
+                    },
                 });
             },
 

@@ -13,7 +13,7 @@
                 </div>
             </div> 
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row mt-4 ">
                 <div class="col-md-12">
                     <div class="overflow-auto">
@@ -21,6 +21,7 @@
                             <thead class="text-center">
                                 <tr>
                                     <th scope="col">გამოფენა</th>
+                                    <th scope="col">კომპანია</th>
                                     <th scope="col">ელ. ფოსტა</th>
                                     <th scope="col">სტატუსი</th>
                                     <th scope="col">გაგზავნის თარიღი</th>
@@ -30,8 +31,32 @@
                             <tbody class="text-center">
                                 <tr v-for="(item, index) in emails" :key="index">
                                     <td>{{ item.exhibition_name }}</td>
+                                    <td>{{ item.company }}</td>
                                     <td>{{ item.email }}</td>
-                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
+                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">
+                                        {{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}
+                                        &nbsp;&nbsp;
+
+                                        <span v-if="item.view == 1" v-tippy="{ content: 'ნანახია' }">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#63E6BE" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                            </svg>
+                                        </span>
+                                        <span v-else v-tippy="{ content: 'გაგზავნილია' }">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                            </svg>
+                                        </span>
+                                        &nbsp;&nbsp;
+
+                                        <span v-if="item.hasnew == 1" v-tippy="{ content: 'სიახლე არაა' }">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+                                                <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
+                                                <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
+                                            </svg>
+                                        </span>
+                                    </td>
                                     <td>{{ item.sent_date }}</td>
                                     <td>
                                         <!-- v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" -->

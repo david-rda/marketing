@@ -62,8 +62,8 @@
 
                 <!-- საქმიანი კავშირი დამყარებულია -->
 
-                <div class="row  mt-5" v-if="data.selected == 1">
-                    <div class="row  mb-4 justify-content-center">
+                <div class="row mt-5" v-if="data.selected == 1">
+                    <div class="row mb-4 justify-content-center">
                         <div class="col-md-8 col-6 border_man"></div>
                     </div>
                     <div v-for="(items, index) in data.organizations" :key="index" class="card p-3 mb-3">
@@ -289,6 +289,18 @@
             }).catch(function(err) {
                 console.log(err);
             });
+
+            axios.get("/email/view/" + this.$route.params.id + "/" + this.$route.query.email).then(function(response) {
+                console.log(response.data);
+            }).catch(function(err) {
+                console.log(err);
+            });
+
+            setTimeout(() => {
+                if(this.data.organizations.length == 0) {
+                    this.addFields();
+                }
+            }, 2000);
         },
 
         methods : {

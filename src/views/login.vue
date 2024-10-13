@@ -1,6 +1,5 @@
 <template>
   <div>
-  
       <div class="container">
         <div class="row aling-items-center row_height">
           <div class="col-md-5 col-12 .col-lg-12 m-auto ">
@@ -28,7 +27,7 @@
                 </div>
                 <div class="row mt-4 justify-content-end">
                   <div class="col-md-4 col-11 mx-4 mb-3">
-                    <button type="submit" class="btn btn-success btn_manual  input_height w-100">
+                    <button type="submit" class="btn btn-success input_height w-100">
                       <b>შესვლა&nbsp;&nbsp;</b>
                       <span class="spinner spinner-border spinner-border-sm" v-if="loader"></span>
                     </button>
@@ -36,13 +35,12 @@
                 </div>
               </form>
               <div v-if="this.error_messages" class="p-4">
-                <div class="alert alert-danger mb-2" v-for="(item, index) in this.error_messages" :key="index">
+                <div class="alert alert-danger mb-2 border-0" v-for="(item, index) in this.error_messages" :key="index">
                   <strong>{{ item[0] }}</strong>
                 </div>
               </div>
-
               <div v-if="incorrect" class="p-4">
-                <div class="alert alert-danger mb-2">
+                <div class="alert alert-danger mb-2 border-0">
                   <strong>ელ. ფოსტა ან პაროლი არასწორია</strong>
                 </div>
               </div>

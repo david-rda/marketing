@@ -24,29 +24,21 @@
                                 <span class="me-2"><b>PDF გადმოწერა</b></span>
                                 <img src="../../assets/img/icon/download-solid.svg" alt="download pdf" width="20" height="20">
                             </button>
-
-                            <!-- <br>
-                            <select class="form-select" v-model="filterdate" @change="filterDetails">
-                                <option value="" disabled selected>აირჩიეთ თარიღი</option>
-                                <option v-for="data in dates" :key="data" :value="data">{{ data }}</option>
-                            </select>  -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form @submit.prevent="filterDetails" class="d-flex">
-                            <input type="date" class="form-control" v-model="from">
-                            <input type="date" class="form-control ms-2" v-model="to">
-                            <input type="submit" value="დადასტურება" class="btn btn-success ms-2">
-                        </form>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="container">
             <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-2" v-if="selectedValue">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item mb-2" v-for="items in dates" :key="items">
+                            <a href="#" class="nav-link bg-success text-dark bg-opacity-25" :data-date="items" @click="filterDetails($event)">{{ items }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div :class="selectedValue ? 'col-md-10' : 'col-md-12'">
                     <div class="overflow-auto">
                         <table class="table table-hover border">
                             <thead class="text-center">
@@ -68,16 +60,16 @@
                                     <td>{{ item.exhibition_name }}</td>
                                     <td>
                                         <ol>
-                                            <li v-for="data in item.organizations" :key="data.id">{{ data.company_name }}</li>
+                                            <li v-for="data in item.organizations" :key="data">{{ data?.company_name }}</li>
                                         </ol>
                                     </td>
-                                    <td>{{ item.company }}</td>
-                                    <td>{{ item.fullname }}</td>
-                                    <td>{{ item.email }}</td>
-                                    <td>{{ new Date(item.updated_at).toISOString().split('T')[0] }}</td>
+                                    <td>{{ item?.company }}</td>
+                                    <td>{{ item?.fullname }}</td>
+                                    <td>{{ item?.email }}</td>
+                                    <td>{{ new Date(item?.updated_at).toISOString().split('T')[0] }}</td>
                                     <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
                                     <td>
-                                        <router-link :to="'/view/' + item.id + '/' + item.exhibition_id" class="btn btn-success btn-sm">დათვალიერება</router-link>
+                                        <router-link :to="'/view/' + item.id + '/' + item.exhibition_id + '/' + item.email" class="btn btn-success btn-sm">დათვალიერება</router-link>
                                         <button :data-item-id="item.id" @click="deleteDetail($event)" class="btn btn-danger btn-sm mt-1">წაშლა</button>
                                     </td>
                                 </tr>
@@ -110,6 +102,7 @@
         newId : Number(window.sessionStorage.getItem("newItemId")) > 0 ? Number(window.sessionStorage.getItem("newItemId")) : null,
 
         data : "",
+        newdate : "",
 
         options: [],
         filterdate : "",
@@ -150,23 +143,23 @@
                 }).catch(function(err) {
                     console.log(err);
                 });
-
-                axios.get("/detail/dates/" + newValue.id, {
-                    headers : {
-                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
-                    }
-                }).then(function(response) {
-                    __this__.dates = response.data;
-                });
             }
 
-            window.sessionStorage.setItem("newItem", newValue.label);
-            window.sessionStorage.setItem("newItemId", newValue.id);
+            window.sessionStorage.setItem("newItem", (typeof newValue?.label == "undefined" ? "" : newValue.label));
+            window.sessionStorage.setItem("newItemId", (typeof newValue?.id == "undefined" ? "" : newValue.id));
         }
     },
 
     mounted() {
         const __this__ = this;
+
+        axios.get("/detail/dates", {
+            headers : {
+                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+            }
+        }).then(function(response) {
+            __this__.dates = response.data;
+        });
 
         if(this.newId != null) {
             axios.get("/detail/list/" + this.newId, {
@@ -177,6 +170,14 @@
                 __this__.data = response.data;
             }).catch(function(err) {
                 console.log(err);
+            });
+
+            axios.get("/detail/dates/" + this.newId, {
+                headers : {
+                    "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                }
+            }).then(res => {
+                this.dates = res.data;
             });
         }else {
             axios.get("/detail/list", {
@@ -218,16 +219,17 @@
         },
 
         downloadPdf() {
-            window.open("https://survey.rda.gov.ge/api/exhibition/download/pdf/" + this.new_value + "/" + this.from + "/" + this.to);
+            window.open("https://survey.rda.gov.ge/api/exhibition/download/pdf/" + this.new_value + "/" + this.newdate);
         },
 
         goBack() {
             this.$router.back();
         },
 
-        filterDetails() {
-            axios.get("/detail/filter/" + Number(window.sessionStorage.getItem("newItemId")) + "/" + this.from + "/" + this.to).then(res => {
+        filterDetails(event) {
+            axios.get("/detail/filter/" + Number(window.sessionStorage.getItem("newItemId")) + "/" + event.target.getAttribute("data-date")).then(res => {
                 this.data = res.data;
+                this.newdate =  event.target.getAttribute("data-date");
             });
         }
     }

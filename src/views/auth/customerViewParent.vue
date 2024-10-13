@@ -289,13 +289,14 @@
             });
 
             setTimeout(() => {
-                this.addFields()
+                if(this.data.organizations.length == 0) {
+                    this.addFields();
+                }
             }, 2000);
         },
 
         methods : {
             sendStatus() {
-
                 if(this.$refs.company.value == "") {
                     this.$refs.company.style.border = "1px solid #f1aeb5";
                     return;

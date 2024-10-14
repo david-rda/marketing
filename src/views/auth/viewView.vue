@@ -115,59 +115,30 @@
                             <!-- გაგზავინილია პროდუქცია -->
 
                             <!-- <div v-if="items.selected1 === '2'"> -->
-                                <div class="row mb-1 mt-3" v-if="items.product_volume != ''">
-                                    <div class="col-md-6">
-                                        <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input disabled type="text" id="product" class="form-control input_form" required v-model="items.product_volume">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                        <input disabled type="number" id="cost" class="form-control input_form" required v-model="items.product_price">
-                                    </div>
-                                </div>
+                        <div class="row mb-1 mt-3" v-if="items.product_volume != ''">
+                            <div class="col-md-6">
+                                <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
+                                <input disabled type="text" id="product" class="form-control input_form" required v-model="items.product_volume">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
+                                <input disabled type="number" id="cost" class="form-control input_form" required v-model="items.product_price">
+                            </div>
+                        </div>
 
-                                <!-- გაგზავინილია ნიმუში -->
+                        <!-- გაგზავინილია ნიმუში -->
 
-                                <div class="row mb-1 mt-3" v-else>
-                                    <div class="col-md-6">
-                                        <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
-                                            ცალი/კგ/ბოთლი...)</label>
-                                        <input disabled type="text" id="sample" class="form-control input_form" required v-model="items.template_volume">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                        <input disabled type="number" id="sampleCost" class="form-control input_form" required v-model="items.template_price">
-                                    </div>
-                                </div>
-                                
-
-                                <!-- გაგზავინილია პროდუქცია -->
-
-                                <!-- <div class="row mb-1 mt-3" v-if="items.selected1==1 && items.selected != 0">
-                                    <div class="col-md-6">
-                                        <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობაW (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input disabled type="text" id="product" class="form-control input_form">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                        <input disabled type="number" id="cost" class="form-control input_form">
-                                    </div>
-                                </div> -->
-
-                                <!-- გაგზავინილია ნიმუში -->
-
-                                <!-- <div class="row mb-1  mt-3" v-if="items.selected1 == 2 && items.selected != 0">
-                                    <div class="col-md-6">
-                                        <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input disabled type="text" id="sample" class="form-control input_form">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                        <input disabled type="number" id="sampleCost" class="form-control input_form">
-                                    </div>
-                                </div> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
+                        <div class="row mb-1 mt-3" v-else>
+                            <div class="col-md-6">
+                                <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
+                                    ცალი/კგ/ბოთლი...)</label>
+                                <input disabled type="text" id="sample" class="form-control input_form" required v-model="items.template_volume">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
+                                <input disabled type="number" id="sampleCost" class="form-control input_form" required v-model="items.template_price">
+                            </div>
+                        </div>
                     </div>
                 </div>                
                 <!-- ექსპორტი -->

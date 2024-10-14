@@ -34,7 +34,7 @@
                 <div class="col-md-2" v-if="selectedValue">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item mb-2" v-for="items in dates" :key="items">
-                            <a href="#" class="nav-link bg-success text-dark bg-opacity-25" :data-date="items" @click="filterDetails($event)">{{ items }}</a>
+                            <a href="#" :class="(this.newdate !== items) ? 'nav-link bg-success text-dark bg-opacity-25' : 'nav-link bg-success text-white'" :data-date="items" @click="filterDetails($event)">{{ items }}</a>
                         </li>
                     </ul>
                 </div>
@@ -67,7 +67,11 @@
                                     <td>{{ item?.fullname }}</td>
                                     <td>{{ item?.email }}</td>
                                     <td>{{ new Date(item?.updated_at).toISOString().split('T')[0] }}</td>
-                                    <td>{{ (item.filled_status === "1") ? 'შევსებულია' : 'არ არის შევსებული' }}</td>
+                                    <td>
+                                        <span v-if="item.filled_status == '1'">შევსებულია&nbsp;&nbsp;</span>
+                                        <span v-if="item.filled_status == '2'">ნანახია&nbsp;&nbsp;</span>
+                                        <span v-if="item.filled_status == '0'">არაა შევსებული&nbsp;&nbsp;</span>
+                                    </td>
                                     <td>
                                         <router-link :to="'/view/' + item.id + '/' + item.exhibition_id + '/' + item.email" class="btn btn-success btn-sm">დათვალიერება</router-link>
                                         <button :data-item-id="item.id" @click="deleteDetail($event)" class="btn btn-danger btn-sm mt-1">წაშლა</button>
@@ -98,11 +102,11 @@
     
     data() {
       return {
-        selectedValue: window.sessionStorage.getItem("newItem") != null ? window.sessionStorage.getItem("newItem") : null,
-        newId : Number(window.sessionStorage.getItem("newItemId")) > 0 ? Number(window.sessionStorage.getItem("newItemId")) : null,
-
+        selectedValue: window.sessionStorage.getItem("newItem") != null ? window.sessionStorage.getItem("newItem") : "",
         data : "",
-        newdate : "",
+
+        newId : Number(window.sessionStorage.getItem("newItemId")) > 0 ? Number(window.sessionStorage.getItem("newItemId")) : null,
+        newdate : (typeof window.sessionStorage.getItem("date") != "undefined" || window.sessionStorage.getItem("date") != null) ? window.sessionStorage.getItem("date") : "",
 
         options: [],
         filterdate : "",
@@ -110,15 +114,15 @@
         new_value : "",
 
         dates : [],
-
-        from : new Date(),
-        to : new Date(),
       }
     },
 
     watch : {
         selectedValue(newValue, oldValue) {
             const __this__ = this;
+
+            window.sessionStorage.setItem("newItem", (typeof newValue?.label == "undefined" ? "" : newValue.label));
+            window.sessionStorage.setItem("newItemId", (typeof newValue?.id == "undefined" ? "" : newValue.id));
 
             if(newValue == null) {
                 window.sessionStorage.clear();
@@ -143,23 +147,21 @@
                 }).catch(function(err) {
                     console.log(err);
                 });
+
+                axios.get("/detail/dates/" + newValue.id, {
+                    headers : {
+                        "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
+                    }
+                }).then(function(response) {
+                    __this__.dates = response.data;
+                });
             }
 
-            window.sessionStorage.setItem("newItem", (typeof newValue?.label == "undefined" ? "" : newValue.label));
-            window.sessionStorage.setItem("newItemId", (typeof newValue?.id == "undefined" ? "" : newValue.id));
         }
     },
 
     mounted() {
         const __this__ = this;
-
-        axios.get("/detail/dates", {
-            headers : {
-                "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
-            }
-        }).then(function(response) {
-            __this__.dates = response.data;
-        });
 
         if(this.newId != null) {
             axios.get("/detail/list/" + this.newId, {
@@ -219,7 +221,7 @@
         },
 
         downloadPdf() {
-            window.open("https://survey.rda.gov.ge/api/exhibition/download/pdf/" + this.new_value + "/" + this.newdate);
+            window.open("https://survey.rda.gov.ge/api/exhibition/download/pdf/" + window.sessionStorage.getItem("newItemId") + "/" + window.sessionStorage.getItem("date"));
         },
 
         goBack() {
@@ -227,9 +229,11 @@
         },
 
         filterDetails(event) {
+            window.sessionStorage.setItem("date", event.target.getAttribute("data-date"));
+
             axios.get("/detail/filter/" + Number(window.sessionStorage.getItem("newItemId")) + "/" + event.target.getAttribute("data-date")).then(res => {
                 this.data = res.data;
-                this.newdate =  event.target.getAttribute("data-date");
+                this.newdate = event.target.getAttribute("data-date");
             });
         }
     }

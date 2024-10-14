@@ -81,10 +81,6 @@
                 this.$swal({
                     title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
                     icon : "success",
-                    timerProgressBar: true,
-                    timer : 2000,
-                    toast : true,
-                    position : "top-end"
                 });
 
                 this.errors = [];

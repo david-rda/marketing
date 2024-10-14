@@ -1,25 +1,23 @@
 <template>
     <div>
-        <div class="container" style="margin-top: 90px;">
-            <navbar/>
+        <div class="container mt-5" v-if="blocked == 0">
+            <div class="row justify-content-md-between align-items-center">
+                <div class="col-md-2 col-12 text-center text-sm-start">
+                    <img src="../../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="icon" width="250">
+                </div>
+                <div class="col-md-10 col-12"> 
+                    <h1 class="mt-5 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
+                    <h4 class="main head float-end">{{ exhibition }}</h4>
+                </div>
+            </div>
+            <div class="row mt-4 mb-4 justify-content-center">
+                <div class="col-md-8 col-6 border_man"></div>
+            </div>
+            <button type="button" class="btn btn-success mb-5" @click="sendStatus">სიახლე არ გვაქვს</button>
+
+            <!-- საკონტაქტო ინფორმაცია -->
 
             <form class="mt-4 form_bg" @submit.prevent="add">
-                <div class="row justify-content-md-between align-items-center">
-                    <div class="col-md-2 col-12 text-center text-sm-start">
-                        <img src="../../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="icon" width="250">
-                    </div>
-                    <div class="col-md-10 col-12"> 
-                        <h1 class="mt-5 brand text-md-end text-sm-center ">მომხმარებლის მიერ შევსებული ფორმა</h1>
-                        <h4 class="main head float-end">{{ exhibition }}</h4>
-                    </div>
-                </div>
-                <div class="row mt-4 mb-4 justify-content-center">
-                    <div class="col-md-8 col-6 border_man"></div>
-                </div>
-                <button type="button" class="btn btn-success mb-5" @click="sendStatus">სიახლე არ გვაქვს</button>
-
-                <!-- საკონტაქტო ინფორმაცია -->
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -233,7 +231,16 @@
                 </div>
             </form>
         </div>
-        <!-- <Footer/> -->
+        <div v-else>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="alert alert-warning">
+                        ლინკი აღარაა აქტიური
+                    </div>
+                </div>
+            </div>
+        </div>
+        <Footer/>
         <div class="modal fade" id="confirmationModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -265,6 +272,7 @@
                 field_id : "",
 
                 errors : [],
+                blocked : "",
 
                 data : [],
             }
@@ -289,10 +297,26 @@
             });
 
             setTimeout(() => {
+                if(this.blocked != 1) {
+                    axios.get("/email/view/" + this.$route.params.id + "/" + this.$route.query.email).then(function(response) {
+                        console.log(response.data);
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                } 
+            }, 1000);
+
+            setTimeout(() => {
                 if(this.data.organizations.length == 0) {
                     this.addFields();
                 }
             }, 2000);
+
+            axios.get("/email/block/check/" + this.$route.query.email + "/" + this.$route.params.id).then(res => {
+                this.blocked = res.data;
+            }).catch(err => {
+                console.log(err);
+            });
         },
 
         methods : {
@@ -349,15 +373,15 @@
             add() {
                 const __this__ = this;
 
-                axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.data, { status : 2 })).then(function() {
+                axios.post("/detail/edit/" + this.$route.query.email + "/" + this.$route.params.id, Object.assign(this.data, { status : 2 })).then(function() {
                     __this__.$swal({
                         title : "ინფორმაცია წარმატებით განახლდა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {
                         __this__.errors = err?.response?.data?.errors;

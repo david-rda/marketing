@@ -162,10 +162,6 @@
                     _this_.$swal({
                         title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
                 }).catch(err => console.log(err));
             },
@@ -191,10 +187,6 @@
                     _this_.$swal({
                         title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
 
                     _this_.errors = [];

@@ -315,10 +315,6 @@
                     __this__.$swal({
                         title : "ინფორმაცია წარმატებით განახლდა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {

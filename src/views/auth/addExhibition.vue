@@ -3,32 +3,35 @@
         <navbar />
 
         <div class="container" style="margin-top: 120px">
-            <div class="row justify-content-between">
-                <div class="col-md-2 col-12">
-                    <button type="button" class="btn btn-secondary" @click="goBack">&larr;</button>
+            <div class="row justify-content-around">
+                <div class="col-md-2 col-12 mb-3">
+                    <button type="button" class="btn btn-secondary w-100" @click="goBack">&larr; უკან</button>
                 </div>
 
-                <div class="col-md-10 col-12">
+                <div class="col-md-8 col-12">
                     <form @submit.prevent="addExhibition">
-                        <div class="mb-3 mx-3">
+                        <div class="mb-3">
                             <label for="name" class="form-label">გამოფენის დასახელება</label>
-                            <input type="text" id="name" class="form-control input_form" v-model="name" autocomplete="off">
+                            <input type="text" id="name" class="form-control" v-model="name" placeholder="შეიყვანეთ დასახელება" autocomplete="off">
                         </div>
-                        <div class="mb-3 mx-3">
+
+                        <div class="mb-3">
                             <label for="country" class="form-label">ქვეყანა</label>
-                            <input type="text" id="country" class="form-control input_form" v-model="country" autocomplete="off">
+                            <input type="text" id="country" class="form-control" v-model="country" placeholder="შეიყვანეთ ქვეყანა" autocomplete="off">
                         </div>
-                        <div class="mb-3 mx-3">
+
+                        <div class="mb-3">
                             <label for="datetime-picker" class="form-label">ჩატარების თარიღი</label>
-                            <flat-pickr class="form-control input_form_add" id="datetime-picker" v-model="datetime" :config="flatpickrOptions"></flat-pickr>
+                            <flat-pickr class="form-control" id="datetime-picker" v-model="datetime" :config="flatpickrOptions"></flat-pickr>
                         </div>
-                        <div class="mb-3 mx-3 mt-4">
-                            <input type="submit" value="დამატება" class="form-control input_form mt-1 btn_manual">
+
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-success w-100">დამატება</button>
                         </div>
-                        
-                        <div class="mx-3" v-if="errors != ''">
+
+                        <div v-if="errors">
                             <div v-for="(item, index) in errors" :key="index" class="alert alert-danger">
-                                <strong>{{ item[0] }}</strong>
+                                {{ item[0] }}
                             </div>
                         </div>
                     </form>
@@ -37,6 +40,7 @@
         </div>
     </div>
 </template>
+
 
 <script>
   import navbar from '../../components/navbar.vue'
@@ -93,10 +97,6 @@
                 this.$swal({
                     title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
                     icon : "success",
-                    timerProgressBar: true,
-                    timer : 2000,
-                    toast : true,
-                    position : "top-end"
                 });
 
                 setTimeout(() => {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container">
+        <div class="container" v-if="blocked == 0">
             <form @submit.prevent="submitForm()" action="#" class=" mt-4 form_bg ">
                 <div class="row justify-content-md-between align-items-center">
                     <div class="col-md-2 col-12 text-center text-sm-start">
@@ -223,6 +223,15 @@
                 </div>
             </form>
         </div>
+        <div v-else>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="alert alert-warning">
+                        ლინკი აღარაა აქტიური
+                    </div>
+                </div>
+            </div>
+        </div>
         <Footer />
     </div>
 </template>
@@ -237,6 +246,7 @@
             return {
                 success_message : false,
                 field_id : "",
+                blocked : "",
 
                 errors : [],
 
@@ -290,9 +300,19 @@
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-            axios.get("/email/view/" + this.$route.params.id + "/" + this.$route.query.email).then(function(response) {
-                console.log(response.data);
-            }).catch(function(err) {
+            setTimeout(() => {
+                if(this.blocked != 1) {
+                    axios.get("/email/view/" + this.$route.params.id + "/" + this.$route.query.email).then(function(response) {
+                        console.log(response.data);
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                } 
+            }, 1000);
+
+            axios.get("/email/block/check/" + this.$route.query.email + "/" + this.$route.params.id).then(res => {
+                this.blocked = res.data;
+            }).catch(err => {
                 console.log(err);
             });
         },
@@ -347,11 +367,11 @@
                     __this__.$swal({
                         title : "თქვენი მოთხოვნა წარმატებით შესრულდა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {
                         __this__.errors = err?.response?.data?.errors;

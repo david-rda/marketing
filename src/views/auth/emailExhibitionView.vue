@@ -143,10 +143,6 @@
                     this.$swal({
                         title : "ელ. ფოსტა დაემატა",
                         icon : "success",
-                        timerProgressBar: true,
-                        timer : 2000,
-                        toast : true,
-                        position : "top-end"
                     });
                 }).catch(err => {
                     if(err instanceof AxiosError) {

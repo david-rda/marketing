@@ -13,6 +13,11 @@
                         <h4 class="main head float-end">{{ exhibition }}</h4>
                     </div>
                 </div>
+
+                <span class="p-2 bg-success bg-opacity-25 rounded-2 user-select-none ms-3" v-if="data.newstatus == '1'">
+                    <strong>არ აქვს სიახლე</strong>
+                </span>
+                
                 <div class="row mt-4 mb-4 justify-content-center">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>

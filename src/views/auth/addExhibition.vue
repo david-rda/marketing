@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="datetime-picker" class="form-label">ჩატარების თარიღი</label>
+                            <label for="datetime-picker" class="form-label">გაგზავნის თარიღი</label>
                             <flat-pickr class="form-control" id="datetime-picker" v-model="datetime" :config="flatpickrOptions"></flat-pickr>
                         </div>
 

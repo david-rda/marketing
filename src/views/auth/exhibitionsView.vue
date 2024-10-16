@@ -24,7 +24,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">გამოფენა</th>
                             <th scope="col">ქვეყანა</th>
-                            <th scope="col">ჩატარების თარიღი</th>
+                            <th scope="col">გაგზავნის თარიღი</th>
                             <th scope="col">ქმედება</th>
                         </tr>
                     </thead>

@@ -10,8 +10,8 @@ import VueTippy from 'vue-tippy'
 import 'tippy.js/dist/tippy.css'
 
 // axios.defaults.baseURL = "http://localhost/exhibition_api/public/api";
-// axios.defaults.baseURL = "https://survey.rda.gov.ge/api";
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = "https://survey.rda.gov.ge/api";
+// axios.defaults.baseURL = "http://localhost:8000/api";
 
 const app = createApp(App);
 

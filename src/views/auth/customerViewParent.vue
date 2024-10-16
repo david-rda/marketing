@@ -17,7 +17,7 @@
 
             <!-- საკონტაქტო ინფორმაცია -->
 
-            <form class="mt-4 form_bg" @submit.prevent="add">
+            <form class="mt-4 form_bg" @submit.prevent="add()">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -373,7 +373,7 @@
             add() {
                 const __this__ = this;
 
-                axios.post("/detail/edit/" + this.$route.query.email + "/" + this.$route.params.id, Object.assign(this.data, { status : 2 })).then(function() {
+                axios.post("/detail/add/" + this.$route.params.id + "/" + this.$route.params.parent_id, Object.assign(this.data, { status : 2 })).then(function() {
                     __this__.$swal({
                         title : "ინფორმაცია წარმატებით განახლდა",
                         icon : "success",

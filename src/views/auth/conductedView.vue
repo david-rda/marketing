@@ -32,6 +32,7 @@
         <div class="container">
             <div class="row mt-3">
                 <div class="col-md-2" v-if="selectedValue">
+                    <p class="text-center">ფილტრაცია გაგზავნის თარიღით</p>
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item mb-2" v-for="items in dates" :key="items">
                             <a href="#" :class="(this.newdate !== items) ? 'nav-link bg-success text-dark bg-opacity-25' : 'nav-link bg-success text-white'" :data-date="items" @click="filterDetails($event)">{{ items }}</a>

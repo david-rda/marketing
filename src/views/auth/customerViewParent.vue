@@ -356,7 +356,7 @@
                     this.$refs.mobile.style.border = "1px solid #000";
                 }
 
-                axios.get("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email).then((res) => {
+                axios.get("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email + "/?detail_id=" + this.data.detail_id).then((res) => {
                     this.$swal({
                         title : "სტატუსი მიენიჭა",
                         icon : "success",

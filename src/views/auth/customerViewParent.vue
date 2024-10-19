@@ -321,40 +321,16 @@
 
         methods : {
             sendStatus() {
-                if(this.$refs.company.value == "") {
-                    this.$refs.company.style.border = "1px solid #f1aeb5";
-                    return;
-                }else {
-                    this.$refs.company.style.border = "1px solid #000";
-                }
-                
-                if(this.$refs.fullname.value == "") {
-                    this.$refs.fullname.style.border = "1px solid #f1aeb5";
-                    return;
-                }else {
-                    this.$refs.fullname.style.border = "1px solid #000";
-                }
-                
-                if(this.$refs.position.value == "") {
-                    this.$refs.position.style.border = "1px solid #f1aeb5";
-                    return;
-                }else {
-                    this.$refs.position.style.border = "1px solid #000";
-                }
-                
-                if(this.$refs.email.value== "") {
-                    this.$refs.email.style.border = "1px solid #f1aeb5";
-                    return;
-                }else {
-                    this.$refs.email.style.border = "1px solid #000";
-                }
-                
-                if(this.$refs.mobile.value == "") {
-                    this.$refs.mobile.style.border = "1px solid #f1aeb5";
-                    return;
-                }else {
-                    this.$refs.mobile.style.border = "1px solid #000";
-                }
+                ['company', 'fullname', 'position', 'email', 'mobile'].forEach(field => {
+                    const ref = this.$refs[field];
+                    if (ref.value === "") {
+                        ref.classList.add("is-invalid");
+                        return;
+                    } else {
+                        ref.classList.remove("is-invalid");
+                        ref.classList.add("is-valid");
+                    }
+                });
 
                 axios.post("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email + "/?detail_id=" + this.data.detail_id, this.data).then((res) => {
                     this.$swal({

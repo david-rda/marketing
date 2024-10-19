@@ -333,44 +333,16 @@
                     item.activityLevel.error = !item.activityLevel.value;
                 });
 
-                if(this.formData.company == "") {
-                    this.$refs.company.classList.add("is-invalid");
-                    return;
-                }else {
-                    this.$refs.company.classList.remove("is-invalid");
-                    this.$refs.company.classList.add("is-valid");
-                }
-                
-                if(this.formData.fullname == "") {
-                    this.$refs.fullname.classList.add("is-invalid");
-                    return;
-                }else {
-                    this.$refs.fullname.classList.remove("is-invalid");
-                    this.$refs.fullname.classList.add("is-valid");
-                }
-                
-                if(this.formData.position == "") {
-                    this.$refs.position.classList.add("is-invalid");
-                    return;
-                }else {
-                    this.$refs.position.classList.remove("is-invalid");
-                    this.$refs.position.classList.add("is-valid");
-                }
-                
-                if(this.formData.email == "") {
-                    this.$refs.email.classList.add("is-invalid");
-                    return;
-                }else {
-                    this.$refs.email.classList.remove("is-invalid");
-                    this.$refs.email.classList.add("is-valid");
-                }
-                
-                if(this.formData.mobile == "") {
-                    this.$refs.mobile.classList.add("is-invalid");
-                    return;
-                }else {
-                    this.$refs.mobile.classList.remove("is-invalid");
-                    this.$refs.mobile.classList.add("is-valid");
+                const fields = ["company", "fullname", "position", "email", "mobile"];
+
+                for (const field of fields) {
+                    if (this.formData[field] === "") {
+                        this.$refs[field].classList.add("is-invalid");
+                        return;
+                    } else {
+                        this.$refs[field].classList.remove("is-invalid");
+                        this.$refs[field].classList.add("is-valid");
+                    }
                 }
 
                 axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { status: 1, recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {

@@ -350,9 +350,7 @@
     }
 
     .btn-success {
-        background-color: #005019 !important;
         font-size: 20px;
-        font-family: 'Regular';
     }
 
     .btn-warning {

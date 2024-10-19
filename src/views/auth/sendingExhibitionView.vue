@@ -27,7 +27,7 @@
                         </div>
 
                         <QuillEditor theme="snow" class="input_form" v-model:content="text" ref="text" contentType="html" style="height: 300px" />
-                        <input type="submit" class="btn btn-success w-100 mt-3 mb-3"  value="გაგზავნა">
+                        <input type="submit" class="btn btn-success w-100 mt-3 mb-3" :disabled="disabled"  value="გაგზავნა">
 
                         <div v-for="(item, index) in errors" class="alert alert-danger" :key="index">
                             <strong>{{ item[0] }}</strong>
@@ -101,7 +101,9 @@
 
                 newObject : "",
 
-                errors : []
+                errors : [],
+
+                disabled : false
             }
         },
 
@@ -173,6 +175,8 @@
             addTemplate() {
                 const _this_ = this;
 
+                this.disabled = true;
+
                 axios.post("/template/add", {
                     exhibition_id : this.$route.params.id,
                     datetime : this.picked,
@@ -190,6 +194,7 @@
                     });
 
                     _this_.errors = [];
+                    _this_.disabled = false;
 
                     setTimeout(() => {
                         _this_.$router.back();
@@ -198,6 +203,7 @@
                     if(err instanceof AxiosError) {
                         _this_.errors = err?.response?.data?.errors;
                     }
+                    _this_.disabled = false;
                 });
             }
         }

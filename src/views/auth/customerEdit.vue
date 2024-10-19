@@ -149,7 +149,7 @@
 
                             <!-- გაგზავინილია პროდუქცია -->
 
-                            <div class="row mb-1 mt-3" v-if="selected1==1&&selected!=0">
+                            <!-- <div class="row mb-1 mt-3" v-if="selected1==1&&selected!=0">
                                 <div class="col-md-6">
                                     <div class="">
                                         <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა  (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
@@ -162,11 +162,11 @@
                                         <input type="number" id="cost" class="form-control input_form">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- გაგზავინილია ნიმუში -->
 
-                            <div class="row mb-1  mt-3" v-if="selected1 == 2 && selected != 0">
+                            <!-- <div class="row mb-1  mt-3" v-if="selected1 == 2 && selected != 0">
                                 <div class="col-md-6">
                                     <div class="">
                                         <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
@@ -179,7 +179,7 @@
                                         <input type="number" id="sampleCost" class="form-control input_form">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         <!-- </div> -->
                     </div>
                 </div>                

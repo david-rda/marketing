@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                <input disabled type="number" class="form-control input_form" :value="(items.product_price).toLocaleString()">
+                                <input disabled type="text" class="form-control input_form" :value="Number(items.product_price).toLocaleString()">
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                <input disabled type="number" class="form-control input_form" :value="(items.template_price).toLocaleString()">
+                                <input disabled type="text" class="form-control input_form" :value="Number(items.template_price).toLocaleString()">
                             </div>
                         </div>
                     </div>
@@ -285,10 +285,7 @@
 h4 {
     color: #005019;   
 }
-.download_btn {
-    width: 30px;
-    height: 30px;
-}
+
 .btn-success {
     height: 50px;
     font-size: 20px;

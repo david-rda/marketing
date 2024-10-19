@@ -33,10 +33,10 @@
                                     <td>{{ item.exhibition_name }}</td>
                                     <td>{{ item.company }}</td>
                                     <td>{{ item.email }}</td>
-                                    <td :class="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">
-                                        <span v-if="item.filled_status == '1'">შევსებულია&nbsp;&nbsp;</span>
-                                        <span v-if="item.filled_status == '2'">ნანახია&nbsp;&nbsp;</span>
-                                        <span v-if="item.filled_status == '0'">არაა შევსებული&nbsp;&nbsp;</span>
+                                    <td :class="(Math.floor((new Date() - new Date(item.send_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1') ? 'table-danger' : ''">
+                                        <span v-if="(item.filled_status == '1' && item.view == '1') || (item.filled_status == '1' && item.view == '0')">შევსებულია&nbsp;&nbsp;</span>
+                                        <span v-else-if="item.filled_status == '0' && item.view == '1'">ნანახია&nbsp;&nbsp;</span>
+                                        <span v-else-if="item.filled_status == '0'  && item.view == '0'">არაა შევსებული&nbsp;&nbsp;</span>
                                         &nbsp;&nbsp;
                                         <span v-if="item.hasnew == 1" v-tippy="{ content: 'სიახლე არაა' }">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
@@ -45,12 +45,16 @@
                                             </svg>
                                         </span>
                                     </td>
-                                    <td>{{ item.sent_date }}</td>
+                                    <td>{{ item.send_date }}</td>
                                     <td>
                                         <!-- v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" -->
                                         <button :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" ref="sendButton" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
 
-                                        <button v-if="item.filled_status === '1'" class="btn btn-info btn-sm ms-1" :data-exhibition-id="item.exhibition_id" :data-id="item.id" type="button" v-on:click="sendForEdit($event, item.email)">ჩასასწორებლად გაგზავნა</button>
+                                        <button v-if="item.filled_status === '1'" class="btn btn-info btn-sm ms-1" :data-exhibition-id="item.exhibition_id" :data-id="item.id" type="button" v-on:click="sendForEdit($event, item.email)" v-tippy="{ content: 'ჩასასწორებლად გაგზავნა' }">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                                            </svg>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -69,9 +69,9 @@
                                     <td>{{ item?.email }}</td>
                                     <td>{{ new Date(item?.updated_at).toISOString().split('T')[0] }}</td>
                                     <td>
-                                        <span v-if="item.filled_status == '1'">შევსებულია&nbsp;&nbsp;</span>
-                                        <span v-if="item.filled_status == '2'">ნანახია&nbsp;&nbsp;</span>
-                                        <span v-if="item.filled_status == '0'">არაა შევსებული&nbsp;&nbsp;</span>
+                                        <span v-if="(item.filled_status == '1' && item.viewstatus == '1') || (item.filled_status == '1' && item.viewstatus == '0')">შევსებულია&nbsp;&nbsp;</span>
+                                        <span v-else-if="item.filled_status == '0' && item.viewstatus == '1'">ნანახია&nbsp;&nbsp;</span>
+                                        <span v-else-if="item.filled_status == '0'  && item.viewstatus == '0'">არაა შევსებული&nbsp;&nbsp;</span>
 
                                         <span v-if="item.newstatus == '1'" v-tippy="{ content: 'სიახლე არაა' }">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">

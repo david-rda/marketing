@@ -27,7 +27,7 @@
                         </div>
 
                         <QuillEditor theme="snow" class="input_form" v-model:content="text" ref="text" contentType="html" style="height: 300px" />
-                        <input type="submit" class=" btn btn-success w-100 btn_manual mt-3 mb-3"  value="გაგზავნა">
+                        <input type="submit" class="btn btn-success w-100 mt-3 mb-3"  value="გაგზავნა">
 
                         <div v-for="(item, index) in errors" class="alert alert-danger" :key="index">
                             <strong>{{ item[0] }}</strong>

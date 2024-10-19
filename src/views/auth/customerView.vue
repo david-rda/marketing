@@ -334,33 +334,43 @@
                 });
 
                 if(this.formData.company == "") {
-                    this.$refs.company.style.border = "1px solid #f1aeb5";
+                    this.$refs.company.classList.add("is-invalid");
+                    return;
                 }else {
-                    this.$refs.company.style.border = "1px solid #000"
+                    this.$refs.company.classList.remove("is-invalid");
+                    this.$refs.company.classList.add("is-valid");
                 }
                 
                 if(this.formData.fullname == "") {
-                    this.$refs.fullname.style.border = "1px solid #f1aeb5";
+                    this.$refs.fullname.classList.add("is-invalid");
+                    return;
                 }else {
-                    this.$refs.fullname.style.border = "1px solid #000"
+                    this.$refs.fullname.classList.remove("is-invalid");
+                    this.$refs.fullname.classList.add("is-valid");
                 }
                 
                 if(this.formData.position == "") {
-                    this.$refs.position.style.border = "1px solid #f1aeb5";
+                    this.$refs.position.classList.add("is-invalid");
+                    return;
                 }else {
-                    this.$refs.position.style.border = "1px solid #000"
+                    this.$refs.position.classList.remove("is-invalid");
+                    this.$refs.position.classList.add("is-valid");
                 }
                 
                 if(this.formData.email == "") {
-                    this.$refs.email.style.border = "1px solid #f1aeb5";
+                    this.$refs.email.classList.add("is-invalid");
+                    return;
                 }else {
-                    this.$refs.email.style.border = "1px solid #000"
+                    this.$refs.email.classList.remove("is-invalid");
+                    this.$refs.email.classList.add("is-valid");
                 }
                 
                 if(this.formData.mobile == "") {
-                    this.$refs.mobile.style.border = "1px solid #f1aeb5";
+                    this.$refs.mobile.classList.add("is-invalid");
+                    return;
                 }else {
-                    this.$refs.mobile.style.border = "1px solid #000"
+                    this.$refs.mobile.classList.remove("is-invalid");
+                    this.$refs.mobile.classList.add("is-valid");
                 }
 
                 axios.post("/detail/add/" + this.$route.params.id, Object.assign(this.formData, { status: 1, recomendation : this.$refs.recomendation.getText(), additional_info : this.$refs.additional_info.getText() })).then(function() {

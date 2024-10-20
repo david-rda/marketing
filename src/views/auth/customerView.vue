@@ -126,7 +126,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                <input type="number" min="0" id="cost" class="form-control input_form" v-model="items.sent_product_price">
+                                <input type="number" step=".01" min="0" id="cost" class="form-control input_form" v-model="items.sent_product_price">
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                <input type="number" min="0" id="sampleCost" class="form-control input_form" v-model="items.sent_example_price">
+                                <input type="number" step=".01" min="0" id="sampleCost" class="form-control input_form" v-model="items.sent_example_price">
                             </div>
                         </div>
                     </div>

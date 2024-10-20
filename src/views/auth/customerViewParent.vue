@@ -65,119 +65,84 @@
                     </div>
                     <div v-for="(items, index) in data.organizations" :key="index" class="card p-3 mb-3">
                         <!-- <div v-if="items.activity_name != null && items.country != null && items.company_name != null && items.target_country_name != null"> -->
-                            <h4 class="card-title d-flex justify-content-between">
-                                <span>#{{ index + 1 }}</span>
-                                <button v-if="data.organizations.length > 1" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal" @click="setId(index)">წაშლა</button>
-                            </h4>
-                            <div class="row">
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                                    <input type="text" id="activity" class="form-control input_form" required v-model="items.activity_name">
-                                </div>
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
-                                    <input type="text" id="country" class="form-control input_form" required v-model="items.country">
+                        <h4 class="card-title d-flex justify-content-between">
+                            <span>#{{ index + 1 }}</span>
+                            <button v-if="data.organizations.length > 1" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal" @click="setId(index)">წაშლა</button>
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="activity" class="form-label">საქმიანობის სფერო</label>
+                                <input type="text" id="activity" class="form-control input_form" required v-model="items.activity_name">
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
+                                <input type="text" id="country" class="form-control input_form" required v-model="items.country">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
+                                <input type="text" id="organization" class="form-control input_form" required v-model="items.company_name">
+                            </div>
+                            <div class="col-md-6 col-12 mb-3">
+                                <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი</label>
+                                <input type="text" id="export" class="form-control input_form" required v-model="items.target_country_name">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12 mb-2">
+                                <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა?</label>
+                                <textarea style="resize:none" class="h-100 form-control" required v-model="items.stage_name"></textarea>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- ექსპორტი -->
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label for="disabledTextInput" class="form-label qui">პროდუქციის გაგზავნის შესახებ ინფორმაცია</label>
+                                <select id="disabledSelect" class="form-select select_man opt" v-model="items.selected1">
+                                    <option class="opt" value="0">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>
+                                    <option class="opt" value="1">გაგზავნილია პროდუქცია</option>
+                                    <option class="opt" value="2">გაგზავნილია ნიმუში</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- გაგზავინილია პროდუქცია -->
+
+                        <div class="row mb-1 mt-3" v-if="items.selected1 == 1 && data.selected != 0">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
+                                    <input type="text" id="product" class="form-control input_form" required v-model="items.product_volume">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                                    <input type="text" id="organization" class="form-control input_form" required v-model="items.company_name">
-                                </div>
-                                <div class="col-md-6 col-12 mb-3">
-                                    <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი</label>
-                                    <input type="text" id="export" class="form-control input_form" required v-model="items.target_country_name">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
+                                    <input type="number" step=".01" id="cost" class="form-control input_form" required v-model="items.product_price">
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12 mb-2">
-                                    <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა?</label>
-                                    <textarea style="resize:none" class="h-100 form-control" required v-model="items.stage_name"></textarea>
+                        </div>
+
+                        <!-- გაგზავინილია ნიმუში -->
+
+                        <div class="row mb-1 mt-3" v-if="items.selected1 == 2 && data.selected != 0">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
+                                        ცალი/კგ/ბოთლი...)</label>
+                                    <input type="text" id="sample" class="form-control input_form" required v-model="items.template_volume">
                                 </div>
                             </div>
-                            <br>
-
-                            <!-- ექსპორტი -->
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <label for="disabledTextInput" class="form-label qui">პროდუქციის გაგზავნის შესახებ ინფორმაცია</label>
-                                    <select id="disabledSelect" class="form-select select_man opt" v-model="items.selected1">
-                                        <option class="opt" value="0">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>
-                                        <option class="opt" value="1">გაგზავნილია პროდუქცია</option>
-                                        <option class="opt" value="2">გაგზავნილია ნიმუში</option>
-                                    </select>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
+                                    <input type="number" step=".01" id="sampleCost" class="form-control input_form" required v-model="items.template_price">
                                 </div>
                             </div>
-
-                            <!-- გაგზავინილია პროდუქცია -->
-
-                            <div class="row mb-1 mt-3" v-if="items.selected1 == 1 && data.selected != 0">
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input type="text" id="product" class="form-control input_form" required v-model="items.product_volume">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                        <input type="number" id="cost" class="form-control input_form" required v-model="items.product_price">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- გაგზავინილია ნიმუში -->
-
-                            <div class="row mb-1 mt-3" v-if="items.selected1 == 2 && data.selected != 0">
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
-                                            ცალი/კგ/ბოთლი...)</label>
-                                        <input type="text" id="sample" class="form-control input_form" required v-model="items.template_volume">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                        <input type="number" id="sampleCost" class="form-control input_form" required v-model="items.template_price">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- გაგზავინილია პროდუქცია -->
-
-                            <div class="row mb-1 mt-3" v-if="selected1==1&&selected!=0">
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა  (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input type="text" id="product" class="form-control input_form">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                        <input type="number" id="cost" class="form-control input_form">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- გაგზავინილია ნიმუში -->
-
-                            <div class="row mb-1  mt-3" v-if="selected1 == 2 && selected != 0">
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                        <input type="text" id="sample" class="form-control input_form">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                        <input type="number" id="sampleCost" class="form-control input_form">
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- </div> -->
+                        </div>
                     </div>
                 </div>                
                 <!-- ექსპორტი -->
@@ -332,7 +297,7 @@
                     }
                 });
 
-                axios.post("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email + "/?detail_id=" + this.data.detail_id, this.data).then((res) => {
+                axios.post("/email/not/new/" + this.$route.params.id + "/" + this.$route.query.email + "/?detail_id=" + this.data.detail_id + "&parent_id=" + this.$route.params.parent_id, Object.assign(this.data, { status : 2 })).then((res) => {
                     this.$swal({
                         title : "სტატუსი მიენიჭა",
                         icon : "success",

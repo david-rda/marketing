@@ -1,54 +1,42 @@
 <template>
-  <div>
-      <div class="container">
-        <div class="row aling-items-center row_height">
-          <div class="col-md-5 col-12 .col-lg-12 m-auto ">
-            <center>    
-              <img class="brand_img mb-2" src="../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="brand">
-            </center>    
-            <div class="card">
-              <form method="POST" @submit.prevent="signin()">
-                <div class="row mt-5 mx-2">
-                  <div class="col-md-4">
-                    <h3 class="log_h">ავტორიზაცია</h3>
-                  </div>
+    <div class="container">
+        <div class="row align-items-center justify-content-center vh-100">
+            <div class="col-lg-6 col-md-8 col-12">
+                <center>
+                    <img class="mb-3" src="../assets/img/RDA-Logo-Geo.55af0c58 (1).png" alt="brand" style="max-width: 200px;">
+                </center>
+                <div class="card p-4">
+                    <form @submit.prevent="signin">
+                        <div class="col-md-4 mb-3">
+                            <h3 class="log_h">ავტორიზაცია</h3>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><b>ელ. ფოსტა</b></label>
+                            <input type="email" v-model="email" class="form-control" id="email" placeholder="ელ. ფოსტა">
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label"><b>პაროლი</b></label>
+                            <input type="password" v-model="password" class="form-control" id="password" placeholder="პაროლი">
+                        </div>
+                        <button type="submit" class="btn btn-success w-100" :disabled="loader">
+                            <span v-if="loader" class="spinner-border spinner-border-sm me-2"></span>
+                            <b>შესვლა</b>
+                        </button>
+                    </form>
+                    <div v-if="error_messages" class="mt-3">
+                        <div class="alert alert-danger" v-for="(item, index) in error_messages" :key="index">
+                            <strong>{{ item[0] }}</strong>
+                        </div>
+                    </div>
+                    <div v-if="incorrect" class="mt-3">
+                        <div class="alert alert-danger">
+                            <strong>ელ. ფოსტა ან პაროლი არასწორია</strong>
+                        </div>
+                    </div>
                 </div>
-                <div class="row mb-3 mt-4">
-                  <div class="col-md-11 col-11 m-auto">
-                    <label for="exampleInputEmail1" class="form-label"><b>ელ. ფოსტა</b></label>
-                    <input type="email" v-model="email" class="form-control input_height inp_color" id="exampleInputEmail1" placeholder="ელ. ფოსტა">
-                  </div>
-                </div>
-                <div class="row mb-4 mt-4">
-                  <div class="col-md-11 col-11 m-auto">
-                    <label for="exampleInputPassword1" class="form-label"><b>პაროლი</b></label>
-                    <input type="password" v-model="password" class="form-control input_height inp_color" id="exampleInputPassword1" placeholder="პაროლი">
-                  </div>
-                </div>
-                <div class="row mt-4 justify-content-end">
-                  <div class="col-md-4 col-11 mx-4 mb-3">
-                    <button type="submit" class="btn btn-success input_height w-100">
-                      <b>შესვლა&nbsp;&nbsp;</b>
-                      <span class="spinner spinner-border spinner-border-sm" v-if="loader"></span>
-                    </button>
-                  </div>
-                </div>
-              </form>
-              <div v-if="this.error_messages" class="p-4">
-                <div class="alert alert-danger mb-2 border-0" v-for="(item, index) in this.error_messages" :key="index">
-                  <strong>{{ item[0] }}</strong>
-                </div>
-              </div>
-              <div v-if="incorrect" class="p-4">
-                <div class="alert alert-danger mb-2 border-0">
-                  <strong>ელ. ფოსტა ან პაროლი არასწორია</strong>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -106,3 +94,9 @@
     }
   }
 </script>
+
+<style scoped>
+    input {
+        font-family: 'firago-regular';
+    }
+</style>

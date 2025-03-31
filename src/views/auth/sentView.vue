@@ -8,12 +8,12 @@
                         <v-select v-model="selectedValue" :options="options" placeholder="აირჩიეთ გამოფენა"> </v-select>
                     </div>
                     <div class="col-md-6 col-12 text-start d-md-block d-none">
-                        <h4 class="main brand"><span class="btn btn-success" @click="goBack">&larr;</span>&nbsp;&nbsp;გაგზავნილი მეილები</h4>
+                        <h4 class="main brand"><span class="btn btn-success" @click="$router.back()">&larr;</span>&nbsp;&nbsp;გაგზავნილი მეილები</h4>
                     </div>
                 </div>
             </div> 
         </div>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row mt-4 ">
                 <div class="col-md-12">
                     <div class="overflow-auto">
@@ -39,21 +39,16 @@
                                         <span v-else-if="item.filled_status == '0'  && item.view == '0'">არაა შევსებული&nbsp;&nbsp;</span>
                                         &nbsp;&nbsp;
                                         <span v-if="item.hasnew == 1" v-tippy="{ content: 'სიახლე არაა' }">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
-                                                <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
-                                            </svg>
+                                            <i class="fa fa-newspaper-o"></i>
                                         </span>
                                     </td>
                                     <td>{{ item.send_date }}</td>
                                     <td>
                                         <!-- v-if="(Math.floor((new Date() - new Date(item.sent_date)) / (1000 * 60 * 60 * 24)) > 10) && !(item.filled_status === '1')" -->
-                                        <button :data-exhibition-id="item.exhibition_id" :data-id="item.id" class="btn btn-warning btn-sm" ref="sendButton" type="button" v-on:click="sendEmail($event)">გაგზავნა</button>
+                                        <button :data-exhibition-id="item.exhibition_id" :data-id="item?.detail_id" :data-email="item?.email" class="btn btn-warning btn-sm" ref="sendButton" type="button" v-on:click="sendEmail($event)" v-if="!((item.filled_status == '1' && item.view == '1') || (item.filled_status == '1' && item.view == '0'))">შეხსენება</button>
 
-                                        <button v-if="item.filled_status === '1'" class="btn btn-info btn-sm ms-1" :data-exhibition-id="item.exhibition_id" :data-id="item.id" type="button" v-on:click="sendForEdit($event, item.email)" v-tippy="{ content: 'ჩასასწორებლად გაგზავნა' }">
-                                            <svg style="pointer-events: none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
-                                            </svg>
+                                        <button v-if="item.filled_status === '1'" class="btn btn-info text-white btn-sm ms-1" :data-exhibition-id="item.exhibition_id" :data-id="item?.detail_id" type="button" v-on:click="sendForEdit($event, item.email)" v-tippy="{ content: 'ჩასასწორებლად გაგზავნა' }">
+                                            <i class="fa fa-envelope pe-none"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -143,8 +138,12 @@
         sendEmail(event) {
             const exhibition_id = Number(event.target.getAttribute("data-exhibition-id"));
             const id = Number(event.target.getAttribute("data-id"));
+            const email = event.target.getAttribute("data-email");
 
-            axios.post("/email/send/to/" + id + "/" + exhibition_id, {}, {
+            axios.post("/email/specific/send/to", {
+                exhibition : exhibition_id,
+                mail : email
+            }, {
                 headers : {
                     "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
                 }
@@ -177,10 +176,6 @@
                 console.log(err);
             });
         },
-
-        goBack() {
-            this.$router.back();
-        }
     }
   }
 </script>
@@ -200,7 +195,4 @@
     width: 150px;
     margin: auto;
    }
-   /* button {
-    margin-top: 14px;
-   } */
 </style>

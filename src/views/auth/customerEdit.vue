@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container" style="margin-top: 90px;">
+        <div class="container" style="margin-top: 90px;" v-if="blocked == 0">
             <navbar/>
 
             <form class="mt-4 form_bg" @submit.prevent="edit">
@@ -13,6 +13,12 @@
                         <h4 class="main head float-end">{{ exhibition }}</h4>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="alert alert-success border-0 user-select-none text-success text-center custom-info position-relative">
+                        <i class="fa fa-info-circle position-absolute top-0 start-0 translate-middle pe-none"></i>
+                        უკუკავშირის შევსება წარმოადგენს სააგენტოსა და თქვენს შორის გაფორმებული ხელშეკრულების (შემდგომში - ხელშეკრულება)  მე-2 პუნქტის 2.2 ქვეპუნქტის 2.2.6 ქვეპუნქტით  განსაზღვრულ ვალდებულებას. თუ უკუკავშირი არ იქნება დროულად წარმოდგენილი,  ხელშეკრულების მე - 3 პუნქტის 3.1 ქვეპუნქტის შესაბამისად,   თქვენს კომპანიას არ ექნება შესაძლებლობა მიიღოს მონაწილეობა მომდევნო გამოფენების შესარჩევ კონკურსში მომდევნო ორი წლის განმავლობაში.
+                    </div>
+                </div>
                 <div class="row mt-4 mb-4 justify-content-center">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
@@ -21,29 +27,29 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="d-flex gap-3 additional">
-                            <div class="mb-3 w-50 additional1">
+                        <div class="d-md-flex gap-3 d-block">
+                            <div class="mb-3 w-md-50 w-100">
                                 <label for="name" class="form-label">კომპანიის დასახელება</label>
-                                <input type="text" id="name" class="form-control input_form" v-model="data.company">
+                                <input type="text" id="name" class="form-control" v-model="data.company">
                             </div>
-                            <div class="mb-3 w-50 additional1">
+                            <div class="mb-3 w-md-50 w-100">
                                 <label for="name" class="form-label">სახელი, გვარი</label>
-                                <input type="text" id="name" class="form-control input_form" v-model="data.fullname">
+                                <input type="text" id="name" class="form-control" v-model="data.fullname">
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="Position" class="form-label">თანამდებობა</label>
-                            <input type="text" id="Position" class="form-control input_form" v-model="data.position">
+                            <input type="text" id="Position" class="form-control" v-model="data.position">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="number" class="form-label">საკონტაქტო ტელეფონის ნომერი</label>
-                            <input type="number" id="number" class="form-control input_form" v-model="data.mobile">
+                            <input type="number" id="number" class="form-control" v-model="data.mobile">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">ელ. ფოსტა</label>
-                            <input type="email" id="email" class="form-control input_form" v-model="data.email">
+                            <input type="email" id="email" class="form-control" v-model="data.email">
                         </div>
                     </div>
                 </div>
@@ -53,9 +59,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <label for="drop" class="form-label ">გამოფენაზე შეძენილი საქმიანი კავშირები</label>
-                        <select id="drop" class="form-select select_man opt" v-model="data.selected">
-                            <option class="opt" value="1">დავამყარეთ საქმიანი კავშირები</option>
-                            <option class="opt" value="0">არ დაგვიმყარებია საქმიანი კავშირები</option>
+                        <select id="drop" class="form-select" v-model="data.selected">
+                            <option value="1">დავამყარეთ საქმიანი კავშირები</option>
+                            <option value="0">არ დაგვიმყარებია საქმიანი კავშირები</option>
                         </select>
                     </div>
                 </div>
@@ -75,27 +81,27 @@
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="activity" class="form-label">საქმიანობის სფერო</label>
-                                <input type="text" id="activity" class="form-control input_form" required v-model="items.activity_name">
+                                <input type="text" id="activity" class="form-control" v-model="items.activity_name">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="country" class="form-label">რომელ ქვეყანას წარმოადგენს</label>
-                                <input type="text" id="country" class="form-control input_form" required v-model="items.country">
+                                <input type="text" id="country" class="form-control" v-model="items.country">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="organization" class="form-label">ორგანიზაციის დასახელება</label>
-                                <input type="text" id="organization" class="form-control input_form" required v-model="items.company_name">
+                                <input type="text" id="organization" class="form-control" v-model="items.company_name">
                             </div>
                             <div class="col-md-6 col-12 mb-3">
                                 <label for="export" class="form-label">ქვეყანა რომელშიც განხორციელდა ან იგეგმება ექსპორტი</label>
-                                <input type="text" id="export" class="form-control input_form" required v-model="items.target_country_name">
+                                <input type="text" id="export" class="form-control" v-model="items.target_country_name">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12 mb-2">
                                 <label for="disabledTextInput" class="form-label">რა ეტაპზეა საქმიანი ურთიერთობა?</label>
-                                <textarea style="resize:none" class="h-100 form-control" required v-model="items.stage_name"></textarea>
+                                <textarea style="resize:none" class="form-control" v-model="items.stage_name"></textarea>
                             </div>
                         </div>
                         <br>
@@ -104,10 +110,10 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <label for="disabledTextInput" class="form-label qui">პროდუქციის გაგზავნის შესახებ ინფორმაცია</label>
-                                <select id="disabledSelect" class="form-select select_man opt" v-model="items.selected1">
-                                    <option class="opt" value="0">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>
-                                    <option class="opt" value="1">გაგზავნილია პროდუქცია</option>
-                                    <option class="opt" value="2">გაგზავნილია ნიმუში</option>
+                                <select id="disabledSelect" class="form-select" v-model="items.selected1">
+                                    <option value="0">პროდუქცია ან ნიმუში არაა გაგზავნილი</option>
+                                    <option value="1">გაგზავნილია პროდუქცია</option>
+                                    <option value="2">გაგზავნილია ნიმუში</option>
                                 </select>
                             </div>
                         </div>
@@ -118,13 +124,13 @@
                             <div class="col-md-6">
                                 <div class="">
                                     <label for="product" class="form-label">გაგზავნილი პროდუქციის მოცულობა (მაგ: 100 - ცალი/კგ/ბოთლი...)</label>
-                                    <input type="text" id="product" class="form-control input_form" required v-model="items.product_volume">
+                                    <input type="text" id="product" class="form-control" v-model="items.product_volume">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="">
                                     <label for="cost" class="form-label">გაგზავნილი პროდუქციის ღირებულება ლარში</label>
-                                    <input type="number" id="cost" class="form-control input_form" required v-model="items.product_price">
+                                    <input type="number" id="cost" class="form-control" v-model="items.product_price">
                                 </div>
                             </div>
                         </div>
@@ -136,13 +142,13 @@
                                 <div class="">
                                     <label for="sample" class="form-label">გაგზავნილი ნიმუშის მოცულობა (მაგ: 100 -
                                         ცალი/კგ/ბოთლი...)</label>
-                                    <input type="text" id="sample" class="form-control input_form" required v-model="items.template_volume">
+                                    <input type="text" id="sample" class="form-control" v-model="items.template_volume">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="">
                                     <label for="sampleCost" class="form-label">გაგზავნილი ნიმუშის ღირებულება ლარში</label>
-                                    <input type="number" id="sampleCost" class="form-control input_form" required v-model="items.template_price">
+                                    <input type="number" id="sampleCost" class="form-control" v-model="items.template_price">
                                 </div>
                             </div>
                         </div>
@@ -156,16 +162,19 @@
                 </div>
 
                 <div class="row justify-content-center" >
-                    <div class="col-md-1 col-12 d-flex justify-content-center">
-                        <button @click="addFields" type="button" class="btn btn-plus" tooltip-inner data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="ახალი ბიზნეს კონტაქტის დამატება">
-                        <img class="plus" src="../../assets/img/icon/plus-circle.svg" alt="plus">
+                    <div class="col-12 d-flex justify-content-center">
+                        <button @click="addFields" type="button" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                            ახალი ბიზნეს კონტაქტის დამატება
                         </button>
                     </div> 
                 </div>
 
                 <!-- რეკომენდაცია/დამატებითი ინფორმაცია -->
 
-                <div class="row mt-5 mb-4 justify-content-center">
+                <div class="row mt-3 mb-4 justify-content-center">
                     <div class="col-md-8 col-6 border_man"></div>
                 </div>
                 <div class="row">
@@ -199,13 +208,22 @@
                 </div>
             </form>
         </div>
+        <div v-else>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="alert alert-warning">
+                        თქვენი განაცხადი წარმატებით გაიგზავნა. ლინკი აღარაა აქტიური
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- <Footer/> -->
         <div class="modal fade" id="confirmationModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">გთხოვთ დაადასტუროთ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         ნამდვილად გსურთ მოცემული კონტაქტის წაშლა?
@@ -231,6 +249,7 @@
         data() {
             return {
                 field_id : "",
+                blocked : "",
 
                 errors : [],
 
@@ -266,6 +285,12 @@
                     this.addFields();
                 }
             }, 2000);
+
+            axios.get("/email/block/check/" + this.$route.query.email + "/" + this.$route.params.id).then(res => {
+                this.blocked = res.data;
+            }).catch(err => {
+                console.log(err);
+            });
         },
 
         methods : {
@@ -281,6 +306,10 @@
                         title : "ინფორმაცია წარმატებით განახლდა",
                         icon : "success",
                     });
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 }).catch(function(err) {
                     if(err instanceof AxiosError) {
                         __this__.errors = err?.response?.data?.errors;
@@ -293,7 +322,6 @@
             addFields() {
                 this.data.organizations.push({
                     selected1 : "0",
-
                     activity_name: "",
                     country: "",
                     company_name: "",
@@ -314,49 +342,7 @@
         color: #005019;   
     }
 
-    .btn-success {
-        font-size: 20px;
-    }
-
-    .btn-warning {
-        font-size: 20px;
-        font-family: 'Regular';
-    }
-
-    form {
-        margin: 0;
-        padding: 0;
-    }
-
-    .row {
-        margin: 0;
-        padding: 0;
-    }
-
-    .plus {
-        width: 30px;
-        height: 30px;
-        opacity: 0.6;
-    }
-
-    h6 {
+    *:not(i) {
         font-family: 'firago-regular';
-        opacity: 0.3;
-    }
-
-    .fade {
-        font-family: firago-regular;
-    }
-    @media only screen and (max-width: 768px) {
-    .card {
-        margin-top: 25px;
-    }
-    .additional {
-            display: block !important;
-        }
-
-        .additional1 {
-            width: 100% !important;
-        }
     }
 </style>

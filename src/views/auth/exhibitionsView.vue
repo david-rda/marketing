@@ -24,13 +24,13 @@
                             <th scope="col">ID</th>
                             <th scope="col">გამოფენა</th>
                             <th scope="col">ქვეყანა</th>
-                            <th scope="col">გაგზავნის თარიღი</th>
+                            <th scope="col">ჩატარების თარიღი</th>
                             <th scope="col">ქმედება</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <tr v-for="data in exhibitions" :key="data.id">
-                            <td>{{ data.id }}</td>
+                        <tr v-for="(data, index) in exhibitions" :key="data.id">
+                            <td>{{ index + 1 }}</td>
                             <td>{{ data.label }}</td>
                             <td>{{ data.country }}</td>
                             <td>{{ data.date }}</td>

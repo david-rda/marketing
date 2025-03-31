@@ -5,7 +5,7 @@
         <div class="container" style="margin-top: 120px">
             <div class="row justify-content-around">
                 <div class="col-md-2 col-12 mb-3">
-                    <button type="button" class="btn btn-secondary w-100" @click="goBack">&larr; უკან</button>
+                    <button type="button" class="btn btn-secondary w-100" @click="$router.back()">&larr; უკან</button>
                 </div>
 
                 <div class="col-md-8 col-12">
@@ -21,12 +21,15 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="datetime-picker" class="form-label">გაგზავნის თარიღი</label>
+                            <label for="datetime-picker" class="form-label">ჩატარების თარიღი</label>
                             <flat-pickr class="form-control" id="datetime-picker" v-model="datetime" :config="flatpickrOptions"></flat-pickr>
                         </div>
 
                         <div class="mb-4">
-                            <button type="submit" class="btn btn-success w-100">დამატება</button>
+                            <button type="submit" class="btn btn-success w-100" :disabled="disabled">
+                                დამატება
+                                <span class="spinner spinner-border spinner-border-sm ms-1" v-show="disabled"></span>
+                            </button>
                         </div>
 
                         <div v-if="errors">
@@ -65,6 +68,7 @@
         name: "",
 
         errors : "",
+        disabled : false,
 
         flatpickrOptions: {
             enableTime: false,
@@ -74,11 +78,9 @@
     },
 
     methods : {
-        goBack() {
-            this.$router.back()
-        },
-
         addExhibition() {
+            this.disabled = true;
+        
             axios.post("/exhibition/add", {
                 title : this.name,
                 datetime : this.datetime,
@@ -103,10 +105,14 @@
                     this.$router.back()
                 }, 2000);
 
+                this.disabled = false;
+
             }).catch(err => {
                 if(err instanceof AxiosError) {
                     this.errors = err?.response?.data?.errors;
                 }
+
+                this.disabled = false;
             });
         },
     }

@@ -13,6 +13,7 @@
     "bootstrap-icons": "^1.11.2",
     "core-js": "^3.8.3",
     "flatpickr": "^4.6.13",
+    "moment": "^2.30.1",
     "vue": "^3.2.13",
     "vue-datetime": "^1.0.0-beta.14",
     "vue-flatpickr-component": "^11.0.3",

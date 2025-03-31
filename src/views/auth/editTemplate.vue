@@ -19,7 +19,7 @@
                                 <QuillEditor theme="snow" style="height: 200px" v-model:content="text" ref="text" contentType="html" />
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-success w-100 mb-4"  value="შენახვა">
+                        <input type="submit" class="btn btn-success w-100 mb-4" :disabled="disabled" value="შენახვა">
                     </form>
 
                     <div class="alert alert-danger" v-for="(item, index) in errors" :key="index">
@@ -54,6 +54,8 @@
             enableTime: false,
             dateFormat: 'Y-m-d',
         },
+
+        disabled : false
       }
     },
 
@@ -75,9 +77,11 @@
 
     methods : {
         editTemplate() {
+            this.disabled = true;
+
             axios.post("/template/edit/" + this.$route.params.id, {
                 date : this.date,
-                text : this.$refs.text.getText(),
+                text : this.$refs.text.getContents(),
             }, {
                 headers : {
                     "Authorization" : "Bearer " + JSON.parse(window.localStorage.getItem("user")).token
@@ -89,6 +93,7 @@
                 });
 
                 this.errors = [];
+                this.disabled = false;
 
                 setTimeout(() => {
                     this.$router.back()
@@ -97,6 +102,8 @@
                 if(err instanceof AxiosError) {
                     this.errors = err?.response?.data?.errors;
                 }
+
+                this.disabled = false;
             });
         },
     }
